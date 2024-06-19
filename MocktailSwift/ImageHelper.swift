@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Photos
 
 enum ContentMode: String {
     case fit = "Fit"
@@ -97,6 +98,25 @@ class ImageHelper {
     }
     
     static func saveImageToPhotosAlbum(image: UIImage) {
-        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+        // Convert UI Image into a PNG image
+        if let resizedImage = resizeImage(image: image, targetSize: CGSize(width: image.size.width, height: image.size.height), contentMode: .fill){
+            if let data = resizedImage.pngData() {
+                // Save PNG image to Photos
+                PHPhotoLibrary.shared().performChanges({
+                    let creationRequest = PHAssetCreationRequest.forAsset()
+                    creationRequest.addResource(with: .photo, data: data, options: nil)
+                }, completionHandler: { success, error in
+                    if success {
+                        // Image saved to the Photos app
+                        print("Image saved to the Photos app")
+                    } else {
+                        // Saving Image saved to the Photos app failed
+                        print("Image saved to the Photos app")
+                    }
+                })
+            }
+        }
     }
+    
+
 }
