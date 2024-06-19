@@ -15,6 +15,7 @@ struct ContentView: View {
     @State private var photosPickerItems: [PhotosPickerItem] = []
     @State private var didStartProcessing = false
     @State private var didFinishProcessing = false
+    @State private var contentMode: ContentMode = .fit
     
     private let targetSize = CGSize(width: 1180, height: 2556)
     private let cornerRadius: CGFloat = 300 // this is mockups corner radius
@@ -85,12 +86,42 @@ struct ContentView: View {
             //                    .frame(width: 200, height: 200)
             //                    .padding()
             //            }
-            
-            Button(action: {
+            HStack {
+                Button(action: {
+                    
+                   processImages()
+                }) {
+                    Text("Process Image")
+                        .padding(2)
+                        .background(.gray.opacity(0.5))
+                }
                 
-               processImages()
-            }) {
-                Text("Process Image")
+                Menu {
+                    Button("Fit") {
+                        contentMode = .fit
+                    }
+                    
+                    Button("Fill") {
+                        contentMode = .fill
+                    }
+                    
+                    Button("Stretch") {
+                        contentMode = .stretch
+                    }
+                    
+
+                } label: {
+                    HStack(spacing: 0) {
+                        Text(contentMode.rawValue)
+                        Image(systemName: "chevron.up.chevron.down")
+                            .font(.title3)
+                    }
+                    .padding(2)
+                    .background(.gray.opacity(0.5))
+                    
+                }
+
+
             }
             .padding()
             
@@ -138,7 +169,7 @@ struct ContentView: View {
     
     func processImages () {
         for selectedImage in selectedImages {
-            if let resizedImage = ImageHelper.resizeImage(image: selectedImage, targetSize: targetSize),
+            if let resizedImage = ImageHelper.resizeImage(image: selectedImage, targetSize: targetSize, contentMode: contentMode),
                let overlayImage = UIImage(named: "mockup14Pro") {
                 
                 if let finalImage = ImageHelper.overlayImage(baseImage: resizedImage, overlayImage: overlayImage, cornerRadius: cornerRadius) {
