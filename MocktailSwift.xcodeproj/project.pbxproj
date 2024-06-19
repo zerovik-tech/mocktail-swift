@@ -7,19 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B103F2992C217EC000F9E9C3 /* MocktailIosTempApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B103F2982C217EC000F9E9C3 /* MocktailIosTempApp.swift */; };
+		B103F2992C217EC000F9E9C3 /* MocktailSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = B103F2982C217EC000F9E9C3 /* MocktailSwift.swift */; };
 		B103F29B2C217EC000F9E9C3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B103F29A2C217EC000F9E9C3 /* ContentView.swift */; };
 		B103F29D2C217EC200F9E9C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B103F29C2C217EC200F9E9C3 /* Assets.xcassets */; };
 		B103F2A02C217EC200F9E9C3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B103F29F2C217EC200F9E9C3 /* Preview Assets.xcassets */; };
 		B103F2A22C217EC200F9E9C3 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B103F2A12C217EC200F9E9C3 /* Persistence.swift */; };
-		B103F2A52C217EC200F9E9C3 /* MocktailIosTemp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B103F2A32C217EC200F9E9C3 /* MocktailIosTemp.xcdatamodeld */; };
+		B103F2A52C217EC200F9E9C3 /* MocktailSwift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B103F2A32C217EC200F9E9C3 /* MocktailSwift.xcdatamodeld */; };
 		B103F2AC2C217EEA00F9E9C3 /* MockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B103F2AB2C217EEA00F9E9C3 /* MockView.swift */; };
 		B103F2AE2C218AA200F9E9C3 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B103F2AD2C218AA200F9E9C3 /* ImageHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B103F2952C217EC000F9E9C3 /* MocktailIosTemp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MocktailIosTemp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B103F2982C217EC000F9E9C3 /* MocktailIosTempApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MocktailIosTempApp.swift; sourceTree = "<group>"; };
+		B103F2952C217EC000F9E9C3 /* MocktailSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MocktailSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B103F2982C217EC000F9E9C3 /* MocktailSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MocktailSwift.swift; sourceTree = "<group>"; };
 		B103F29A2C217EC000F9E9C3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B103F29C2C217EC200F9E9C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B103F29F2C217EC200F9E9C3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -43,7 +43,7 @@
 		B103F28C2C217EC000F9E9C3 = {
 			isa = PBXGroup;
 			children = (
-				B103F2972C217EC000F9E9C3 /* MocktailIosTemp */,
+				B103F2972C217EC000F9E9C3 /* MocktailSwift */,
 				B103F2962C217EC000F9E9C3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -51,24 +51,24 @@
 		B103F2962C217EC000F9E9C3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B103F2952C217EC000F9E9C3 /* MocktailIosTemp.app */,
+				B103F2952C217EC000F9E9C3 /* MocktailSwift.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B103F2972C217EC000F9E9C3 /* MocktailIosTemp */ = {
+		B103F2972C217EC000F9E9C3 /* MocktailSwift */ = {
 			isa = PBXGroup;
 			children = (
-				B103F2982C217EC000F9E9C3 /* MocktailIosTempApp.swift */,
+				B103F2982C217EC000F9E9C3 /* MocktailSwift.swift */,
 				B103F29A2C217EC000F9E9C3 /* ContentView.swift */,
 				B103F2AD2C218AA200F9E9C3 /* ImageHelper.swift */,
 				B103F2AB2C217EEA00F9E9C3 /* MockView.swift */,
 				B103F29C2C217EC200F9E9C3 /* Assets.xcassets */,
 				B103F2A12C217EC200F9E9C3 /* Persistence.swift */,
-				B103F2A32C217EC200F9E9C3 /* MocktailIosTemp.xcdatamodeld */,
+				B103F2A32C217EC200F9E9C3 /* MocktailSwift.xcdatamodeld */,
 				B103F29E2C217EC200F9E9C3 /* Preview Content */,
 			);
-			path = MocktailIosTemp;
+			path = MocktailSwift;
 			sourceTree = "<group>";
 		};
 		B103F29E2C217EC200F9E9C3 /* Preview Content */ = {
@@ -82,9 +82,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B103F2942C217EC000F9E9C3 /* MocktailIosTemp */ = {
+		B103F2942C217EC000F9E9C3 /* MocktailSwift */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B103F2A82C217EC200F9E9C3 /* Build configuration list for PBXNativeTarget "MocktailIosTemp" */;
+			buildConfigurationList = B103F2A82C217EC200F9E9C3 /* Build configuration list for PBXNativeTarget "MocktailSwift" */;
 			buildPhases = (
 				B103F2912C217EC000F9E9C3 /* Sources */,
 				B103F2922C217EC000F9E9C3 /* Frameworks */,
@@ -94,9 +94,9 @@
 			);
 			dependencies = (
 			);
-			name = MocktailIosTemp;
+			name = MocktailSwift;
 			productName = MocktailIosTemp;
-			productReference = B103F2952C217EC000F9E9C3 /* MocktailIosTemp.app */;
+			productReference = B103F2952C217EC000F9E9C3 /* MocktailSwift.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -114,7 +114,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B103F2902C217EC000F9E9C3 /* Build configuration list for PBXProject "MocktailIosTemp" */;
+			buildConfigurationList = B103F2902C217EC000F9E9C3 /* Build configuration list for PBXProject "MocktailSwift" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -127,7 +127,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B103F2942C217EC000F9E9C3 /* MocktailIosTemp */,
+				B103F2942C217EC000F9E9C3 /* MocktailSwift */,
 			);
 		};
 /* End PBXProject section */
@@ -150,10 +150,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B103F2A22C217EC200F9E9C3 /* Persistence.swift in Sources */,
-				B103F2A52C217EC200F9E9C3 /* MocktailIosTemp.xcdatamodeld in Sources */,
+				B103F2A52C217EC200F9E9C3 /* MocktailSwift.xcdatamodeld in Sources */,
 				B103F29B2C217EC000F9E9C3 /* ContentView.swift in Sources */,
 				B103F2AC2C217EEA00F9E9C3 /* MockView.swift in Sources */,
-				B103F2992C217EC000F9E9C3 /* MocktailIosTempApp.swift in Sources */,
+				B103F2992C217EC000F9E9C3 /* MocktailSwift.swift in Sources */,
 				B103F2AE2C218AA200F9E9C3 /* ImageHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -287,7 +287,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"MocktailIosTemp/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"MocktailSwift/Preview Content\"";
 				DEVELOPMENT_TEAM = 8A97AKQKW4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -319,7 +319,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"MocktailIosTemp/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"MocktailSwift/Preview Content\"";
 				DEVELOPMENT_TEAM = 8A97AKQKW4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -347,7 +347,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B103F2902C217EC000F9E9C3 /* Build configuration list for PBXProject "MocktailIosTemp" */ = {
+		B103F2902C217EC000F9E9C3 /* Build configuration list for PBXProject "MocktailSwift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B103F2A62C217EC200F9E9C3 /* Debug */,
@@ -356,7 +356,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B103F2A82C217EC200F9E9C3 /* Build configuration list for PBXNativeTarget "MocktailIosTemp" */ = {
+		B103F2A82C217EC200F9E9C3 /* Build configuration list for PBXNativeTarget "MocktailSwift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B103F2A92C217EC200F9E9C3 /* Debug */,
@@ -368,13 +368,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		B103F2A32C217EC200F9E9C3 /* MocktailIosTemp.xcdatamodeld */ = {
+		B103F2A32C217EC200F9E9C3 /* MocktailSwift.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				B103F2A42C217EC200F9E9C3 /* MocktailIosTemp.xcdatamodel */,
 			);
 			currentVersion = B103F2A42C217EC200F9E9C3 /* MocktailIosTemp.xcdatamodel */;
-			path = MocktailIosTemp.xcdatamodeld;
+			path = MocktailSwift.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

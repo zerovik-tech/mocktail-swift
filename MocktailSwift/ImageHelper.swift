@@ -37,11 +37,13 @@ class ImageHelper {
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
         let cornerPoint: CGPoint = CGPoint(x: ((size.width / 2) - (baseImage.size.width / 2)) , y: ((size.height / 2) - (baseImage.size.height / 2)))
         let baseRect = CGRect(origin: cornerPoint, size: baseImage.size)
-                baseImage.draw(in: baseRect)
+        baseImage.draw(in: baseRect)
+        
         
         let overlayRect = CGRect(origin: .zero, size: overlayImage.size)
-       
+        
         overlayImage.draw(in: overlayRect, blendMode: .normal, alpha: 1.0)
+        
         
         
         
