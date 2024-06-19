@@ -13,6 +13,8 @@
 		B103F2A02C217EC200F9E9C3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B103F29F2C217EC200F9E9C3 /* Preview Assets.xcassets */; };
 		B103F2A22C217EC200F9E9C3 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B103F2A12C217EC200F9E9C3 /* Persistence.swift */; };
 		B103F2A52C217EC200F9E9C3 /* MocktailIosTemp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B103F2A32C217EC200F9E9C3 /* MocktailIosTemp.xcdatamodeld */; };
+		B103F2AC2C217EEA00F9E9C3 /* MockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B103F2AB2C217EEA00F9E9C3 /* MockView.swift */; };
+		B103F2AE2C218AA200F9E9C3 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B103F2AD2C218AA200F9E9C3 /* ImageHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,8 @@
 		B103F29F2C217EC200F9E9C3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B103F2A12C217EC200F9E9C3 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		B103F2A42C217EC200F9E9C3 /* MocktailIosTemp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MocktailIosTemp.xcdatamodel; sourceTree = "<group>"; };
+		B103F2AB2C217EEA00F9E9C3 /* MockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockView.swift; sourceTree = "<group>"; };
+		B103F2AD2C218AA200F9E9C3 /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,8 @@
 			children = (
 				B103F2982C217EC000F9E9C3 /* MocktailIosTempApp.swift */,
 				B103F29A2C217EC000F9E9C3 /* ContentView.swift */,
+				B103F2AD2C218AA200F9E9C3 /* ImageHelper.swift */,
+				B103F2AB2C217EEA00F9E9C3 /* MockView.swift */,
 				B103F29C2C217EC200F9E9C3 /* Assets.xcassets */,
 				B103F2A12C217EC200F9E9C3 /* Persistence.swift */,
 				B103F2A32C217EC200F9E9C3 /* MocktailIosTemp.xcdatamodeld */,
@@ -146,7 +152,9 @@
 				B103F2A22C217EC200F9E9C3 /* Persistence.swift in Sources */,
 				B103F2A52C217EC200F9E9C3 /* MocktailIosTemp.xcdatamodeld in Sources */,
 				B103F29B2C217EC000F9E9C3 /* ContentView.swift in Sources */,
+				B103F2AC2C217EEA00F9E9C3 /* MockView.swift in Sources */,
 				B103F2992C217EC000F9E9C3 /* MocktailIosTempApp.swift in Sources */,
+				B103F2AE2C218AA200F9E9C3 /* ImageHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,9 +288,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MocktailIosTemp/Preview Content\"";
-				DEVELOPMENT_TEAM = 3P7DFTT5MC;
+				DEVELOPMENT_TEAM = 8A97AKQKW4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "we need permission to get image from user";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -293,8 +302,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sachin.MocktailIosTemp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zerovik.MocktailIosTemp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -309,9 +320,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MocktailIosTemp/Preview Content\"";
-				DEVELOPMENT_TEAM = 3P7DFTT5MC;
+				DEVELOPMENT_TEAM = 8A97AKQKW4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "we need permission to get image from user";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -322,8 +334,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sachin.MocktailIosTemp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zerovik.MocktailIosTemp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
