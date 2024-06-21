@@ -64,10 +64,23 @@ class ImageHelper {
         return newImage
     }
     
-    static func overlayImage(baseImage: UIImage, overlayImage: UIImage, cornerRadius: CGFloat) -> UIImage? {
+    static func overlayImage(baseImage: UIImage, overlayImage: UIImage, mockup: Mockup) -> UIImage? {
+        let cornerRadius = mockup.radius
         let size = overlayImage.size
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
-        let cornerPoint: CGPoint = CGPoint(x: ((size.width / 2) - (baseImage.size.width / 2)) , y: ((size.height / 2) - (baseImage.size.height / 2)))
+        var cornerPoint: CGPoint = CGPoint(x: ((size.width / 2) - (baseImage.size.width / 2)) , y: ((size.height / 2) - (baseImage.size.height / 2)))
+        
+        // these cases are used for non symmetrical mockups :
+        
+        if mockup.mockup.rawValue == MockupList.iMac24.rawValue{
+            cornerPoint = CGPoint(x: cornerPoint.x, y: 159)
+        } else if mockup.mockup.rawValue == MockupList.iMac27.rawValue {
+            cornerPoint = CGPoint(x: cornerPoint.x, y: 249)
+        } else if mockup.mockup.rawValue == MockupList.MacBookPro16_4thGen.rawValue {
+            cornerPoint = CGPoint(x: cornerPoint.x, y: 112)
+        } else if mockup.mockup.rawValue == MockupList.MacBookPro15_4thGen.rawValue {
+            cornerPoint = CGPoint(x: cornerPoint.x, y: 196)
+        }
         
        
         let baseRect = CGRect(origin: cornerPoint, size: baseImage.size)
@@ -86,7 +99,9 @@ class ImageHelper {
         
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
         let newImageRect = CGRect(origin: .zero, size: size)
-        
+//        if cornerRadius != 0 {
+//            
+//        }
         let path = UIBezierPath(roundedRect: newImageRect, cornerRadius: cornerRadius)
         path.addClip()
         newImage?.draw(in: newImageRect)

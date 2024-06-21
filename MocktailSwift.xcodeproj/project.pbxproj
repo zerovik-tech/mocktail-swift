@@ -15,6 +15,8 @@
 		B103F2A52C217EC200F9E9C3 /* MocktailSwift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B103F2A32C217EC200F9E9C3 /* MocktailSwift.xcdatamodeld */; };
 		B103F2AC2C217EEA00F9E9C3 /* MockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B103F2AB2C217EEA00F9E9C3 /* MockView.swift */; };
 		B103F2AE2C218AA200F9E9C3 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B103F2AD2C218AA200F9E9C3 /* ImageHelper.swift */; };
+		B14844C42C244B98004B7B76 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14844C32C244B98004B7B76 /* Constants.swift */; };
+		B14844C62C24646B004B7B76 /* Mockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14844C52C24646B004B7B76 /* Mockup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +29,8 @@
 		B103F2A42C217EC200F9E9C3 /* MocktailIosTemp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MocktailIosTemp.xcdatamodel; sourceTree = "<group>"; };
 		B103F2AB2C217EEA00F9E9C3 /* MockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockView.swift; sourceTree = "<group>"; };
 		B103F2AD2C218AA200F9E9C3 /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
+		B14844C32C244B98004B7B76 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B14844C52C24646B004B7B76 /* Mockup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mockup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +63,8 @@
 		B103F2972C217EC000F9E9C3 /* MocktailSwift */ = {
 			isa = PBXGroup;
 			children = (
+				B14844C32C244B98004B7B76 /* Constants.swift */,
+				B14844C52C24646B004B7B76 /* Mockup.swift */,
 				B103F2982C217EC000F9E9C3 /* MocktailSwift.swift */,
 				B103F29A2C217EC000F9E9C3 /* ContentView.swift */,
 				B103F2AD2C218AA200F9E9C3 /* ImageHelper.swift */,
@@ -155,6 +161,8 @@
 				B103F2AC2C217EEA00F9E9C3 /* MockView.swift in Sources */,
 				B103F2992C217EC000F9E9C3 /* MocktailSwift.swift in Sources */,
 				B103F2AE2C218AA200F9E9C3 /* ImageHelper.swift in Sources */,
+				B14844C62C24646B004B7B76 /* Mockup.swift in Sources */,
+				B14844C42C244B98004B7B76 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

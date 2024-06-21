@@ -13,12 +13,12 @@ struct ContentView: View {
     @State private var finalImages: [UIImage] = []
     @State private var isImagePickerPresented = false
     @State private var photosPickerItems: [PhotosPickerItem] = []
-    @State private var didStartProcessing = false
-    @State private var didFinishProcessing = false
+    @State private var isProcessing = false
+   
     @State private var contentMode: ContentMode = .fit
-    
-    private let targetSize = CGSize(width: 1180, height: 2556)
-    private let cornerRadius: CGFloat = 300 // this is mockups corner radius
+    @State private var selectedMockup: Mockup = Mockup(mockup: MockupList.iPhone15, baseImageSize: CGSize(width: 1179, height: 2556), radius: 300)
+    private let targetSize = CGSize(width: 828, height: 1792)
+    private let cornerRadius: CGFloat = 200 // this is mockups corner radius
     private let baseImagePoint = CGPoint(x: 80, y: 80) // Example coordinates for overlay image
     
     var body: some View {
@@ -26,8 +26,7 @@ struct ContentView: View {
             Button {
                 selectedImages = []
                 finalImages = []
-                didStartProcessing = false
-                didFinishProcessing = false
+                
             } label: {
                 Text("Clear")
                 
@@ -88,12 +87,88 @@ struct ContentView: View {
             //            }
             HStack {
                 Button(action: {
+                    isProcessing = true
+                    processImages() {result in
+                        isProcessing = result
+                    }
                     
-                   processImages()
                 }) {
                     Text("Process Image")
                         .padding(2)
                         .background(.gray.opacity(0.5))
+                }
+                
+                Menu {
+                    ForEach (MockupType.iPhoneMockups){item in
+                        Button {
+                            selectedMockup = item
+                        } label: {
+                            HStack {
+                                Text(item.mockup.rawValue)
+                                if (item.mockup.rawValue == selectedMockup.mockup.rawValue) {
+                                    Image(systemName: "checkmark")
+                                        .font(.callout)
+                                }
+                                
+                            }
+                        }
+
+                    }
+                    
+                    ForEach (MockupType.iPadMockups){item in
+                        Button {
+                            selectedMockup = item
+                        } label: {
+                            HStack {
+                                Text(item.mockup.rawValue)
+                                if (item.mockup.rawValue == selectedMockup.mockup.rawValue) {
+                                    Image(systemName: "checkmark")
+                                        .font(.callout)
+                                }
+                            }
+                        }
+
+                    }
+                    
+                    ForEach (MockupType.macMockups){item in
+                        Button {
+                            selectedMockup = item
+                        } label: {
+                            HStack {
+                                Text(item.mockup.rawValue)
+                                if (item.mockup.rawValue == selectedMockup.mockup.rawValue) {
+                                    Image(systemName: "checkmark")
+                                        .font(.callout)
+                                }
+                            }
+                        }
+
+                    }
+                    
+                    ForEach (MockupType.appleWatchMockups){item in
+                        Button {
+                            selectedMockup = item
+                        } label: {
+                            HStack {
+                                Text(item.mockup.rawValue)
+                                if (item.mockup.rawValue == selectedMockup.mockup.rawValue) {
+                                    Image(systemName: "checkmark")
+                                        .font(.callout)
+                                }
+                            }
+                        }
+
+                    }
+
+                } label: {
+                    HStack(spacing: 0) {
+                        Text(selectedMockup.mockup.rawValue)
+                        Image(systemName: "chevron.up.chevron.down")
+                            .font(.callout)
+                    }
+                    .padding(2)
+                    .background(.gray.opacity(0.5))
+                    
                 }
                 
                 Menu {
@@ -114,7 +189,7 @@ struct ContentView: View {
                     HStack(spacing: 0) {
                         Text(contentMode.rawValue)
                         Image(systemName: "chevron.up.chevron.down")
-                            .font(.title3)
+                            .font(.callout)
                     }
                     .padding(2)
                     .background(.gray.opacity(0.5))
@@ -125,26 +200,30 @@ struct ContentView: View {
             }
             .padding()
             
-            if finalImages != nil && didFinishProcessing == true {
+            if finalImages != [] && !isProcessing{
                 Button(action: {
                     saveImages()
                 }) {
                     Text("Download Final Image")
                 }
                 .padding()
-            } else if(didStartProcessing && didFinishProcessing == false) {
-                Text("Processing...")
-                    .font(.title3)
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle())
+            }
+            if(isProcessing) {
+                HStack{
+                    Text("Processing...")
+                        .bold()
+                        .foregroundStyle(.red)
+                    
+                }
+                
             }
         }
+        .background(Gradient(colors: [.black, .gray, .white]))
         .onChange(of: photosPickerItems) {newValue in
 
             Task {
                 finalImages = []
-                didStartProcessing = false
-                didFinishProcessing = false
+                
                 for item in photosPickerItems {
                     if let data = try? await item.loadTransferable(type: Data.self) {
                         if let image = UIImage(data: data) {
@@ -167,20 +246,20 @@ struct ContentView: View {
         }
     }
     
-    func processImages () {
+    func processImages (completion: @escaping(Bool) -> Void) {
+        
         for selectedImage in selectedImages {
-            if let resizedImage = ImageHelper.resizeImage(image: selectedImage, targetSize: targetSize, contentMode: contentMode),
-               let overlayImage = UIImage(named: "mockup14Pro") {
+            
+            if let resizedImage = ImageHelper.resizeImage(image: selectedImage, targetSize: selectedMockup.baseImageSize, contentMode: contentMode),
+               let overlayImage = UIImage(named: selectedMockup.mockup.rawValue) {
                 
-                if let finalImage = ImageHelper.overlayImage(baseImage: resizedImage, overlayImage: overlayImage, cornerRadius: cornerRadius) {
+                if let finalImage = ImageHelper.overlayImage(baseImage: resizedImage, overlayImage: overlayImage, mockup: selectedMockup) {
                     finalImages.append(finalImage)
                 }
             }
         }
-        didFinishProcessing = true
-        
+        completion(false)
     }
-    
 }
 
 //struct ImagePicker: UIViewControllerRepresentable {
