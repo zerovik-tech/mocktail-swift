@@ -15,12 +15,15 @@ enum ContentMode: String {
 }
 
 class ImageHelper {
-    static func resizeImage(image: UIImage, targetSize: CGSize, contentMode: ContentMode) -> UIImage? {
+    static func resizeImage(image: UIImage, targetSize: CGSize, contentMode: ContentMode, cornerRadius: CGFloat) -> UIImage? {
         let size = image.size
         var screenSize = targetSize
         
         let widthRatio  = targetSize.width  / size.width
         let heightRatio = targetSize.height / size.height
+        print("widthRatio: \(widthRatio)")
+        print("heightRatio: \(heightRatio)")
+        
         
         var newSize: CGSize
         var origin: CGPoint = .zero
@@ -56,6 +59,16 @@ class ImageHelper {
         
         UIGraphicsBeginImageContextWithOptions(screenSize, false, 1.0)
         
+        let path = UIBezierPath(roundedRect: rect, cornerRadius: cornerRadius)
+        if cornerRadius != 0 {
+          
+         
+            if (widthRatio >= 1 && widthRatio <= 1.5) && (heightRatio >= 1 && heightRatio <= 1.5) {
+                print("target size width: \(targetSize.width), target size height: \(targetSize.height)")
+                print("newsize width: \(newSize.width), newsize height: \(newSize.height)")
+                path.addClip()
+            }
+        }
         image.draw(in: rect)
         
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -97,24 +110,24 @@ class ImageHelper {
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
-        let newImageRect = CGRect(origin: .zero, size: size)
-//        if cornerRadius != 0 {
-//            
-//        }
-        let path = UIBezierPath(roundedRect: newImageRect, cornerRadius: cornerRadius)
-        path.addClip()
-        newImage?.draw(in: newImageRect)
-        let finalImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
+//        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+//        let newImageRect = CGRect(origin: .zero, size: size)
+////        if cornerRadius != 0 {
+////            
+////        }
+//        let path = UIBezierPath(roundedRect: newImageRect, cornerRadius: cornerRadius)
+//        path.addClip()
+//        newImage?.draw(in: newImageRect)
+//        let finalImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
         
         
-        return finalImage
+        return newImage
     }
     
     static func saveImageToPhotosAlbum(image: UIImage) {
         // Convert UI Image into a PNG image
-        if let resizedImage = resizeImage(image: image, targetSize: CGSize(width: image.size.width, height: image.size.height), contentMode: .fill){
+        if let resizedImage = resizeImage(image: image, targetSize: CGSize(width: image.size.width, height: image.size.height), contentMode: .fill, cornerRadius: 0){
             if let data = resizedImage.pngData() {
                 // Save PNG image to Photos
                 PHPhotoLibrary.shared().performChanges({

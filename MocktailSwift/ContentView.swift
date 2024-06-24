@@ -16,7 +16,7 @@ struct ContentView: View {
     @State private var isProcessing = false
    
     @State private var contentMode: ContentMode = .fit
-    @State private var selectedMockup: Mockup = Mockup(mockup: MockupList.iPhone15, baseImageSize: CGSize(width: 1179, height: 2556), radius: 300)
+    @State private var selectedMockup: Mockup = MockupType.iPhoneMockups[15]
     private let targetSize = CGSize(width: 828, height: 1792)
     private let cornerRadius: CGFloat = 200 // this is mockups corner radius
     private let baseImagePoint = CGPoint(x: 80, y: 80) // Example coordinates for overlay image
@@ -250,7 +250,7 @@ struct ContentView: View {
         
         for selectedImage in selectedImages {
             
-            if let resizedImage = ImageHelper.resizeImage(image: selectedImage, targetSize: selectedMockup.baseImageSize, contentMode: contentMode),
+            if let resizedImage = ImageHelper.resizeImage(image: selectedImage, targetSize: selectedMockup.baseImageSize, contentMode: contentMode, cornerRadius: selectedMockup.radius),
                let overlayImage = UIImage(named: selectedMockup.mockup.rawValue) {
                 
                 if let finalImage = ImageHelper.overlayImage(baseImage: resizedImage, overlayImage: overlayImage, mockup: selectedMockup) {
