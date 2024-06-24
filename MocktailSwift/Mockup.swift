@@ -13,3 +13,10 @@ struct Mockup: Identifiable, Equatable {
     let baseImageSize: CGSize
     let radius: CGFloat
 }
+
+enum MockupType: String {
+    case iphone = "iphone"
+    case ipad = "ipad"
+    case mac = "mac"
+    case appleWatch = "appleWatch"
+}

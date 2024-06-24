@@ -16,7 +16,7 @@ struct ContentView: View {
     @State private var isProcessing = false
    
     @State private var contentMode: ContentMode = .fit
-    @State private var selectedMockup: Mockup = MockupType.iPhoneMockups[15]
+    @State private var selectedMockup: Mockup = MockupArray.iPhoneMockups[15]
     private let targetSize = CGSize(width: 828, height: 1792)
     private let cornerRadius: CGFloat = 200 // this is mockups corner radius
     private let baseImagePoint = CGPoint(x: 80, y: 80) // Example coordinates for overlay image
@@ -99,7 +99,7 @@ struct ContentView: View {
                 }
                 
                 Menu {
-                    ForEach (MockupType.iPhoneMockups){item in
+                    ForEach (MockupArray.iPhoneMockups){item in
                         Button {
                             selectedMockup = item
                         } label: {
@@ -115,7 +115,7 @@ struct ContentView: View {
 
                     }
                     
-                    ForEach (MockupType.iPadMockups){item in
+                    ForEach (MockupArray.iPadMockups){item in
                         Button {
                             selectedMockup = item
                         } label: {
@@ -130,7 +130,7 @@ struct ContentView: View {
 
                     }
                     
-                    ForEach (MockupType.macMockups){item in
+                    ForEach (MockupArray.macMockups){item in
                         Button {
                             selectedMockup = item
                         } label: {
@@ -145,7 +145,7 @@ struct ContentView: View {
 
                     }
                     
-                    ForEach (MockupType.appleWatchMockups){item in
+                    ForEach (MockupArray.appleWatchMockups){item in
                         Button {
                             selectedMockup = item
                         } label: {

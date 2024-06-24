@@ -17,6 +17,9 @@
 		B103F2AE2C218AA200F9E9C3 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B103F2AD2C218AA200F9E9C3 /* ImageHelper.swift */; };
 		B14844C42C244B98004B7B76 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14844C32C244B98004B7B76 /* Constants.swift */; };
 		B14844C62C24646B004B7B76 /* Mockup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14844C52C24646B004B7B76 /* Mockup.swift */; };
+		B14844CA2C294DDF004B7B76 /* MockupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14844C92C294DDF004B7B76 /* MockupView.swift */; };
+		B14844D12C295762004B7B76 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14844D02C295762004B7B76 /* HomeView.swift */; };
+		B14844D32C295A6C004B7B76 /* Merienda-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B14844D22C295A6C004B7B76 /* Merienda-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +34,10 @@
 		B103F2AD2C218AA200F9E9C3 /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		B14844C32C244B98004B7B76 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B14844C52C24646B004B7B76 /* Mockup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mockup.swift; sourceTree = "<group>"; };
+		B14844C92C294DDF004B7B76 /* MockupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockupView.swift; sourceTree = "<group>"; };
+		B14844D02C295762004B7B76 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		B14844D22C295A6C004B7B76 /* Merienda-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merienda-Regular.ttf"; sourceTree = "<group>"; };
+		B14844D42C295AC1004B7B76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +70,10 @@
 		B103F2972C217EC000F9E9C3 /* MocktailSwift */ = {
 			isa = PBXGroup;
 			children = (
+				B14844D42C295AC1004B7B76 /* Info.plist */,
+				B14844D22C295A6C004B7B76 /* Merienda-Regular.ttf */,
+				B14844CB2C295706004B7B76 /* home */,
+				B14844C72C294DB7004B7B76 /* mockup */,
 				B14844C32C244B98004B7B76 /* Constants.swift */,
 				B14844C52C24646B004B7B76 /* Mockup.swift */,
 				B103F2982C217EC000F9E9C3 /* MocktailSwift.swift */,
@@ -83,6 +94,38 @@
 				B103F29F2C217EC200F9E9C3 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		B14844C72C294DB7004B7B76 /* mockup */ = {
+			isa = PBXGroup;
+			children = (
+				B14844C82C294DC2004B7B76 /* presentation */,
+			);
+			path = mockup;
+			sourceTree = "<group>";
+		};
+		B14844C82C294DC2004B7B76 /* presentation */ = {
+			isa = PBXGroup;
+			children = (
+				B14844C92C294DDF004B7B76 /* MockupView.swift */,
+			);
+			path = presentation;
+			sourceTree = "<group>";
+		};
+		B14844CB2C295706004B7B76 /* home */ = {
+			isa = PBXGroup;
+			children = (
+				B14844CF2C295749004B7B76 /* presentation */,
+			);
+			path = home;
+			sourceTree = "<group>";
+		};
+		B14844CF2C295749004B7B76 /* presentation */ = {
+			isa = PBXGroup;
+			children = (
+				B14844D02C295762004B7B76 /* HomeView.swift */,
+			);
+			path = presentation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,6 +187,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B103F2A02C217EC200F9E9C3 /* Preview Assets.xcassets in Resources */,
+				B14844D32C295A6C004B7B76 /* Merienda-Regular.ttf in Resources */,
 				B103F29D2C217EC200F9E9C3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -156,7 +200,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B103F2A22C217EC200F9E9C3 /* Persistence.swift in Sources */,
+				B14844CA2C294DDF004B7B76 /* MockupView.swift in Sources */,
 				B103F2A52C217EC200F9E9C3 /* MocktailSwift.xcdatamodeld in Sources */,
+				B14844D12C295762004B7B76 /* HomeView.swift in Sources */,
 				B103F29B2C217EC000F9E9C3 /* ContentView.swift in Sources */,
 				B103F2AC2C217EEA00F9E9C3 /* MockView.swift in Sources */,
 				B103F2992C217EC000F9E9C3 /* MocktailSwift.swift in Sources */,
@@ -299,6 +345,7 @@
 				DEVELOPMENT_TEAM = 8A97AKQKW4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MocktailSwift/Info.plist;
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "we need permission to get image from user";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -331,6 +378,7 @@
 				DEVELOPMENT_TEAM = 8A97AKQKW4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MocktailSwift/Info.plist;
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "we need permission to get image from user";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
