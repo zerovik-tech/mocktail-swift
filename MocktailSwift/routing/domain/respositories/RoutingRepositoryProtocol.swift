@@ -1,12 +1,11 @@
 //
 //  RoutingRepositoryProtocol.swift
-//  Hashtag Generator Pro
+//  FancyKeys
 //
-//  Created by Sachin Pandey on 01/02/24.
+//  Created by Karan Chilwal on 22/11/23.
 //
 
 import Foundation
-
 protocol RoutingRepositoryProtocol {
     
 //    func createScript(script:Script)

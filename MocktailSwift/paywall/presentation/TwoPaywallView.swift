@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import AppsFlyerLib
+//import AppsFlyerLib
 import AmplitudeSwift
 
 struct TwoPaywallView: View {
@@ -29,22 +29,18 @@ struct TwoPaywallView: View {
         
         let annualPlan = viewModel.viewState.allPlans.first(where: { $0.rcPackage?.identifier == "$rc_annual" }) ?? SubscriptionPlan.empty()
         
-        let weeklyPlan = viewModel.viewState.allPlans.first(where: { $0.rcPackage?.identifier == "$rc_weekly" }) ?? SubscriptionPlan.empty()
+        let monthlyPlan = viewModel.viewState.allPlans.first(where: { $0.rcPackage?.identifier == "$rc_monthly" }) ?? SubscriptionPlan.empty()
         
         let annualPlanPrice = getSubscriptionPlanValue(from: annualPlan)
-        let weeklyPlanPrice = getSubscriptionPlanValue(from: weeklyPlan)
+        let monthlyPlanPrice = getSubscriptionPlanValue(from: monthlyPlan)
         
         
-        let discount = calculateDiscount(annualPlanPrice: annualPlanPrice, weeklyPlanPrice: weeklyPlanPrice)
+        let discount = calculateDiscount(annualPlanPrice: annualPlanPrice, monthlyPlanPrice: monthlyPlanPrice)
       
         
         
         let annualTrialPeriod = getSubscriptionPeriodValue(from: annualPlan)
-        let weekTrialPeriod = getSubscriptionPeriodValue(from: weeklyPlan)
-        
-        
-        
-        
+        let monthlyTrialPeriod = getSubscriptionPeriodValue(from: monthlyPlan)
         
         
         
@@ -79,10 +75,10 @@ struct TwoPaywallView: View {
                                         
                                         AmplitudeManager.amplitude.track(eventType: AmplitudeEvents.paywall_cross.rawValue)
                                         
-                                        AppsFlyerLib.shared().logEvent(Event.af_paywall_cross.rawValue, withValues: nil)
+//                                        AppsFlyerLib.shared().logEvent(Event.af_paywall_cross.rawValue, withValues: nil)
                                         
                                         
-                                        routingViewModel.send(action: .updateUserFlow(userflow: .sidebar))
+                                        routingViewModel.send(action: .updateUserFlow(userflow: .home))
                                     }
                                     .disabled(viewModel.viewState.isProcessingPurchase)
                                 
@@ -97,7 +93,7 @@ struct TwoPaywallView: View {
                                     .onTapGesture {
                                         AmplitudeManager.amplitude.track(eventType: AmplitudeEvents.paywall_restore.rawValue)
                                         
-                                        AppsFlyerLib.shared().logEvent(Event.af_paywall_restore.rawValue, withValues: nil)
+//                                        AppsFlyerLib.shared().logEvent(Event.af_paywall_restore.rawValue, withValues: nil)
                                         viewModel.send(action: .restorePressed)
                                     }
                                     .disabled(viewModel.viewState.isProcessingPurchase)
@@ -119,7 +115,7 @@ struct TwoPaywallView: View {
                                         
                                         AmplitudeManager.amplitude.track(eventType: AmplitudeEvents.paywall_terms.rawValue)
                                         
-                                        AppsFlyerLib.shared().logEvent(Event.af_paywall_terms.rawValue, withValues: nil)
+//                                        AppsFlyerLib.shared().logEvent(Event.af_paywall_terms.rawValue, withValues: nil)
                                         if let url = URL(string: TERMS_OF_USE) {
                                             if #available(iOS 10, *) {
                                                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -138,7 +134,7 @@ struct TwoPaywallView: View {
                                     .onTapGesture {
                                         AmplitudeManager.amplitude.track(eventType: AmplitudeEvents.paywall_restore.rawValue)
                                         
-                                        AppsFlyerLib.shared().logEvent(Event.af_paywall_restore.rawValue, withValues: nil)
+//                                        AppsFlyerLib.shared().logEvent(Event.af_paywall_restore.rawValue, withValues: nil)
                                         viewModel.send(action: .restorePressed)
                                     }
                                     .disabled(viewModel.viewState.isProcessingPurchase)
@@ -244,7 +240,7 @@ struct TwoPaywallView: View {
                             }
                             .padding(.top)
                             
-                            PlanCardTwoPaywall(viewModel: viewModel, plan: weeklyPlan, title: weeklyPlan.isTrialEligible ? "\(weekTrialPeriod)-days Free Trial" : "Weekly Plan", subtitle: "/week, cancel anytime", trialOffer: "")
+                            PlanCardTwoPaywall(viewModel: viewModel, plan: monthlyPlan, title: monthlyPlan.isTrialEligible ? "\(monthlyTrialPeriod)-days Free Trial" : "Monthly Plan", subtitle: "/month, cancel anytime", trialOffer: "")
                             
                             //                    viewModel: viewModel, currentPlan: weeklyPlan, title: "3-days Free Trial", subtitle: "/week, cancel anytime", trialOffer: ""
                             //
@@ -257,15 +253,15 @@ struct TwoPaywallView: View {
                             Button(action: {
                                 AmplitudeManager.amplitude.track(eventType: AmplitudeEvents.paywall_start_plan.rawValue)
                                 
-                                AppsFlyerLib.shared().logEvent(Event.af_paywall_start_plan.rawValue, withValues: nil)
+//                                AppsFlyerLib.shared().logEvent(Event.af_paywall_start_plan.rawValue, withValues: nil)
                                 viewModel.send(action: .continuePressed)
                             }, label:
                                     
                                     {
                                 
                                 if(!viewModel.viewState.isProcessingPurchase){
-                                    if viewModel.viewState.selectedPlan == weeklyPlan {
-                                        Text(viewModel.viewState.selectedPlan.isTrialEligible ? "Start my \(weekTrialPeriod)-day free trial" : "Start Plan")
+                                    if viewModel.viewState.selectedPlan == monthlyPlan {
+                                        Text(viewModel.viewState.selectedPlan.isTrialEligible ? "Start my \(monthlyTrialPeriod)-day free trial" : "Start Plan")
                                             .font(.title3)
                                             .bold()
                                             .padding()
@@ -320,7 +316,7 @@ struct TwoPaywallView: View {
                                 
                             }
                             
-                            if viewModel.viewState.selectedPlan == weeklyPlan {
+                            if viewModel.viewState.selectedPlan == monthlyPlan {
                                 HStack(spacing: 1) {
                                     Image(systemName: "checkmark.shield.fill")
                                     //
@@ -340,11 +336,11 @@ struct TwoPaywallView: View {
                         
                     }
                     .onAppear {
-                        print(" weekly trial is : \(weekTrialPeriod )")
+                        print(" monthly trial is : \(monthlyTrialPeriod)")
                         print(" annual trial is : \(annualTrialPeriod )")
                         print("discount is : \(discount)")
                         print("annual plan price : \(annualPlanPrice)")
-                        print("weekly plan price: \(weeklyPlanPrice)")
+                        print("monthly plan price: \(monthlyPlanPrice)")
                         print("annual plan is : \(annualPlan.rcPackage?.storeProduct.price)")
                     }
                     
@@ -361,7 +357,7 @@ struct TwoPaywallView: View {
                     print(viewModel.viewState.isProcessingPurchase)
                     print(viewModel.viewState.subscriptionSuccessful)
                     if viewModel.viewState.subscriptionSuccessful {
-                        routingViewModel.send(action: .updateUserFlow(userflow: .sidebar))
+                        routingViewModel.send(action: .updateUserFlow(userflow: .home))
                     }
                 }
             }
@@ -414,8 +410,8 @@ struct TwoPaywallView: View {
         }
     }
     
-    func calculateDiscount(annualPlanPrice: Float, weeklyPlanPrice: Float) -> String {
-        let discountValue = (( 1 - (annualPlanPrice / (weeklyPlanPrice * 52) )) * 100)
+    func calculateDiscount(annualPlanPrice: Float, monthlyPlanPrice: Float) -> String {
+        let discountValue = (( 1 - (annualPlanPrice / (monthlyPlanPrice * 52) )) * 100)
         if discountValue.isFinite && !discountValue.isNaN {
             let discount = String(Int(discountValue))
             return discount
@@ -487,14 +483,14 @@ struct PlanCardTwoPaywall: View {
         .overlay(RoundedRectangle(cornerRadius: 15).stroke(lineWidth: 1.2).fill(viewModel.viewState.selectedPlan == plan ? appColor2 : appColor2.opacity(0.5)))
         .onTapGesture {
             if(title == "Weekly Plan"){
-                AmplitudeManager.amplitude.track(eventType: AmplitudeEvents.paywall_weekly.rawValue)
+//                AmplitudeManager.amplitude.track(eventType: AmplitudeEvents.paywall_weekly.rawValue)
                 
-                AppsFlyerLib.shared().logEvent(Event.af_paywall_weekly.rawValue, withValues: nil)
+//                AppsFlyerLib.shared().logEvent(Event.af_paywall_weekly.rawValue, withValues: nil)
             }
             if(title == "Annual Plan"){
                 AmplitudeManager.amplitude.track(eventType: AmplitudeEvents.paywall_annual.rawValue)
                 
-                AppsFlyerLib.shared().logEvent(Event.af_paywall_annual.rawValue, withValues: nil)
+//                AppsFlyerLib.shared().logEvent(Event.af_paywall_annual.rawValue, withValues: nil)
             }
             viewModel.send(action: .subscriptionPlanChanged(plan: plan))
         }

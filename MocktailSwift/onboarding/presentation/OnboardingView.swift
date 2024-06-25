@@ -25,14 +25,8 @@ struct OnboardingView: View {
     
     
     
-    
-    
-    
-
-    
-    
     var body: some View {
-        ScrollView((selectedPage == 4) ? [] : .horizontal, showsIndicators: false) {
+        ScrollView((selectedPage == 3) ? [] : .horizontal, showsIndicators: false) {
                 ZStack{
                     TabView(selection: $selectedPage) {
 
@@ -40,50 +34,40 @@ struct OnboardingView: View {
                                 myIndex: 0,
                                 selectedPage: $selectedPage,
                                 image: "onboarding1",
-                                title: "Hashtags Generator\nusing AI ❤️",
-                                subtitle: "Let us assist you in gaining more followers and likes using popular Hashtags"
+                                title: "Real Time\nVoice Translation",
+                                subtitle: "Live Translator translates languages to easy to read text and voice with superior accuracy."
                             ).tag(0)
                             OnboardingSinglePage(
                                 myIndex: 1,
                                 selectedPage: $selectedPage,
                                 image: "onboarding2",
-                                title: "Explore Popular,\nTrending Hashtags 📈",
-                                subtitle: "Boost your likes and followers by discovering our trending tag selection"
+                                title: "60+ Languages\nto Choose From",
+                                subtitle: "Live Translator can easily and accurately translate text and speech in 60+ languages."
                             ).tag(1)
                             OnboardingSinglePage(
                                 myIndex: 2,
                                 selectedPage: $selectedPage,
                                 image: "onboarding3",
-                                title: "Generate Tags\nwith AI 🤖",
-                                subtitle: "Instantly generate tags for your images using our Auto Tag AI feature"
-                                
+                                title: "Fast voice &\nText Translation",
+                                subtitle: "Live Translator gives you accurate voice and text translation with a single tap.",
+                                isLastPage: true
                             ).tag(2)
-                        
-                        OnboardingSinglePage(
-                            myIndex: 3,
-                            selectedPage: $selectedPage,
-                            image: "onboarding4",
-                            title: "Personalise using\nCustom Tags #️⃣",
-                            subtitle: "Create custom tags to efficiently organise and manage social media hashtags",
-                            isLastPage: true
-                        ).tag(3)
-
 
                         VStack{
-//                            ThreePaywallView(viewModel: paywallViewModel, routingViewModel : routingViewModel, showLoadingIndicator: true)
-                            
-                                PaywallRouter(viewModel: paywallViewModel, routingViewModel: routingViewModel, showLoadingIndicator: true)
+                            PaywallRouter(viewModel: paywallViewModel, routingViewModel: routingViewModel, showLoadingIndicator: true)
                                
-                                
-                        }.tag(4)
+                           
+                        }
+                        
+                        .tag(3)
                     }
                     .tabViewStyle(.page)
                     .indexViewStyle(.page(backgroundDisplayMode: .never))
                     .frame(
-                        width: UIScreen.main.bounds.width
-//                        height: UIScreen.main.bounds.height
+                        width: UIScreen.main.bounds.width,
+                        height: UIScreen.main.bounds.height
                     )
-                    if selectedPage != 4 {
+                    if selectedPage != 3 {
                         VStack{
                             Spacer()
                             PageIndicator(myIndex: selectedPage)
@@ -93,12 +77,12 @@ struct OnboardingView: View {
                     
                 }
             }
-        
-        .edgesIgnoringSafeArea(.top)
-        .onAppear {
-            let structName = String(describing: type(of: self))
-            AmplitudeManager.amplitude.track(eventType : structName)
-        }
+            .edgesIgnoringSafeArea(.all)
+            .onAppear {
+                let structName = String(describing: type(of: self))
+                AmplitudeManager.amplitude.track(eventType : structName)
+
+            }
         
     }
     
@@ -120,10 +104,13 @@ struct OnboardingView: View {
         var body: some View {
             VStack {
 //                Rectangle()
+                VStack {
+                    
+                }
+                .frame(height: UIScreen.main.bounds.height / 14)
                 Image(image)
                     .resizable()
                     .scaledToFit()
-                    .padding(.top, 16)
 //                    .ignoresSafeArea()
 //                Spacer()
                 VStack {
@@ -134,7 +121,6 @@ struct OnboardingView: View {
                             .padding(.vertical)
                             .multilineTextAlignment(.center)
                             .fixedSize(horizontal: false, vertical: true)
-                          
 
                         Text(subtitle)
                             .font(.system(size: 24))
@@ -144,6 +130,7 @@ struct OnboardingView: View {
                     }
                     Spacer()
                     Button(action: {
+//                        AmplitudeManager.amplitude.track(eventType: AmplitudeEvents.onboarding_continue.rawValue)
                         //MARK: Set the onboarding shown to true if new user presses continue on third page aka 2th page
                         if isLastPage ?? false {
                             #if DEBUG
@@ -157,10 +144,7 @@ struct OnboardingView: View {
 //                            RMetrics.recordEvent("app_onboarding_continued")
                         }
                         
-                                
-                        AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.onboarding_next.rawValue)
-
-                        
+                            
                         withAnimation {
                             selectedPage += 1
                         }
@@ -186,7 +170,6 @@ struct OnboardingView: View {
                 }.padding(.horizontal, 16)
                 Spacer()
             }
-            .edgesIgnoringSafeArea(.all)
             .padding(0)
         }
     }
@@ -211,9 +194,6 @@ struct OnboardingView: View {
                     .frame(width: size, height: size)
                 Circle()
                     .foregroundColor((myIndex == 3) ? .blue : .gray)
-                    .frame(width: size, height: size)
-                Circle()
-                    .foregroundColor((myIndex == 4) ? .blue : .gray)
                     .frame(width: size, height: size)
                 Spacer()
             }

@@ -9,10 +9,10 @@ import Foundation
 import RevenueCat
 
 
-let APP_ID = "6483859706"
+let APP_ID = "6504801633"
 
-let RC_API_KEY = "appl_yLwapYYLqDUJIlTGVrNKtmBmyvO"
-let APPS_FLYER_DEVKEY = "NbV4N3m54YbZrX6Gp7xypY"
+let RC_API_KEY = "appl_KLLriClfOsqsXDNZnvYoJxQMSAF"
+//let APPS_FLYER_DEVKEY = "NbV4N3m54YbZrX6Gp7xypY"
 let PRIVACY_POLICY = "https://zerovik.com/live-translator-privacy-policy/?u="+Purchases.shared.appUserID
 let TERMS_OF_USE = "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"
 let CUSTOMER_SUPPORT_URL = "https://tally.so/r/mJ22RY"

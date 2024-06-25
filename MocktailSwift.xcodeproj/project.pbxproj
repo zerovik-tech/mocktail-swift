@@ -7,24 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5717311F2C2ACEEB004862FA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5717311E2C2ACEEB004862FA /* GoogleService-Info.plist */; };
+		571731212C2AD995004862FA /* shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571731202C2AD995004862FA /* shapes.swift */; };
+		5717312D2C2AFC11004862FA /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 5717312C2C2AFC11004862FA /* RevenueCat */; };
+		5717312F2C2AFD3E004862FA /* Lancelot-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5717312E2C2AFD3E004862FA /* Lancelot-Regular.ttf */; };
+		571731412C2AFF90004862FA /* RoutingViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571731322C2AFF90004862FA /* RoutingViewState.swift */; };
+		571731422C2AFF90004862FA /* RoutingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571731332C2AFF90004862FA /* RoutingViewModel.swift */; };
+		571731432C2AFF90004862FA /* RoutingViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571731342C2AFF90004862FA /* RoutingViewInteractor.swift */; };
+		571731442C2AFF90004862FA /* RoutingLocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571731372C2AFF90004862FA /* RoutingLocalDataSource.swift */; };
+		571731452C2AFF90004862FA /* RoutingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571731392C2AFF90004862FA /* RoutingRepository.swift */; };
+		571731462C2AFF90004862FA /* RoutingRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5717313C2C2AFF90004862FA /* RoutingRepositoryProtocol.swift */; };
+		571731472C2AFF90004862FA /* UserFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5717313E2C2AFF90004862FA /* UserFlow.swift */; };
+		571731482C2AFF90004862FA /* RoutingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571731402C2AFF90004862FA /* RoutingView.swift */; };
+		5717314E2C2B0021004862FA /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5717314C2C2B0021004862FA /* OnboardingView.swift */; };
 		57A561122C2AA05400D70D0D /* URLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A5610F2C2AA05400D70D0D /* URLView.swift */; };
 		57A561132C2AA05400D70D0D /* URLWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A561102C2AA05400D70D0D /* URLWebView.swift */; };
 		57A561142C2AA05400D70D0D /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A561112C2AA05400D70D0D /* MoreView.swift */; };
-		57A561182C2AA09A00D70D0D /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A561172C2AA09A00D70D0D /* OnboardingView.swift */; };
 		57A5611C2C2AA0A200D70D0D /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A5611B2C2AA0A200D70D0D /* SplashView.swift */; };
 		57A5611E2C2AA0B800D70D0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A5611D2C2AA0B800D70D0D /* AppDelegate.swift */; };
-		57A5615A2C2AA19100D70D0D /* RoutingViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A5614B2C2AA19100D70D0D /* RoutingViewState.swift */; };
-		57A5615B2C2AA19100D70D0D /* RoutingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A5614C2C2AA19100D70D0D /* RoutingViewModel.swift */; };
-		57A5615C2C2AA19100D70D0D /* RoutingViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A5614D2C2AA19100D70D0D /* RoutingViewInteractor.swift */; };
-		57A5615D2C2AA19100D70D0D /* RoutingLocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A561502C2AA19100D70D0D /* RoutingLocalDataSource.swift */; };
-		57A5615E2C2AA19100D70D0D /* RoutingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A561522C2AA19100D70D0D /* RoutingRepository.swift */; };
-		57A5615F2C2AA19100D70D0D /* RoutingRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A561552C2AA19100D70D0D /* RoutingRepositoryProtocol.swift */; };
-		57A561602C2AA19100D70D0D /* UserFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A561572C2AA19100D70D0D /* UserFlow.swift */; };
-		57A561612C2AA19100D70D0D /* RoutingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A561592C2AA19100D70D0D /* RoutingView.swift */; };
-		57A561642C2AA7BF00D70D0D /* ReceiptParser in Frameworks */ = {isa = PBXBuildFile; productRef = 57A561632C2AA7BF00D70D0D /* ReceiptParser */; };
-		57A561662C2AA7BF00D70D0D /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 57A561652C2AA7BF00D70D0D /* RevenueCat */; };
-		57A561682C2AA7BF00D70D0D /* RevenueCatUI in Frameworks */ = {isa = PBXBuildFile; productRef = 57A561672C2AA7BF00D70D0D /* RevenueCatUI */; };
-		57A5616A2C2AA7BF00D70D0D /* RevenueCat_CustomEntitlementComputation in Frameworks */ = {isa = PBXBuildFile; productRef = 57A561692C2AA7BF00D70D0D /* RevenueCat_CustomEntitlementComputation */; };
 		57A5616D2C2AA88600D70D0D /* FacebookAEM in Frameworks */ = {isa = PBXBuildFile; productRef = 57A5616C2C2AA88600D70D0D /* FacebookAEM */; };
 		57A5616F2C2AA88600D70D0D /* FacebookBasics in Frameworks */ = {isa = PBXBuildFile; productRef = 57A5616E2C2AA88600D70D0D /* FacebookBasics */; };
 		57A561712C2AA88600D70D0D /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 57A561702C2AA88600D70D0D /* FacebookCore */; };
@@ -57,6 +57,7 @@
 		57A561B72C2AAAD500D70D0D /* AmplitudeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A561B62C2AAAD500D70D0D /* AmplitudeManager.swift */; };
 		57A561BD2C2AAAF000D70D0D /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A561BA2C2AAAF000D70D0D /* Event.swift */; };
 		57A561C02C2ABCEB00D70D0D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A561BF2C2ABCEB00D70D0D /* Constants.swift */; };
+		6D7390AF2C2ABD5900F1AB57 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D7390AE2C2ABD5900F1AB57 /* StoreKit.framework */; };
 		B103F2992C217EC000F9E9C3 /* MocktailSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = B103F2982C217EC000F9E9C3 /* MocktailSwift.swift */; };
 		B103F29B2C217EC000F9E9C3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B103F29A2C217EC000F9E9C3 /* ContentView.swift */; };
 		B103F29D2C217EC200F9E9C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B103F29C2C217EC200F9E9C3 /* Assets.xcassets */; };
@@ -72,20 +73,23 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5717311E2C2ACEEB004862FA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		571731202C2AD995004862FA /* shapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shapes.swift; sourceTree = "<group>"; };
+		5717312E2C2AFD3E004862FA /* Lancelot-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lancelot-Regular.ttf"; sourceTree = "<group>"; };
+		571731322C2AFF90004862FA /* RoutingViewState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingViewState.swift; sourceTree = "<group>"; };
+		571731332C2AFF90004862FA /* RoutingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingViewModel.swift; sourceTree = "<group>"; };
+		571731342C2AFF90004862FA /* RoutingViewInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingViewInteractor.swift; sourceTree = "<group>"; };
+		571731372C2AFF90004862FA /* RoutingLocalDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingLocalDataSource.swift; sourceTree = "<group>"; };
+		571731392C2AFF90004862FA /* RoutingRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingRepository.swift; sourceTree = "<group>"; };
+		5717313C2C2AFF90004862FA /* RoutingRepositoryProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingRepositoryProtocol.swift; sourceTree = "<group>"; };
+		5717313E2C2AFF90004862FA /* UserFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFlow.swift; sourceTree = "<group>"; };
+		571731402C2AFF90004862FA /* RoutingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingView.swift; sourceTree = "<group>"; };
+		5717314C2C2B0021004862FA /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		57A5610F2C2AA05400D70D0D /* URLView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLView.swift; sourceTree = "<group>"; };
 		57A561102C2AA05400D70D0D /* URLWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLWebView.swift; sourceTree = "<group>"; };
 		57A561112C2AA05400D70D0D /* MoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
-		57A561172C2AA09A00D70D0D /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		57A5611B2C2AA0A200D70D0D /* SplashView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		57A5611D2C2AA0B800D70D0D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		57A5614B2C2AA19100D70D0D /* RoutingViewState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingViewState.swift; sourceTree = "<group>"; };
-		57A5614C2C2AA19100D70D0D /* RoutingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingViewModel.swift; sourceTree = "<group>"; };
-		57A5614D2C2AA19100D70D0D /* RoutingViewInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingViewInteractor.swift; sourceTree = "<group>"; };
-		57A561502C2AA19100D70D0D /* RoutingLocalDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingLocalDataSource.swift; sourceTree = "<group>"; };
-		57A561522C2AA19100D70D0D /* RoutingRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingRepository.swift; sourceTree = "<group>"; };
-		57A561552C2AA19100D70D0D /* RoutingRepositoryProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingRepositoryProtocol.swift; sourceTree = "<group>"; };
-		57A561572C2AA19100D70D0D /* UserFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFlow.swift; sourceTree = "<group>"; };
-		57A561592C2AA19100D70D0D /* RoutingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingView.swift; sourceTree = "<group>"; };
 		57A561842C2AA95E00D70D0D /* PaywallViewState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaywallViewState.swift; sourceTree = "<group>"; };
 		57A561852C2AA95E00D70D0D /* PaywallViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaywallViewModel.swift; sourceTree = "<group>"; };
 		57A561862C2AA95E00D70D0D /* PaywallViewInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaywallViewInteractor.swift; sourceTree = "<group>"; };
@@ -106,6 +110,7 @@
 		57A561B62C2AAAD500D70D0D /* AmplitudeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmplitudeManager.swift; sourceTree = "<group>"; };
 		57A561BA2C2AAAF000D70D0D /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		57A561BF2C2ABCEB00D70D0D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		6D7390AE2C2ABD5900F1AB57 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		B103F2952C217EC000F9E9C3 /* MocktailSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MocktailSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B103F2982C217EC000F9E9C3 /* MocktailSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MocktailSwift.swift; sourceTree = "<group>"; };
 		B103F29A2C217EC000F9E9C3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -129,26 +134,119 @@
 			files = (
 				57A561B22C2AAA5B00D70D0D /* AmplitudeSwift in Frameworks */,
 				57A5617E2C2AA93500D70D0D /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				5717312D2C2AFC11004862FA /* RevenueCat in Frameworks */,
 				57A5617C2C2AA93500D70D0D /* FirebaseAnalyticsSwift in Frameworks */,
-				57A561662C2AA7BF00D70D0D /* RevenueCat in Frameworks */,
 				57A5616D2C2AA88600D70D0D /* FacebookAEM in Frameworks */,
 				57A561802C2AA93500D70D0D /* FirebaseAppCheck in Frameworks */,
 				57A5617A2C2AA93500D70D0D /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				57A561712C2AA88600D70D0D /* FacebookCore in Frameworks */,
-				57A561642C2AA7BF00D70D0D /* ReceiptParser in Frameworks */,
 				57A5616F2C2AA88600D70D0D /* FacebookBasics in Frameworks */,
 				57A561752C2AA88600D70D0D /* FacebookLogin in Frameworks */,
-				57A561682C2AA7BF00D70D0D /* RevenueCatUI in Frameworks */,
 				57A561AF2C2AAA2500D70D0D /* AppsFlyerLib in Frameworks */,
-				57A5616A2C2AA7BF00D70D0D /* RevenueCat_CustomEntitlementComputation in Frameworks */,
 				57A561782C2AA93500D70D0D /* FirebaseAnalytics in Frameworks */,
 				57A561732C2AA88600D70D0D /* FacebookGamingServices in Frameworks */,
+				6D7390AF2C2ABD5900F1AB57 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		571731302C2AFF90004862FA /* routing */ = {
+			isa = PBXGroup;
+			children = (
+				571731312C2AFF90004862FA /* application */,
+				571731352C2AFF90004862FA /* infrastructure */,
+				5717313A2C2AFF90004862FA /* domain */,
+				5717313F2C2AFF90004862FA /* presentation */,
+			);
+			path = routing;
+			sourceTree = "<group>";
+		};
+		571731312C2AFF90004862FA /* application */ = {
+			isa = PBXGroup;
+			children = (
+				571731322C2AFF90004862FA /* RoutingViewState.swift */,
+				571731332C2AFF90004862FA /* RoutingViewModel.swift */,
+				571731342C2AFF90004862FA /* RoutingViewInteractor.swift */,
+			);
+			path = application;
+			sourceTree = "<group>";
+		};
+		571731352C2AFF90004862FA /* infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				571731362C2AFF90004862FA /* datasources */,
+				571731382C2AFF90004862FA /* repositories */,
+			);
+			path = infrastructure;
+			sourceTree = "<group>";
+		};
+		571731362C2AFF90004862FA /* datasources */ = {
+			isa = PBXGroup;
+			children = (
+				571731372C2AFF90004862FA /* RoutingLocalDataSource.swift */,
+			);
+			path = datasources;
+			sourceTree = "<group>";
+		};
+		571731382C2AFF90004862FA /* repositories */ = {
+			isa = PBXGroup;
+			children = (
+				571731392C2AFF90004862FA /* RoutingRepository.swift */,
+			);
+			path = repositories;
+			sourceTree = "<group>";
+		};
+		5717313A2C2AFF90004862FA /* domain */ = {
+			isa = PBXGroup;
+			children = (
+				5717313B2C2AFF90004862FA /* respositories */,
+				5717313D2C2AFF90004862FA /* entities */,
+			);
+			path = domain;
+			sourceTree = "<group>";
+		};
+		5717313B2C2AFF90004862FA /* respositories */ = {
+			isa = PBXGroup;
+			children = (
+				5717313C2C2AFF90004862FA /* RoutingRepositoryProtocol.swift */,
+			);
+			path = respositories;
+			sourceTree = "<group>";
+		};
+		5717313D2C2AFF90004862FA /* entities */ = {
+			isa = PBXGroup;
+			children = (
+				5717313E2C2AFF90004862FA /* UserFlow.swift */,
+			);
+			path = entities;
+			sourceTree = "<group>";
+		};
+		5717313F2C2AFF90004862FA /* presentation */ = {
+			isa = PBXGroup;
+			children = (
+				571731402C2AFF90004862FA /* RoutingView.swift */,
+			);
+			path = presentation;
+			sourceTree = "<group>";
+		};
+		571731492C2B0021004862FA /* onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				5717314A2C2B0021004862FA /* presentation */,
+			);
+			path = onboarding;
+			sourceTree = "<group>";
+		};
+		5717314A2C2B0021004862FA /* presentation */ = {
+			isa = PBXGroup;
+			children = (
+				5717314C2C2B0021004862FA /* OnboardingView.swift */,
+			);
+			path = presentation;
+			sourceTree = "<group>";
+		};
 		57A5610D2C2AA05400D70D0D /* more */ = {
 			isa = PBXGroup;
 			children = (
@@ -167,22 +265,6 @@
 			path = presentation;
 			sourceTree = "<group>";
 		};
-		57A561152C2AA09A00D70D0D /* onboarding */ = {
-			isa = PBXGroup;
-			children = (
-				57A561162C2AA09A00D70D0D /* presentation */,
-			);
-			path = onboarding;
-			sourceTree = "<group>";
-		};
-		57A561162C2AA09A00D70D0D /* presentation */ = {
-			isa = PBXGroup;
-			children = (
-				57A561172C2AA09A00D70D0D /* OnboardingView.swift */,
-			);
-			path = presentation;
-			sourceTree = "<group>";
-		};
 		57A561192C2AA0A200D70D0D /* splash */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,85 +277,6 @@
 			isa = PBXGroup;
 			children = (
 				57A5611B2C2AA0A200D70D0D /* SplashView.swift */,
-			);
-			path = presentation;
-			sourceTree = "<group>";
-		};
-		57A561492C2AA19100D70D0D /* routing */ = {
-			isa = PBXGroup;
-			children = (
-				57A5614A2C2AA19100D70D0D /* application */,
-				57A5614E2C2AA19100D70D0D /* infrastructure */,
-				57A561532C2AA19100D70D0D /* domain */,
-				57A561582C2AA19100D70D0D /* presentation */,
-			);
-			path = routing;
-			sourceTree = "<group>";
-		};
-		57A5614A2C2AA19100D70D0D /* application */ = {
-			isa = PBXGroup;
-			children = (
-				57A5614B2C2AA19100D70D0D /* RoutingViewState.swift */,
-				57A5614C2C2AA19100D70D0D /* RoutingViewModel.swift */,
-				57A5614D2C2AA19100D70D0D /* RoutingViewInteractor.swift */,
-			);
-			path = application;
-			sourceTree = "<group>";
-		};
-		57A5614E2C2AA19100D70D0D /* infrastructure */ = {
-			isa = PBXGroup;
-			children = (
-				57A5614F2C2AA19100D70D0D /* datasources */,
-				57A561512C2AA19100D70D0D /* repositories */,
-			);
-			path = infrastructure;
-			sourceTree = "<group>";
-		};
-		57A5614F2C2AA19100D70D0D /* datasources */ = {
-			isa = PBXGroup;
-			children = (
-				57A561502C2AA19100D70D0D /* RoutingLocalDataSource.swift */,
-			);
-			path = datasources;
-			sourceTree = "<group>";
-		};
-		57A561512C2AA19100D70D0D /* repositories */ = {
-			isa = PBXGroup;
-			children = (
-				57A561522C2AA19100D70D0D /* RoutingRepository.swift */,
-			);
-			path = repositories;
-			sourceTree = "<group>";
-		};
-		57A561532C2AA19100D70D0D /* domain */ = {
-			isa = PBXGroup;
-			children = (
-				57A561542C2AA19100D70D0D /* repositories */,
-				57A561562C2AA19100D70D0D /* entities */,
-			);
-			path = domain;
-			sourceTree = "<group>";
-		};
-		57A561542C2AA19100D70D0D /* repositories */ = {
-			isa = PBXGroup;
-			children = (
-				57A561552C2AA19100D70D0D /* RoutingRepositoryProtocol.swift */,
-			);
-			path = repositories;
-			sourceTree = "<group>";
-		};
-		57A561562C2AA19100D70D0D /* entities */ = {
-			isa = PBXGroup;
-			children = (
-				57A561572C2AA19100D70D0D /* UserFlow.swift */,
-			);
-			path = entities;
-			sourceTree = "<group>";
-		};
-		57A561582C2AA19100D70D0D /* presentation */ = {
-			isa = PBXGroup;
-			children = (
-				57A561592C2AA19100D70D0D /* RoutingView.swift */,
 			);
 			path = presentation;
 			sourceTree = "<group>";
@@ -401,9 +404,18 @@
 			isa = PBXGroup;
 			children = (
 				57A561BA2C2AAAF000D70D0D /* Event.swift */,
+				571731202C2AD995004862FA /* shapes.swift */,
 				57A561BF2C2ABCEB00D70D0D /* Constants.swift */,
 			);
 			path = static;
+			sourceTree = "<group>";
+		};
+		6D7390AD2C2ABD5900F1AB57 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6D7390AE2C2ABD5900F1AB57 /* StoreKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		B103F28C2C217EC000F9E9C3 = {
@@ -411,6 +423,7 @@
 			children = (
 				B103F2972C217EC000F9E9C3 /* MocktailSwift */,
 				B103F2962C217EC000F9E9C3 /* Products */,
+				6D7390AD2C2ABD5900F1AB57 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -426,9 +439,10 @@
 			isa = PBXGroup;
 			children = (
 				B14844D42C295AC1004B7B76 /* Info.plist */,
+				5717312E2C2AFD3E004862FA /* Lancelot-Regular.ttf */,
 				B14844D22C295A6C004B7B76 /* Merienda-Regular.ttf */,
+				571731492C2B0021004862FA /* onboarding */,
 				57A561192C2AA0A200D70D0D /* splash */,
-				57A561152C2AA09A00D70D0D /* onboarding */,
 				57A561B52C2AAAD500D70D0D /* analytics */,
 				57A5610D2C2AA05400D70D0D /* more */,
 				B14844CB2C295706004B7B76 /* home */,
@@ -437,13 +451,14 @@
 				57A561B32C2AAAB200D70D0D /* SceneDelegate.swift */,
 				B103F2982C217EC000F9E9C3 /* MocktailSwift.swift */,
 				B103F29A2C217EC000F9E9C3 /* ContentView.swift */,
+				5717311E2C2ACEEB004862FA /* GoogleService-Info.plist */,
 				B103F2AD2C218AA200F9E9C3 /* ImageHelper.swift */,
 				B103F2AB2C217EEA00F9E9C3 /* MockView.swift */,
 				B103F29C2C217EC200F9E9C3 /* Assets.xcassets */,
 				B103F2A12C217EC200F9E9C3 /* Persistence.swift */,
+				571731302C2AFF90004862FA /* routing */,
 				57A561812C2AA95E00D70D0D /* paywall */,
 				57A561B82C2AAAF000D70D0D /* static */,
-				57A561492C2AA19100D70D0D /* routing */,
 				B103F2A32C217EC200F9E9C3 /* MocktailSwift.xcdatamodeld */,
 				B103F29E2C217EC200F9E9C3 /* Preview Content */,
 			);
@@ -524,10 +539,6 @@
 			);
 			name = MocktailSwift;
 			packageProductDependencies = (
-				57A561632C2AA7BF00D70D0D /* ReceiptParser */,
-				57A561652C2AA7BF00D70D0D /* RevenueCat */,
-				57A561672C2AA7BF00D70D0D /* RevenueCatUI */,
-				57A561692C2AA7BF00D70D0D /* RevenueCat_CustomEntitlementComputation */,
 				57A5616C2C2AA88600D70D0D /* FacebookAEM */,
 				57A5616E2C2AA88600D70D0D /* FacebookBasics */,
 				57A561702C2AA88600D70D0D /* FacebookCore */,
@@ -540,6 +551,7 @@
 				57A5617F2C2AA93500D70D0D /* FirebaseAppCheck */,
 				57A561AE2C2AAA2500D70D0D /* AppsFlyerLib */,
 				57A561B12C2AAA5B00D70D0D /* AmplitudeSwift */,
+				5717312C2C2AFC11004862FA /* RevenueCat */,
 			);
 			productName = MocktailIosTemp;
 			productReference = B103F2952C217EC000F9E9C3 /* MocktailSwift.app */;
@@ -570,11 +582,11 @@
 			);
 			mainGroup = B103F28C2C217EC000F9E9C3;
 			packageReferences = (
-				57A561622C2AA7BF00D70D0D /* XCRemoteSwiftPackageReference "purchases-ios" */,
 				57A5616B2C2AA88600D70D0D /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 				57A561762C2AA93500D70D0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				57A561AD2C2AAA2500D70D0D /* XCRemoteSwiftPackageReference "AppsFlyerFramework" */,
 				57A561B02C2AAA5B00D70D0D /* XCRemoteSwiftPackageReference "Amplitude-Swift" */,
+				5717312B2C2AFC11004862FA /* XCRemoteSwiftPackageReference "purchases-ios" */,
 			);
 			productRefGroup = B103F2962C217EC000F9E9C3 /* Products */;
 			projectDirPath = "";
@@ -592,7 +604,9 @@
 			files = (
 				B103F2A02C217EC200F9E9C3 /* Preview Assets.xcassets in Resources */,
 				B14844D32C295A6C004B7B76 /* Merienda-Regular.ttf in Resources */,
+				5717311F2C2ACEEB004862FA /* GoogleService-Info.plist in Resources */,
 				B103F29D2C217EC200F9E9C3 /* Assets.xcassets in Resources */,
+				5717312F2C2AFD3E004862FA /* Lancelot-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -605,25 +619,29 @@
 			files = (
 				B103F2A22C217EC200F9E9C3 /* Persistence.swift in Sources */,
 				B14844CA2C294DDF004B7B76 /* MockupView.swift in Sources */,
+				571731462C2AFF90004862FA /* RoutingRepositoryProtocol.swift in Sources */,
+				5717314E2C2B0021004862FA /* OnboardingView.swift in Sources */,
 				57A561A22C2AA95F00D70D0D /* PaywallRepository.swift in Sources */,
 				57A561B72C2AAAD500D70D0D /* AmplitudeManager.swift in Sources */,
 				57A5611C2C2AA0A200D70D0D /* SplashView.swift in Sources */,
-				57A5615F2C2AA19100D70D0D /* RoutingRepositoryProtocol.swift in Sources */,
+				571731422C2AFF90004862FA /* RoutingViewModel.swift in Sources */,
 				57A561A52C2AA95F00D70D0D /* SubscriptionPlan.swift in Sources */,
+				571731212C2AD995004862FA /* shapes.swift in Sources */,
+				571731472C2AFF90004862FA /* UserFlow.swift in Sources */,
 				57A561A32C2AA95F00D70D0D /* PaywallError.swift in Sources */,
 				57A561C02C2ABCEB00D70D0D /* Constants.swift in Sources */,
 				57A561A42C2AA95F00D70D0D /* PaywallRepositoryProtocol.swift in Sources */,
 				57A561AC2C2AA95F00D70D0D /* VerticalPlanCard.swift in Sources */,
 				B103F2A52C217EC200F9E9C3 /* MocktailSwift.xcdatamodeld in Sources */,
+				571731442C2AFF90004862FA /* RoutingLocalDataSource.swift in Sources */,
 				57A561BD2C2AAAF000D70D0D /* Event.swift in Sources */,
 				57A561A02C2AA95F00D70D0D /* PaywallRemoteDataSource.swift in Sources */,
+				571731412C2AFF90004862FA /* RoutingViewState.swift in Sources */,
 				57A561142C2AA05400D70D0D /* MoreView.swift in Sources */,
-				57A5615D2C2AA19100D70D0D /* RoutingLocalDataSource.swift in Sources */,
 				57A5619F2C2AA95F00D70D0D /* PaywallViewInteractor.swift in Sources */,
 				57A561A72C2AA95F00D70D0D /* TwoPaywallView.swift in Sources */,
 				57A561A82C2AA95F00D70D0D /* ThreePaywallView.swift in Sources */,
 				B14844D12C295762004B7B76 /* HomeView.swift in Sources */,
-				57A561612C2AA19100D70D0D /* RoutingView.swift in Sources */,
 				B103F29B2C217EC000F9E9C3 /* ContentView.swift in Sources */,
 				57A5619D2C2AA95E00D70D0D /* PaywallViewState.swift in Sources */,
 				B103F2AC2C217EEA00F9E9C3 /* MockView.swift in Sources */,
@@ -631,21 +649,18 @@
 				57A5611E2C2AA0B800D70D0D /* AppDelegate.swift in Sources */,
 				B103F2992C217EC000F9E9C3 /* MocktailSwift.swift in Sources */,
 				57A561132C2AA05400D70D0D /* URLWebView.swift in Sources */,
-				57A5615A2C2AA19100D70D0D /* RoutingViewState.swift in Sources */,
+				571731452C2AFF90004862FA /* RoutingRepository.swift in Sources */,
 				57A561AB2C2AA95F00D70D0D /* AllPlansView.swift in Sources */,
 				B103F2AE2C218AA200F9E9C3 /* ImageHelper.swift in Sources */,
-				57A5615C2C2AA19100D70D0D /* RoutingViewInteractor.swift in Sources */,
 				57A561122C2AA05400D70D0D /* URLView.swift in Sources */,
-				57A5615B2C2AA19100D70D0D /* RoutingViewModel.swift in Sources */,
-				57A5615E2C2AA19100D70D0D /* RoutingRepository.swift in Sources */,
+				571731482C2AFF90004862FA /* RoutingView.swift in Sources */,
 				57A5619E2C2AA95F00D70D0D /* PaywallViewModel.swift in Sources */,
 				57A561AA2C2AA95F00D70D0D /* PaywallRouter.swift in Sources */,
-				57A561602C2AA19100D70D0D /* UserFlow.swift in Sources */,
 				57A561A62C2AA95F00D70D0D /* AlertItem.swift in Sources */,
 				57A561B42C2AAAB200D70D0D /* SceneDelegate.swift in Sources */,
 				B14844C62C24646B004B7B76 /* Mockup.swift in Sources */,
 				57A561A12C2AA95F00D70D0D /* PaywallLocalDataSource.swift in Sources */,
-				57A561182C2AA09A00D70D0D /* OnboardingView.swift in Sources */,
+				571731432C2AFF90004862FA /* RoutingViewInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -784,6 +799,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MocktailSwift/Info.plist;
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "we need permission to get image from user";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "We need this permission to measure if our ads are efficient or not. It really helps us keep the cost of our app lower. We'd appreciate if you'd allow it.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -794,7 +810,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.zerovik.MocktailSwift;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zerovik.Mocktail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
@@ -817,6 +833,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MocktailSwift/Info.plist;
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "we need permission to get image from user";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "We need this permission to measure if our ads are efficient or not. It really helps us keep the cost of our app lower. We'd appreciate if you'd allow it.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -827,7 +844,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.zerovik.MocktailSwift;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zerovik.Mocktail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
@@ -861,7 +878,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		57A561622C2AA7BF00D70D0D /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
+		5717312B2C2AFC11004862FA /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RevenueCat/purchases-ios.git";
 			requirement = {
@@ -904,25 +921,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		57A561632C2AA7BF00D70D0D /* ReceiptParser */ = {
+		5717312C2C2AFC11004862FA /* RevenueCat */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 57A561622C2AA7BF00D70D0D /* XCRemoteSwiftPackageReference "purchases-ios" */;
-			productName = ReceiptParser;
-		};
-		57A561652C2AA7BF00D70D0D /* RevenueCat */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 57A561622C2AA7BF00D70D0D /* XCRemoteSwiftPackageReference "purchases-ios" */;
+			package = 5717312B2C2AFC11004862FA /* XCRemoteSwiftPackageReference "purchases-ios" */;
 			productName = RevenueCat;
-		};
-		57A561672C2AA7BF00D70D0D /* RevenueCatUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 57A561622C2AA7BF00D70D0D /* XCRemoteSwiftPackageReference "purchases-ios" */;
-			productName = RevenueCatUI;
-		};
-		57A561692C2AA7BF00D70D0D /* RevenueCat_CustomEntitlementComputation */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 57A561622C2AA7BF00D70D0D /* XCRemoteSwiftPackageReference "purchases-ios" */;
-			productName = RevenueCat_CustomEntitlementComputation;
 		};
 		57A5616C2C2AA88600D70D0D /* FacebookAEM */ = {
 			isa = XCSwiftPackageProductDependency;

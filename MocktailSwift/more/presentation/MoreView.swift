@@ -58,7 +58,7 @@ struct MoreView: View {
                                     if paywallViewModel.viewState.isUserSubscribed == true {
                 Button(action: {
                     //                        RMetrics.recordEvent("app_setting_purchase_managed")
-                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_manage_subscription.rawValue)
+//                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_manage_subscription.rawValue)
 
                     
                     showManageSubscriptionSheet = true
@@ -72,7 +72,7 @@ struct MoreView: View {
                 
                 //pro upgrade link
                 Button {
-                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_upgrade_to_pro.rawValue)
+//                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_upgrade_to_pro.rawValue)
 
                     routingViewModel.send(action: .updateUserFlow(userflow: .paywallWithLoading))
                 } label: {
@@ -87,7 +87,7 @@ struct MoreView: View {
                 //restore button
                 
                 Button {
-                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_restore_purchases.rawValue)
+//                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_restore_purchases.rawValue)
 
                                                 paywallViewModel.send(action: .restorePressed)
                 } label: {
@@ -136,7 +136,7 @@ struct MoreView: View {
                 }
                 
                 Button {
-                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_rateus.rawValue)
+//                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_rateus.rawValue)
 
                     rateApp()
                 } label: {
@@ -162,7 +162,7 @@ struct MoreView: View {
                 //                            .labelStyle(.titleOnly)
                 //                    }
                 Button(action: {
-                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_privacy_policy.rawValue)
+//                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_privacy_policy.rawValue)
 
                     if let url = URL(string: "https://zerovik.com/hashtag-generator-privacy-policy/?u="+Purchases.shared.appUserID) {
                         if #available(iOS 10, *) {
@@ -179,7 +179,7 @@ struct MoreView: View {
                     
                 }
                 Button(action: {
-                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_terms.rawValue)
+//                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_terms.rawValue)
 
                     if let url = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/") {
                         if #available(iOS 10, *) {

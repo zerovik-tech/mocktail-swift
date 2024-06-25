@@ -9,7 +9,7 @@ import SwiftUI
 import RevenueCat
 import FacebookCore
 import AppTrackingTransparency
-import AppsFlyerLib
+//import AppsFlyerLib
 
 @main
 struct Hashtag_Generator_ProApp: App {
@@ -34,7 +34,7 @@ struct Hashtag_Generator_ProApp: App {
         routingViewModel = RoutingViewModel(interactor: routingViewInteractor)
     
         
-        Purchases.configure(withAPIKey: "appl_arLGeuIqPGZyNudcvspMbGmWUKI")
+        Purchases.configure(withAPIKey: RC_API_KEY)
         Purchases.logLevel = .debug
         print("RC User ID")
         print(Purchases.shared.appUserID)
@@ -57,7 +57,8 @@ struct Hashtag_Generator_ProApp: App {
                     
                     Purchases.shared.attribution.collectDeviceIdentifiers()
                     
-                    Purchases.shared.attribution.setFBAnonymousID(FacebookCore.AppEvents.shared.anonymousID)
+//                    Purchases.shared.attribution.setFBAnonymousID(FacebookCore.AppEvents.shared.anonymousID)
+                    
 //                    Purchases.shared.attribution.setAppsflyerID(AppsFlyerLib.shared().getAppsFlyerUID())
                     
 //                    AppEvents.shared.logEvent(AppEvents.Name("hekk"), parameters: [AppEvents.ParameterName("count") : 10])
@@ -67,8 +68,10 @@ struct Hashtag_Generator_ProApp: App {
 
                     
 //                    Settings.shared.isAutoLogAppEventsEnabled = true
-                    FacebookCore.Settings.shared.isAdvertiserTrackingEnabled = true
-                    FacebookCore.Settings.shared.isAdvertiserIDCollectionEnabled = true
+                    
+//                    FacebookCore.Settings.shared.isAdvertiserTrackingEnabled = true
+//                    FacebookCore.Settings.shared.isAdvertiserIDCollectionEnabled = true
+                    
 //                    print(ASIdentifierManager.shared().advertisingIdentifier)
 //                    print("after - \(FacebookCore.Settings.shared.isAutoLogAppEventsEnabled)  \(FacebookCore.Settings.shared.isAdvertiserIDCollectionEnabled)")
 //                    processAttribution()
@@ -82,7 +85,8 @@ struct Hashtag_Generator_ProApp: App {
 //                    FacebookCore.Settings.shared.isAutoLogAppEventsEnabled = false
                     Purchases.shared.attribution.collectDeviceIdentifiers()   // here it will not collect nil as user rejected tracking
                     
-                    Purchases.shared.attribution.setFBAnonymousID(FacebookCore.AppEvents.shared.anonymousID)
+//                    Purchases.shared.attribution.setFBAnonymousID(FacebookCore.AppEvents.shared.anonymousID)
+                    
 //                    Purchases.shared.attribution.setAppsflyerID(AppsFlyerLib.shared().getAppsFlyerUID())
                     
                     AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.tracking_not_allow.rawValue)
@@ -128,19 +132,19 @@ struct Hashtag_Generator_ProApp: App {
                 }
                 .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
                     print("App became active")
-                    AppsFlyerLib.shared().waitForATTUserAuthorization(timeoutInterval: 30)
-                    //                        AppsFlyerLib.shared().start()
-                    AppsFlyerLib.shared().start(completionHandler: { (dictionary, error) in
-                        if (error != nil){
-                            print(error ?? "")
-                            return
-                        } else {
-                            print(dictionary ?? "")
-                            print(AppsFlyerLib.shared().getAppsFlyerUID())
-                            Purchases.shared.attribution.setAppsflyerID(AppsFlyerLib.shared().getAppsFlyerUID())
-                            return
-                        }
-                    })
+//                    AppsFlyerLib.shared().waitForATTUserAuthorization(timeoutInterval: 30)
+//                    //                        AppsFlyerLib.shared().start()
+//                    AppsFlyerLib.shared().start(completionHandler: { (dictionary, error) in
+//                        if (error != nil){
+//                            print(error ?? "")
+//                            return
+//                        } else {
+//                            print(dictionary ?? "")
+//                            print(AppsFlyerLib.shared().getAppsFlyerUID())
+//                            Purchases.shared.attribution.setAppsflyerID(AppsFlyerLib.shared().getAppsFlyerUID())
+//                            return
+//                        }
+//                    })
                     requestPermission()
                     isConnectedToInternet = Reachability.isConnectedToNetwork()
                     if(isConnectedToInternet == false){

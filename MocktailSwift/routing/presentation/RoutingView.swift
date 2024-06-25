@@ -1,24 +1,24 @@
 //
 //  RoutingView.swift
-//  Hashtag Generator Pro
+//  FancyKeys
 //
-//  Created by Sachin Pandey on 01/02/24.
+//  Created by Karan Chilwal on 22/11/23.
 //
-
 
 import SwiftUI
+import AmplitudeSwift
 
 struct RoutingView: View {
     
-//    @StateObject private var stateManager : StateManager
-    @StateObject private var viewModel : RoutingViewModel
     
+    @StateObject private var viewModel : RoutingViewModel
     @StateObject private var paywallViewModel : PaywallViewModel
+   
+
     
     init(viewModel: RoutingViewModel, paywallViewModel: PaywallViewModel) {
-        self._paywallViewModel = StateObject(wrappedValue: paywallViewModel)
         self._viewModel = StateObject(wrappedValue: viewModel)
-        
+        self._paywallViewModel = StateObject(wrappedValue: paywallViewModel)
     }
     
     
@@ -26,9 +26,9 @@ struct RoutingView: View {
         
         VStack {
             switch viewModel.viewState.userflow {
-            case .home:
-                HomeView(paywallViewModel: paywallViewModel, routingViewModel: viewModel)
-                    .preferredColorScheme(.none)
+            
+                
+              
             case .onboarding:
                 NavigationStack {
                     OnboardingView(paywallViewModel: paywallViewModel, routingViewModel: viewModel)
@@ -47,15 +47,25 @@ struct RoutingView: View {
                     PaywallRouter(viewModel: paywallViewModel, routingViewModel: viewModel, showLoadingIndicator: true)
                         .preferredColorScheme(.light)
                 }
-
                 
+            case .home:
+                NavigationView {
+                    HomeView(paywallViewModel: paywallViewModel, routingViewModel: viewModel)
+                        .preferredColorScheme(.light)
+                }
             default:
                 SplashView()
                     .onAppear {
                         //show the splash view until we get the userflow
                         paywallViewModel.send(action: .userSubscriptionStatusRequested)
-                        viewModel.send(action: .initialUserFlowRequested)
+
                     }
+                    .onChange(of: paywallViewModel.viewState.isUserSubscribed){ value in
+                        if(value != nil){
+                            viewModel.send(action: .initialUserFlowRequested)
+                        }
+                    }
+                    .preferredColorScheme(.light)
             }
             
         }

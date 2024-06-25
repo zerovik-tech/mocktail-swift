@@ -23,13 +23,13 @@ struct URLView: View {
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             if(title == "Customer Support"){
-                AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_contact_support.rawValue)
+//                AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_contact_support.rawValue)
 
             } else if(title == "Request Feature"){
-                AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_request_feature.rawValue)
+//                AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_request_feature.rawValue)
 
             } else if(title == "Feedback Form") {
-                AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_give_feedback.rawValue)
+//                AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_give_feedback.rawValue)
 
             } 
         }

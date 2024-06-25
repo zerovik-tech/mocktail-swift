@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import FacebookCore
+//import FacebookCore
 
 import UIKit
 
@@ -28,7 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                  continue userActivity: NSUserActivity
                )
     {
-      ApplicationDelegate.shared.application(.shared, continue: userActivity)
+//      ApplicationDelegate.shared.application(.shared, continue: userActivity)
       
       // Rest of implementation...
     }
@@ -38,7 +38,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let userActivity = connectionOptions.userActivities.first,
                userActivity.activityType == NSUserActivityTypeBrowsingWeb
         {
-          ApplicationDelegate.shared.application(.shared, continue: userActivity)
+//          ApplicationDelegate.shared.application(.shared, continue: userActivity)
         }
         if let shortcutItem = connectionOptions.shortcutItem {
            
@@ -56,7 +56,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       }
 
       // Pass DeepLink URL to iOS SDK
-      ApplicationDelegate.shared.application(UIApplication.shared,open: url,sourceApplication: nil,annotation: [UIApplication.OpenURLOptionsKey.annotation])
+//      ApplicationDelegate.shared.application(UIApplication.shared,open: url,sourceApplication: nil,annotation: [UIApplication.OpenURLOptionsKey.annotation])
     }
 
     func handleShortCutItem(shortcutItem: UIApplicationShortcutItem) -> Bool {

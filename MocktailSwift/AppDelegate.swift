@@ -7,11 +7,11 @@
 
 import Foundation
 import UIKit
-import FacebookCore
+//import FacebookCore
 import RevenueCat
 import FirebaseCore
 import FirebaseAnalytics
-import AppsFlyerLib
+//import AppsFlyerLib
 
 
 class AppDelegate : UIResponder,UIApplicationDelegate, PurchasesDelegate {
@@ -19,18 +19,18 @@ class AppDelegate : UIResponder,UIApplicationDelegate, PurchasesDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
-        ApplicationDelegate.shared.application(
-            application,
-            didFinishLaunchingWithOptions: launchOptions
-        )
+//        ApplicationDelegate.shared.application(
+//            application,
+//            didFinishLaunchingWithOptions: launchOptions
+//        )
         
 
         
-        //configure appflyer
-        AppsFlyerLib.shared().appsFlyerDevKey = "NbV4N3m54YbZrX6Gp7xypY"
-        AppsFlyerLib.shared().appleAppID = "6477149814"
-        //  Set isDebug to true to see AppsFlyer debug logs
-        AppsFlyerLib.shared().isDebug = true
+//        //configure appflyer
+//        AppsFlyerLib.shared().appsFlyerDevKey = "NbV4N3m54YbZrX6Gp7xypY"
+//        AppsFlyerLib.shared().appleAppID = "6477149814"
+//        //  Set isDebug to true to see AppsFlyer debug logs
+//        AppsFlyerLib.shared().isDebug = true
         
         
         FirebaseApp.configure()
@@ -51,14 +51,14 @@ class AppDelegate : UIResponder,UIApplicationDelegate, PurchasesDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        ApplicationDelegate.shared.application(
-            app,
-            open: url,
-            sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
-            annotation: options[UIApplication.OpenURLOptionsKey.annotation]
-        )
+//        ApplicationDelegate.shared.application(
+//            app,
+//            open: url,
+//            sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+//            annotation: options[UIApplication.OpenURLOptionsKey.annotation]
+//        )
     
-        AppsFlyerLib.shared().handleOpen(url, options: options)
+//        AppsFlyerLib.shared().handleOpen(url, options: options)
 
         
         return true
@@ -76,9 +76,9 @@ class AppDelegate : UIResponder,UIApplicationDelegate, PurchasesDelegate {
                        restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void
                      ) -> Bool
     {
-      ApplicationDelegate.shared.application(application, continue: userActivity)
+//      ApplicationDelegate.shared.application(application, continue: userActivity)
         
-      AppsFlyerLib.shared().continue(userActivity, restorationHandler: nil)
+//      AppsFlyerLib.shared().continue(userActivity, restorationHandler: nil)
       
       // Rest of implementation...
       
