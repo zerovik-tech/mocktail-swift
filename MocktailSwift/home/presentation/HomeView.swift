@@ -26,8 +26,8 @@ struct HomeView: View {
                     
                     Text("this is paywall view")
                         .tabItem {
-                            Image(systemName: "crown.fill")
-                            Text("Premium")
+                            Image(systemName: "gear")
+                            Text("More")
                         }
                     
                         .tag("paywall")
