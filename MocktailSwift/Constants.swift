@@ -7,6 +7,8 @@
 
 import Foundation
 
+let APP_ID = "6483859706"
+
 enum MockupList: String {
     case AppleWatchSeries6 = "Apple Watch Series 6"
     case AppleWatchSeries7 = "Apple Watch Series 7"
@@ -51,7 +53,7 @@ enum MockupList: String {
     case MacBookPro16_5thGen = "MacBook Pro 16 - 5th Gen"
 }
 
-struct MockupType {
+struct MockupArray {
     
     
     
