@@ -20,3 +20,14 @@ enum MockupType: String {
     case mac = "mac"
     case appleWatch = "appleWatch"
 }
+
+enum Quality: String {
+    case low = "low"
+    case medium = "medium"
+    case high = "high"
+}
+
+enum DownloadMessage: String {
+    case saved = "Mockup Saved Successfully"
+    case error = "Error Saving Mockup"
+}

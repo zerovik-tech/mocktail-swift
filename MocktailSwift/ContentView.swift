@@ -242,7 +242,7 @@ struct ContentView: View {
     
     func saveImages () {
         for image in finalImages {
-            ImageHelper.saveImageToPhotosAlbum(image: image)
+            ImageHelper.saveImageToPhotosAlbum(image: image, quality: .high)
         }
     }
     

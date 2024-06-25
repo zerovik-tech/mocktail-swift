@@ -78,19 +78,22 @@ struct TemplateView: View {
     @State  var selectedMockup: Mockup
     @Binding  var selectedImages: [UIImage]
     @State private var finalImages: [UIImage] = []
+    @State private var replacedImage: UIImage = UIImage()
     @State private var isImagePickerPresented = false
     @State private var photosPickerItems: [PhotosPickerItem] = []
+    @State private var replacePhotoPickerItem: PhotosPickerItem?
     @State private var isProcessing = false
     @State private var contentMode: ContentMode = .fit
-    @State private var selectedFinalImage: UIImage = UIImage()
+    @State private var selectedFinalImageIndex: Int = 0
+    @State private var showDownloadAlert = false
 @State private var count = 0
     
     
     var body: some View {
         VStack {
             HStack {
-                Text("Mockview")
-                    .font(.custom("Merienda-Regular", size: 20))
+                Text("Mocktail")
+                    .font(.custom("YatraOne-Regular", size: 24))
                     .bold()
                 
                 Spacer()
@@ -112,10 +115,21 @@ struct TemplateView: View {
                 
 
                 
+                Button(action: {
+                   
+                    selectedImages = []
+                    finalImages = []
+                    selectedFinalImageIndex = 0
+                    
 
+                }) {
+                    Text("Clear")
+                        .font(.callout)
+                        .bold()
+
+                }
                 
-                Image(systemName: "moon.fill")
-                    .font(.title2)
+               
                 
                 
             }
@@ -128,10 +142,10 @@ struct TemplateView: View {
                 if isProcessing {
                     HStack {
                         Text("Processing ")
-                            
-                         ProgressView()
+                        
+                        ProgressView()
                     }
-                   
+                    
                 } else if finalImages == [] {
                     PhotosPicker(selection: $photosPickerItems, matching: .images) {
                         Image(selectedMockup.mockup.rawValue)
@@ -147,7 +161,7 @@ struct TemplateView: View {
                                         .foregroundStyle(.gray)
                                 }
                             }
-
+                        
                     }
                 } else if finalImages.count == 1 {
                     
@@ -155,11 +169,12 @@ struct TemplateView: View {
                         Image(uiImage: finalImages[0])
                             .resizable()
                             .scaledToFit()
-                            
-
+                        
+                        
                     }
                     
                 } else {
+                    
                     HStack {
                         Spacer()
                         ScrollView(.horizontal) {
@@ -174,71 +189,182 @@ struct TemplateView: View {
                                             .scaledToFit()
                                             .frame(width: UIScreen.main.bounds.width * 0.25, height: UIScreen.main.bounds.height * 0.2)
                                             .onTapGesture {
-                                                selectedFinalImage = finalImages[index]
+                                                selectedFinalImageIndex = index
                                             }
                                             .id(index) // Assign a unique ID to each image
                                     }
                                 }
- 
+                                
                                 
                             }
                         }
-                      
+                        
                         Spacer()
                     }
-                        
+                    
+                    
+                    
+                    
                     PhotosPicker(selection: $photosPickerItems, matching: .images) {
-                        if selectedFinalImage != UIImage() {
-                            Image(uiImage: selectedFinalImage)
-                                    .resizable()
-                                    .scaledToFit()
+                        if selectedFinalImageIndex < finalImages.count {
+                            Image(uiImage: finalImages[selectedFinalImageIndex])
+                                .resizable()
+                                .scaledToFit()
                         }
-                        
-                        
-                        
-                            
-
                     }
+                    
+                    HStack {
+                        
+                        Menu {
+                            
+                            Button("Low Quality") {
+                                if selectedFinalImageIndex < finalImages.count {
+                                    ImageHelper.saveImageToPhotosAlbum(image: finalImages[selectedFinalImageIndex], quality: .low)
+                                    showDownloadAlert = true
+                                }
+                            }
+                            
+                            Button("Medium Quality") {
+                                if selectedFinalImageIndex < finalImages.count {
+                                    ImageHelper.saveImageToPhotosAlbum(image: finalImages[selectedFinalImageIndex], quality: .medium)
+                                    showDownloadAlert = true
+                                }
+                            }
+                            
+                            Button("High Quality") {
+                                if selectedFinalImageIndex < finalImages.count {
+                                    ImageHelper.saveImageToPhotosAlbum(image: finalImages[selectedFinalImageIndex], quality: .high)
+                                    showDownloadAlert = true
+                                }
+                            }
+                            
+                            
+                        } label: {
+                            HStack {
+                                Image(systemName: "square.and.arrow.down")
+                                    .font(.footnote)
+                                    .bold()
+                                Text("Save")
+                                    .font(.footnote)
+                                    .bold()
+                            }
+                            .padding(4)
+                            .padding(.horizontal, 2)
+                            .background {
+                                RoundedRectangle(cornerRadius: 12).fill(.black.opacity(0.1))
+                            }
+
+                            
+                        }
+                        .padding(.trailing)
+
+                        
+                        PhotosPicker(selection: $replacePhotoPickerItem) {
+                            HStack {
+                                Image(systemName: "repeat")
+                                    .font(.footnote)
+                                Text("Replace")
+                                    .font(.footnote)
+                            }
+                            .foregroundStyle(.white)
+                            .padding(4)
+                            .padding(.horizontal, 2)
+                            
+                            .background {
+                                RoundedRectangle(cornerRadius: 12).fill(.black.opacity(0.8))
+                            }
+                            
+                        }
+                        .padding(.leading)
+                        
+                        
+                    }
+                    
+                    
+                    
                 }
                 
                 Spacer()
-                
-                VStack {
-                    HStack {
+               
+                HStack{
+                    VStack {
                         HStack {
-                            Text("Device")
-                                .font(.footnote)
-                                .bold()
-                                .foregroundStyle(.gray)
-                            Menu {
-                                ForEach (mockupArray){item in
-                                    Button {
-                                        selectedImages = []
-                                        finalImages = []
-                                        selectedFinalImage = UIImage()
-                                        selectedMockup = item
-                                    } label: {
-                                        HStack {
-                                            Text(item.mockup.rawValue)
-                                            if (item.mockup.rawValue == selectedMockup.mockup.rawValue) {
-                                                Image(systemName: "checkmark")
-                                                    .font(.callout)
+                            HStack {
+                                Text("Device")
+                                    .font(.footnote)
+                                    .bold()
+                                    .foregroundStyle(.gray)
+                                Menu {
+                                    ForEach (mockupArray){item in
+                                        Button {
+                                            finalImages = []
+                                            selectedFinalImageIndex = 0
+                                            selectedMockup = item
+                                            processImages()
+                                        } label: {
+                                            HStack {
+                                                Text(item.mockup.rawValue)
+                                                if (item.mockup.rawValue == selectedMockup.mockup.rawValue) {
+                                                    Image(systemName: "checkmark")
+                                                        .font(.callout)
+                                                }
+                                                
                                             }
-                                            
                                         }
+                                        
                                     }
                                     
+                                    
+                                    
+                                    
+                                } label: {
+                                    HStack(spacing: 0) {
+                                        Text(selectedMockup.mockup.rawValue)
+                                            .font(.subheadline)
+                                            .bold()
+                                            .padding(.horizontal, 4)
+                                        Image(systemName: "chevron.up.chevron.down")
+                                            .font(.caption2)
+                                            .bold()
+                                    }
+                                    .foregroundStyle(.black)
+                                    .padding(4)
+                                    .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(.white))
+                                    
+                                    
+                                }
+                            }
+                            .padding(.horizontal)
+                            
+                            Menu {
+                                
+                                Button("Fit") {
+                                    contentMode = .fit
+                                    finalImages = []
+                                    processImages()
                                 }
                                 
+                                Button("Fill") {
+                                    contentMode = .fill
+                                    finalImages = []
+                                    processImages()
+                                }
                                 
+                                Button("Stretch") {
+                                    contentMode = .stretch
+                                    finalImages = []
+                                    processImages()
+                                }
                                 
                                 
                             } label: {
                                 HStack(spacing: 0) {
-                                    Text(selectedMockup.mockup.rawValue)
+                                    Text(contentMode.rawValue)
+                                        .fixedSize()
                                         .font(.subheadline)
                                         .bold()
                                         .padding(.horizontal, 4)
+                                    
                                     Image(systemName: "chevron.up.chevron.down")
                                         .font(.caption2)
                                         .bold()
@@ -247,59 +373,44 @@ struct TemplateView: View {
                                 .padding(4)
                                 .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(.white))
                                 
-                                
                             }
-                        }
-                        .padding(.horizontal)
-    
-                        Menu {
-                            
-                            Button("Fit") {
-                                contentMode = .fit
-                                finalImages = []
-                                selectedFinalImage = UIImage()
-                                processImages()
-                            }
-                            
-                            Button("Fill") {
-                                contentMode = .fill
-                                finalImages = []
-                                selectedFinalImage = UIImage()
-                                processImages()
-                            }
-                            
-                            Button("Stretch") {
-                                contentMode = .stretch
-                                finalImages = []
-                                selectedFinalImage = UIImage()
-                                processImages()
-                            }
-                            
-
-                        } label: {
-                            HStack(spacing: 0) {
-                                Text(contentMode.rawValue)
-                                    .fixedSize()
-                                    .font(.subheadline)
-                                    .bold()
-                                    .padding(.horizontal, 4)
-                                
-                                Image(systemName: "chevron.up.chevron.down")
-                                    .font(.caption2)
-                                    .bold()
-                            }
-                            .foregroundStyle(.black)
-                            .padding(4)
-                            .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(.white))
+                            .padding(.horizontal)
                             
                         }
-                        .padding(.horizontal)
+                    }
+                    .padding(4)
+                    .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(.black.opacity(0.1)))
+                    
+                    
+                    Menu {
+                        
+                        Button("Low Quality") {
+                            saveImages(quality: .low)
+                        }
+                        
+                        Button("Medium Quality") {
+                            saveImages(quality: .medium)
+                        }
+                        
+                        Button("High Quality") {
+                            saveImages(quality: .high)
+                        }
+                        
+                        
+                    } label: {
+                        Text("Download")
+                            .font(.callout)
+                            .foregroundStyle(.white)
+                            .bold()
+                            .padding(6)
+                            .background(RoundedRectangle(cornerRadius: 8).fill(.blue))
                         
                     }
+                    
+
                 }
-                .padding(4)
-                .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(.black.opacity(0.1)))
-                .padding()
+
+            
 
                 
 
@@ -313,8 +424,51 @@ struct TemplateView: View {
             }
             
         })
+        .onChange(of: selectedImages, perform: { value in
+            selectedFinalImageIndex = 0
+        })
         .onChange(of: isProcessing){
             print("isProcessing changed: \(isProcessing)")
+        }
+        .onChange(of: replacePhotoPickerItem) { value in
+            Task {
+                
+                if let replacePhotoPickerItem,
+                   let data = try? await replacePhotoPickerItem.loadTransferable(type: Data.self) {
+                    if let image = UIImage(data: data){
+                        replacedImage = image
+                    }
+                }
+                
+                
+            }
+
+        }
+        .onChange(of: replacedImage) { value in
+            if replacedImage != UIImage() {
+                isProcessing = true
+                DispatchQueue.global(qos: .userInitiated).async {
+                    var image: UIImage = UIImage()
+                   
+                        if let resizedImage = ImageHelper.resizeImage(image: replacedImage, targetSize: selectedMockup.baseImageSize, contentMode: contentMode, cornerRadius: selectedMockup.radius),
+                           let overlayImage = UIImage(named: selectedMockup.mockup.rawValue) {
+                            if let finalImage = ImageHelper.overlayImage(baseImage: resizedImage, overlayImage: overlayImage, mockup: selectedMockup) {
+                                image = finalImage
+                            }
+                        }
+                    
+                    DispatchQueue.main.async {
+                    
+                        finalImages.remove(at: selectedFinalImageIndex)
+                        finalImages.insert(image, at: selectedFinalImageIndex)
+                        isProcessing = false
+                        
+                    }
+                }
+            }
+            
+
+            
         }
         .onChange(of: photosPickerItems) {newValue in
            
@@ -339,19 +493,21 @@ struct TemplateView: View {
                 photosPickerItems.removeAll()
             }
         }
-      
-        .onChange(of: finalImages) { value in
-            if finalImages.count > 1 {
-                selectedFinalImage = finalImages[0]
+        .alert("Mockup Saved Successfully" , isPresented: $showDownloadAlert) {
+            Button("OK", role: .cancel) {
+                
             }
         }
+      
+        
 
     }
     
-    func saveImages () {
+    func saveImages (quality: Quality) {
         for image in finalImages {
-            ImageHelper.saveImageToPhotosAlbum(image: image)
+            ImageHelper.saveImageToPhotosAlbum(image: image, quality: quality)
         }
+        showDownloadAlert = true
     }
     
     func processImages() {
