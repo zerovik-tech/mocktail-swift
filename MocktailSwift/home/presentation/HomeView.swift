@@ -8,10 +8,25 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    @StateObject private var paywallViewModel: PaywallViewModel
+    
+    @StateObject private var routingViewModel: RoutingViewModel
+    
+    
+    
+    
     @State private var selectedTab = "mockup"
 //    init() {
 //        UITabBar.appearance().backgroundColor = UIColor.black.withAlphaComponent(0.1)
 //        }
+    
+    init(paywallViewModel: PaywallViewModel, routingViewModel: RoutingViewModel) {
+        self._paywallViewModel = StateObject(wrappedValue: paywallViewModel)
+        self._routingViewModel = StateObject(wrappedValue: routingViewModel)
+    }
+    
+    
     var body: some View {
         VStack {
             TabView(selection: $selectedTab) {
@@ -43,6 +58,6 @@ struct HomeView: View {
     }
 }
 
-#Preview {
-    HomeView()
-}
+//#Preview {
+//    HomeView()
+//}

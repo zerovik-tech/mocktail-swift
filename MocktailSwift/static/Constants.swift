@@ -1,13 +1,46 @@
 //
-//  Const.swift
-//  MocktailSwift
+//  Constants.swift
+//  Keys AI AI Keyboard
 //
-//  Created by Sachin Pandey on 20/06/24.
+//  Created by Sachin Pandey on 22/02/24.
 //
 
 import Foundation
+import RevenueCat
+
 
 let APP_ID = "6483859706"
+
+let RC_API_KEY = "appl_yLwapYYLqDUJIlTGVrNKtmBmyvO"
+let APPS_FLYER_DEVKEY = "NbV4N3m54YbZrX6Gp7xypY"
+let PRIVACY_POLICY = "https://zerovik.com/live-translator-privacy-policy/?u="+Purchases.shared.appUserID
+let TERMS_OF_USE = "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"
+let CUSTOMER_SUPPORT_URL = "https://tally.so/r/mJ22RY"
+let FEEDBACK_FORM_URL = "https://tally.so/r/31rrKO"
+let FEATURE_REQUEST_URL = "https://tally.so/r/wg55A1"
+let APP_VERSION = "1.1.1"
+let AMPLITUDE_API_KEY = ""
+
+
+
+let dailyFreeLimit = "dailyFreeLimit"
+let lastRunDate = "lastRunDate"
+let totalApiCalls = "totalApiCalls"
+let ratingShown = "ratingShown"
+let npsShown = "npsShown"
+let orderArray = "orderArray"
+
+let LAMBDA_NO = "sou6UTri6i9mMqqdKKJ6W6H3s6gF2U2z3VyBTxcE"
+let LAMBDA_TEXTRACT = "GjGjucqato16AF6tpX8bq9nXtUWyTa0B59dFGkdM"
+
+#if DEBUG
+let FREE_LIMIT = 100
+#else
+let FREE_LIMIT = 7
+#endif
+let DEFAULT_SPEED = 0.4
+var appShareText = "Live Translator:\n https://apps.apple.com/us/app/id\(APP_ID)"
+
 
 enum MockupList: String {
     case AppleWatchSeries6 = "Apple Watch Series 6"
@@ -52,6 +85,7 @@ enum MockupList: String {
     case MacBookPro16_4thGen = "MacBook Pro 16 - 4th Gen"
     case MacBookPro16_5thGen = "MacBook Pro 16 - 5th Gen"
 }
+
 
 struct MockupArray {
     
@@ -110,3 +144,8 @@ struct MockupArray {
     ]
     
 }
+
+
+
+
+
