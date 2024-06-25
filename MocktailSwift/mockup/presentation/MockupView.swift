@@ -83,6 +83,7 @@ struct TemplateView: View {
     @State private var isProcessing = false
     @State private var contentMode: ContentMode = .fit
     @State private var selectedFinalImage: UIImage = UIImage()
+@State private var count = 0
     
     
     var body: some View {
@@ -124,8 +125,14 @@ struct TemplateView: View {
             
             VStack {
                 Spacer()
-                
-                if finalImages == [] {
+                if isProcessing {
+                    HStack {
+                        Text("Processing ")
+                            
+                         ProgressView()
+                    }
+                   
+                } else if finalImages == [] {
                     PhotosPicker(selection: $photosPickerItems, matching: .images) {
                         Image(selectedMockup.mockup.rawValue)
                             .resizable()
@@ -142,8 +149,7 @@ struct TemplateView: View {
                             }
 
                     }
-                }
-                if finalImages.count == 1 {
+                } else if finalImages.count == 1 {
                     
                     PhotosPicker(selection: $photosPickerItems, matching: .images) {
                         Image(uiImage: finalImages[0])
@@ -247,6 +253,7 @@ struct TemplateView: View {
                         .padding(.horizontal)
     
                         Menu {
+                            
                             Button("Fit") {
                                 contentMode = .fit
                                 finalImages = []
@@ -272,6 +279,7 @@ struct TemplateView: View {
                         } label: {
                             HStack(spacing: 0) {
                                 Text(contentMode.rawValue)
+                                    .fixedSize()
                                     .font(.subheadline)
                                     .bold()
                                     .padding(.horizontal, 4)
@@ -300,8 +308,14 @@ struct TemplateView: View {
             
         }
         .onAppear(perform: {
-            processImages()
+            if selectedImages != [] {
+                processImages()
+            }
+            
         })
+        .onChange(of: isProcessing){
+            print("isProcessing changed: \(isProcessing)")
+        }
         .onChange(of: photosPickerItems) {newValue in
            
             Task {
@@ -315,18 +329,17 @@ struct TemplateView: View {
                     }
                 }
                 if imagesArray != [] {
+           
                     selectedImages = imagesArray
+                                
+                                processImages()
                 }
                 
                 
                 photosPickerItems.removeAll()
             }
         }
-        .onChange(of: selectedImages) {
-            print("selected images count: \(selectedImages.count)")
-          print("onchange called")
-            processImages()
-        }
+      
         .onChange(of: finalImages) { value in
             if finalImages.count > 1 {
                 selectedFinalImage = finalImages[0]
@@ -341,21 +354,23 @@ struct TemplateView: View {
         }
     }
     
-    func processImages () {
-        var imageArray : [UIImage] = []
-        for selectedImage in selectedImages {
-            
-            if let resizedImage = ImageHelper.resizeImage(image: selectedImage, targetSize: selectedMockup.baseImageSize, contentMode: contentMode, cornerRadius: selectedMockup.radius),
-               let overlayImage = UIImage(named: selectedMockup.mockup.rawValue) {
-                
-                if let finalImage = ImageHelper.overlayImage(baseImage: resizedImage, overlayImage: overlayImage, mockup: selectedMockup) {
-                    imageArray.append(finalImage)
-                    
+    func processImages() {
+        isProcessing = true
+        DispatchQueue.global(qos: .userInitiated).async {
+            var imageArray: [UIImage] = []
+            for selectedImage in selectedImages {
+                if let resizedImage = ImageHelper.resizeImage(image: selectedImage, targetSize: selectedMockup.baseImageSize, contentMode: contentMode, cornerRadius: selectedMockup.radius),
+                   let overlayImage = UIImage(named: selectedMockup.mockup.rawValue) {
+                    if let finalImage = ImageHelper.overlayImage(baseImage: resizedImage, overlayImage: overlayImage, mockup: selectedMockup) {
+                        imageArray.append(finalImage)
+                    }
                 }
             }
+            DispatchQueue.main.async {
+                finalImages = imageArray
+                isProcessing = false
+            }
         }
-        finalImages = imageArray
-        
     }
 }
 
