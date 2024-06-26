@@ -78,6 +78,7 @@ class ImageHelper {
     }
     
     static func overlayImage(baseImage: UIImage, overlayImage: UIImage, mockup: Mockup,addWatermark : Bool) -> UIImage? {
+        
         let cornerRadius = mockup.radius
         let size = overlayImage.size
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
@@ -86,36 +87,51 @@ class ImageHelper {
         // these cases are used for non symmetrical mockups :
         
         if mockup.mockup.rawValue == MockupList.iMac24.rawValue{
-            cornerPoint = CGPoint(x: cornerPoint.x, y: 159)
+            cornerPoint = CGPoint(x: cornerPoint.x, y: 159 + ((mockup.baseImageSize.height / 2) - (baseImage.size.height / 2)))
         } else if mockup.mockup.rawValue == MockupList.iMac27.rawValue {
-            cornerPoint = CGPoint(x: cornerPoint.x, y: 249)
+            cornerPoint = CGPoint(x: cornerPoint.x, y: 249 + ((mockup.baseImageSize.height / 2) - (baseImage.size.height / 2)))
         } else if mockup.mockup.rawValue == MockupList.MacBookPro16_4thGen.rawValue {
-            cornerPoint = CGPoint(x: cornerPoint.x, y: 112)
+            cornerPoint = CGPoint(x: cornerPoint.x, y: 112 + ((mockup.baseImageSize.height / 2) - (baseImage.size.height / 2)))
         } else if mockup.mockup.rawValue == MockupList.MacBookPro15_4thGen.rawValue {
-            cornerPoint = CGPoint(x: cornerPoint.x, y: 196)
+            cornerPoint = CGPoint(x: cornerPoint.x, y: 196 + ((mockup.baseImageSize.height / 2) - (baseImage.size.height / 2)))
         }
         
        
         let baseRect = CGRect(origin: cornerPoint, size: baseImage.size)
         baseImage.draw(in: baseRect)
         
-        
-        let overlayRect = CGRect(origin: .zero, size: overlayImage.size)
-        
-        overlayImage.draw(in: overlayRect, blendMode: .normal, alpha: 1.0)
-        
-        if(addWatermark){
-            let watermarkImg = UIImage(named: "watermark")
-            if let watermarkImg = watermarkImg {
-                let watermarkPoint = CGPoint(x: (size.width / 2 - ((size.width * 0.3) / 2)), y: size.height * 0.05)
-                let watermarkRect = CGRect(origin: watermarkPoint , size: CGSize(width: size.width * 0.3, height: size.width * 0.1))
-                watermarkImg.draw(in: watermarkRect)
+        if(true){
+            let waterMarkImage = UIImage(named: "watermark")
+            if let waterMarkImage = waterMarkImage {
+
+                var waterMarkOrigin = CGPoint(x: ((size.width / 2) - (mockup.baseImageSize.width / 2)) , y: ((size.height / 2) - (mockup.baseImageSize.height / 2)))
+                
+                // these cases are used for non symmetrical mockups :
+                
+                if mockup.mockup.rawValue == MockupList.iMac24.rawValue{
+                    waterMarkOrigin = CGPoint(x: waterMarkOrigin.x, y: 159 )
+                } else if mockup.mockup.rawValue == MockupList.iMac27.rawValue {
+                    waterMarkOrigin = CGPoint(x: waterMarkOrigin.x, y: 249 )
+                } else if mockup.mockup.rawValue == MockupList.MacBookPro16_4thGen.rawValue {
+                    waterMarkOrigin = CGPoint(x: waterMarkOrigin.x, y: 112 )
+                } else if mockup.mockup.rawValue == MockupList.MacBookPro15_4thGen.rawValue {
+                    waterMarkOrigin = CGPoint(x: waterMarkOrigin.x, y: 196 )
+                }
+                
+                           let waterMarkRect = CGRect(origin: waterMarkOrigin, size: mockup.baseImageSize)
+                           waterMarkImage.draw(in: waterMarkRect, blendMode: .normal, alpha: 0.2)
                 
                 
             } else {
                 print("Image not available")
             }
         }
+        
+        let overlayRect = CGRect(origin: .zero, size: overlayImage.size)
+        
+        overlayImage.draw(in: overlayRect, blendMode: .normal, alpha: 1.0)
+        
+
         
         
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
