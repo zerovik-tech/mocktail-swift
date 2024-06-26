@@ -79,6 +79,7 @@ struct MockupView: View {
         }
         .environmentObject(paywallViewModel)
         .environmentObject(routingViewModel)
+        .environmentObject(moreViewModel)
        
     }
 
@@ -88,6 +89,7 @@ struct TemplateView: View {
     
     @EnvironmentObject var paywallViewModel : PaywallViewModel
     @EnvironmentObject var routingViewModel : RoutingViewModel
+    @EnvironmentObject var moreViewModel : MoreViewModel
     
     
     @State  var mockupArray: [Mockup]
@@ -102,7 +104,8 @@ struct TemplateView: View {
     @State private var contentMode: ContentMode = .fit
     @State private var selectedFinalImageIndex: Int = 0
     @State private var showDownloadAlert = false
-@State private var count = 0
+    @State private var count = 0
+    @State private var showUpgradeAlert : Bool = false
     
     
     var body: some View {
@@ -163,7 +166,7 @@ struct TemplateView: View {
                     }
                     
                 } else if finalImages == [] {
-                    PhotosPicker(selection: $photosPickerItems, matching: .images) {
+                    PhotosPicker(selection: $photosPickerItems, maxSelectionCount:MAX_SELECTION_COUNT, matching: .images) {
                         Image(selectedMockup.mockup.rawValue)
                             .resizable()
                             .scaledToFit()
@@ -181,7 +184,7 @@ struct TemplateView: View {
                     }
                 } else if finalImages.count == 1 {
                     
-                    PhotosPicker(selection: $photosPickerItems, matching: .images) {
+                    PhotosPicker(selection: $photosPickerItems, maxSelectionCount:MAX_SELECTION_COUNT, matching: .images) {
                         Image(uiImage: finalImages[0])
                             .resizable()
                             .scaledToFit()
@@ -222,7 +225,7 @@ struct TemplateView: View {
                     
                     
                     
-                    PhotosPicker(selection: $photosPickerItems, matching: .images) {
+                    PhotosPicker(selection: $photosPickerItems, maxSelectionCount:MAX_SELECTION_COUNT, matching: .images) {
                         if selectedFinalImageIndex < finalImages.count {
                             Image(uiImage: finalImages[selectedFinalImageIndex])
                                 .resizable()
@@ -236,22 +239,21 @@ struct TemplateView: View {
                             
                             Button("Low Quality") {
                                 if selectedFinalImageIndex < finalImages.count {
-                                    ImageHelper.saveImageToPhotosAlbum(image: finalImages[selectedFinalImageIndex], quality: .low)
-                                    showDownloadAlert = true
+                                    saveImages(finalImagesArray: [finalImages[selectedFinalImageIndex]], quality: .low)
+                                    
                                 }
                             }
                             
                             Button("Medium Quality") {
                                 if selectedFinalImageIndex < finalImages.count {
-                                    ImageHelper.saveImageToPhotosAlbum(image: finalImages[selectedFinalImageIndex], quality: .medium)
-                                    showDownloadAlert = true
+                                    saveImages(finalImagesArray: [finalImages[selectedFinalImageIndex]], quality: .medium)
+
                                 }
                             }
                             
                             Button("High Quality") {
                                 if selectedFinalImageIndex < finalImages.count {
-                                    ImageHelper.saveImageToPhotosAlbum(image: finalImages[selectedFinalImageIndex], quality: .high)
-                                    showDownloadAlert = true
+                                    saveImages(finalImagesArray: [finalImages[selectedFinalImageIndex]], quality: .high)
                                 }
                             }
                             
@@ -267,10 +269,8 @@ struct TemplateView: View {
                             }
                             .padding(4)
                             .padding(.horizontal, 2)
-                            .background {
-                                RoundedRectangle(cornerRadius: 12).fill(.black.opacity(0.1))
-                            }
-
+                            .background((isProcessing || finalImages.count == 0) ? RoundedRectangle(cornerRadius: 12).fill(.gray.opacity(0.1)) : RoundedRectangle(cornerRadius: 12).fill(.black.opacity(0.1)))
+                            .disabled((isProcessing || finalImages.count == 0) ? true : false)
                             
                         }
                         .padding(.trailing)
@@ -402,15 +402,15 @@ struct TemplateView: View {
                     Menu {
                         
                         Button("Low Quality") {
-                            saveImages(quality: .low)
+                            saveImages(finalImagesArray: finalImages, quality: .low)
                         }
                         
                         Button("Medium Quality") {
-                            saveImages(quality: .medium)
+                            saveImages(finalImagesArray: finalImages, quality: .medium)
                         }
                         
                         Button("High Quality") {
-                            saveImages(quality: .high)
+                            saveImages(finalImagesArray: finalImages, quality: .low)
                         }
                         
                         
@@ -420,7 +420,8 @@ struct TemplateView: View {
                             .foregroundStyle(.white)
                             .bold()
                             .padding(6)
-                            .background(RoundedRectangle(cornerRadius: 8).fill(.blue))
+                            .background((isProcessing || finalImages.count == 0) ? RoundedRectangle(cornerRadius: 8).fill(.gray) : RoundedRectangle(cornerRadius: 8).fill(.blue))
+                            .disabled((isProcessing || finalImages.count == 0) ? true : false)
                         
                     }
                     
@@ -469,7 +470,7 @@ struct TemplateView: View {
                    
                         if let resizedImage = ImageHelper.resizeImage(image: replacedImage, targetSize: selectedMockup.baseImageSize, contentMode: contentMode, cornerRadius: selectedMockup.radius),
                            let overlayImage = UIImage(named: selectedMockup.mockup.rawValue) {
-                            if let finalImage = ImageHelper.overlayImage(baseImage: resizedImage, overlayImage: overlayImage, mockup: selectedMockup, addWatermark: true) {
+                            if let finalImage = ImageHelper.overlayImage(baseImage: resizedImage, overlayImage: overlayImage, mockup: selectedMockup, addWatermark: paywallViewModel.viewState.isUserSubscribed ?? false ? false : true) {
                                 image = finalImage
                             }
                         }
@@ -515,16 +516,53 @@ struct TemplateView: View {
                 
             }
         }
-      
-        
+        .alert(isPresented: $showUpgradeAlert, content: {
+            Alert(
+                title: Text("Free Mockups Left : \(moreViewModel.viewState.more.dailyFreeLimit)"),
+                message: Text("You can download up to \(DAILY_FREE_LIMIT) mockups per day for free. Upgrade to Pro for unlimited downloads."),
+                primaryButton: .cancel() {
+//                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.autotag_upload_alert_cancel.rawValue)
+
+                },
+                secondaryButton: .default(Text("Unlock")) {
+//                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.autotag_upload_alert_unlock.rawValue)
+
+                    routingViewModel.send(action: .updateUserFlow(userflow: .paywall))
+                    
+                }
+            )
+        }
+      )
+               
 
     }
     
-    func saveImages (quality: Quality) {
-        for image in finalImages {
-            ImageHelper.saveImageToPhotosAlbum(image: image, quality: quality)
+    func saveImages (finalImagesArray : [UIImage],quality: Quality) {
+        if(paywallViewModel.viewState.isUserSubscribed ?? false){
+            // if user is subscribed
+            for image in finalImagesArray {
+                ImageHelper.saveImageToPhotosAlbum(image: image, quality: quality)
+            }
+            showDownloadAlert = true
+        } else {
+            // if user is not subscribed
+            // check the daily limit
+            if(finalImagesArray.count > moreViewModel.viewState.more.dailyFreeLimit){
+                // user has less/no limit left
+                showUpgradeAlert = true
+            } else {
+                // user has limit left
+                for image in finalImagesArray {
+                    ImageHelper.saveImageToPhotosAlbum(image: image, quality: quality)
+                }
+                let imagesCount = finalImagesArray.count
+                let currLimit = moreViewModel.viewState.more.dailyFreeLimit
+                moreViewModel.send(action: .updateDailyLimit(to: currLimit - imagesCount))
+                moreViewModel.send(action: .setMore(moreType: .dailyFreeLimit))
+                showDownloadAlert = true
+            }
         }
-        showDownloadAlert = true
+
     }
     
     func processImages() {
@@ -534,7 +572,7 @@ struct TemplateView: View {
             for selectedImage in selectedImages {
                 if let resizedImage = ImageHelper.resizeImage(image: selectedImage, targetSize: selectedMockup.baseImageSize, contentMode: contentMode, cornerRadius: selectedMockup.radius),
                    let overlayImage = UIImage(named: selectedMockup.mockup.rawValue) {
-                    if let finalImage = ImageHelper.overlayImage(baseImage: resizedImage, overlayImage: overlayImage, mockup: selectedMockup, addWatermark: true) {
+                    if let finalImage = ImageHelper.overlayImage(baseImage: resizedImage, overlayImage: overlayImage, mockup: selectedMockup, addWatermark: paywallViewModel.viewState.isUserSubscribed ?? false ? false : true) {
                         imageArray.append(finalImage)
                     }
                 }
