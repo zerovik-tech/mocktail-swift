@@ -119,8 +119,8 @@ struct MockupArray {
     ]
     
     static let macMockups: [Mockup] = [
-        Mockup(mockup: MockupList.iMac24, baseImageSize: CGSize(width: 4482, height: 2522), radius: 0),
-        Mockup(mockup: MockupList.iMac27, baseImageSize: CGSize(width: 5120, height: 2881), radius: 0),
+//        Mockup(mockup: MockupList.iMac24, baseImageSize: CGSize(width: 4482, height: 2522), radius: 0),
+//        Mockup(mockup: MockupList.iMac27, baseImageSize: CGSize(width: 5120, height: 2881), radius: 0),
         Mockup(mockup: MockupList.MacBookAir13_4th_Gen, baseImageSize: CGSize(width: 2560, height: 1664), radius: 0),
         Mockup(mockup: MockupList.MacBookPro15_4thGen, baseImageSize: CGSize(width: 2579, height: 1613), radius: 0),
         Mockup(mockup: MockupList.MacBookPro16_4thGen, baseImageSize: CGSize(width: 2965, height: 1856), radius: 0),
