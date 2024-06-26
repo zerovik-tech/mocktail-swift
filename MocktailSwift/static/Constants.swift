@@ -13,11 +13,14 @@ let APP_ID = "6504801633"
 
 let RC_API_KEY = "appl_pzkKiUeolRvKCsZFUwTDXVDCcYz"
 //let APPS_FLYER_DEVKEY = "NbV4N3m54YbZrX6Gp7xypY"
-let PRIVACY_POLICY = "https://zerovik.com/live-translator-privacy-policy/?u="+Purchases.shared.appUserID
+let PRIVACY_POLICY = "https://zerovik.com/mocktail-privacy-policy/?u="+Purchases.shared.appUserID
 let TERMS_OF_USE = "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"
-let CUSTOMER_SUPPORT_URL = "https://tally.so/r/mJ22RY"
-let FEEDBACK_FORM_URL = "https://tally.so/r/31rrKO"
-let FEATURE_REQUEST_URL = "https://tally.so/r/wg55A1"
+let ABOUT = "https://zerovik.com/"
+
+let CUSTOMER_SUPPORT_URL = "https://tally.so/r/31KLyp"
+let FEEDBACK_FORM_URL = "https://tally.so/r/mJRQxo"
+let FEATURE_REQUEST_URL = "https://tally.so/r/wMOWqM"
+
 let APP_VERSION = "1.1.1"
 let AMPLITUDE_API_KEY = ""
 

@@ -123,17 +123,17 @@ struct MoreView: View {
             //MARK: General Settings Section
             
             Section("Get in Touch") {
-                NavigationLink(destination: URLView(url: URL(string: "https://tally.so/r/mK1bGz")!, title: "Customer Support")) {
+                NavigationLink(destination: URLView(url: URL(string: CUSTOMER_SUPPORT_URL)!, title: "Customer Support")) {
                     Label("Customer Support", systemImage: "info.circle")
                         .labelStyle(.titleOnly)
                 }
-                NavigationLink(destination: URLView(url: URL(string: "https://tally.so/r/wLplOz")!, title: "Request Feature")) {
+                NavigationLink(destination: URLView(url: URL(string: FEATURE_REQUEST_URL)!, title: "Request Feature")) {
                     Label("Request Feature", systemImage: "info.circle")
                         .labelStyle(.titleOnly)
                 }
                 
                 
-                NavigationLink(destination: URLView(url: URL(string: "https://tally.so/r/mVJgVv")!, title: "Feedback Form")) {
+                NavigationLink(destination: URLView(url: URL(string: FEEDBACK_FORM_URL)!, title: "Feedback Form")) {
                     Label("Give Feedback", systemImage: "info.circle")
                         .labelStyle(.titleOnly)
                 }
@@ -164,10 +164,42 @@ struct MoreView: View {
                 //                        Label("Privacy Policy", systemImage: "info.circle" )
                 //                            .labelStyle(.titleOnly)
                 //                    }
+               
+                Button(action: {
+//                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_terms.rawValue)
+
+                    if let url = URL(string: ABOUT) {
+                        if #available(iOS 10, *) {
+                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                        } else {
+                            UIApplication.shared.openURL(url)
+                        }
+                    }
+                    
+                }) {
+                    Label("About", systemImage: "i.circle")
+                        .labelStyle(.titleOnly)
+                        .foregroundColor(Color(UIColor.label))
+                    
+                }
+                
+                
+                NavigationLink {
+                    FaqView()
+                } label: {
+                    Label("FAQs", systemImage: "info.circle")
+                        .labelStyle(.titleOnly)
+                        .foregroundColor(Color(UIColor.label))
+
+                       
+                        
+                }
+                
+                
                 Button(action: {
 //                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_privacy_policy.rawValue)
 
-                    if let url = URL(string: "https://zerovik.com/hashtag-generator-privacy-policy/?u="+Purchases.shared.appUserID) {
+                    if let url = URL(string: PRIVACY_POLICY) {
                         if #available(iOS 10, *) {
                             UIApplication.shared.open(url, options: [:], completionHandler: nil)
                         } else {
@@ -184,7 +216,7 @@ struct MoreView: View {
                 Button(action: {
 //                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_terms.rawValue)
 
-                    if let url = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/") {
+                    if let url = URL(string: TERMS_OF_USE) {
                         if #available(iOS 10, *) {
                             UIApplication.shared.open(url, options: [:], completionHandler: nil)
                         } else {
