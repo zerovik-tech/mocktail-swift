@@ -11,7 +11,7 @@ import RevenueCat
 
 let APP_ID = "6504801633"
 
-let RC_API_KEY = "appl_KLLriClfOsqsXDNZnvYoJxQMSAF"
+let RC_API_KEY = "appl_pzkKiUeolRvKCsZFUwTDXVDCcYz"
 //let APPS_FLYER_DEVKEY = "NbV4N3m54YbZrX6Gp7xypY"
 let PRIVACY_POLICY = "https://zerovik.com/live-translator-privacy-policy/?u="+Purchases.shared.appUserID
 let TERMS_OF_USE = "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"
@@ -23,20 +23,12 @@ let AMPLITUDE_API_KEY = ""
 
 
 
-let dailyFreeLimit = "dailyFreeLimit"
-let lastRunDate = "lastRunDate"
-let totalApiCalls = "totalApiCalls"
-let ratingShown = "ratingShown"
-let npsShown = "npsShown"
-let orderArray = "orderArray"
 
-let LAMBDA_NO = "sou6UTri6i9mMqqdKKJ6W6H3s6gF2U2z3VyBTxcE"
-let LAMBDA_TEXTRACT = "GjGjucqato16AF6tpX8bq9nXtUWyTa0B59dFGkdM"
 
 #if DEBUG
-let FREE_LIMIT = 100
+let DAILY_FREE_LIMIT = 5
 #else
-let FREE_LIMIT = 7
+let DAILY_FREE_LIMIT = 5
 #endif
 let DEFAULT_SPEED = 0.4
 var appShareText = "Live Translator:\n https://apps.apple.com/us/app/id\(APP_ID)"

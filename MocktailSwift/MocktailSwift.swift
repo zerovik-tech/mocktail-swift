@@ -20,6 +20,7 @@ struct Hashtag_Generator_ProApp: App {
     //MARK: View Models
     let paywallViewModel : PaywallViewModel
     let routingViewModel : RoutingViewModel
+    let moreViewModel : MoreViewModel
 
     
     init() {
@@ -32,6 +33,10 @@ struct Hashtag_Generator_ProApp: App {
         let routingRepository = RoutingRepository()
         let routingViewInteractor = RoutingViewInteractor(repository: routingRepository)
         routingViewModel = RoutingViewModel(interactor: routingViewInteractor)
+        
+        let moreRepository = MoreRepository()
+        let moreViewInteractor = MoreViewInteractor(repository: moreRepository)
+        moreViewModel = MoreViewModel(interactor: moreViewInteractor)
     
         
         Purchases.configure(withAPIKey: RC_API_KEY)
@@ -119,15 +124,24 @@ struct Hashtag_Generator_ProApp: App {
         
         WindowGroup {
             
-            RoutingView(viewModel: routingViewModel, paywallViewModel: paywallViewModel)
+            RoutingView(viewModel: routingViewModel, paywallViewModel: paywallViewModel, moreViewModel: moreViewModel)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .onAppear {
                     routingViewModel.send(action: .getFirstRunStatus)
+                    moreViewModel.send(action: .checkDaysFirstRun)
+                    
+             
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
                         if let status = routingViewModel.viewState.firstRunStatus {
                             AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.first_app_launch.rawValue)
 
                         }
+                        
+                        if(moreViewModel.viewState.daysFirstRun){
+                            moreViewModel.send(action: .updateDailyLimit(to: DAILY_FREE_LIMIT))
+                            moreViewModel.send(action: .setMore(moreType: .dailyFreeLimit))
+                        }
+                        
                     }
                 }
                 .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in

@@ -13,12 +13,13 @@ struct RoutingView: View {
     
     @StateObject private var viewModel : RoutingViewModel
     @StateObject private var paywallViewModel : PaywallViewModel
-   
+    @StateObject private var moreViewModel : MoreViewModel
 
     
-    init(viewModel: RoutingViewModel, paywallViewModel: PaywallViewModel) {
+    init(viewModel: RoutingViewModel, paywallViewModel: PaywallViewModel,moreViewModel : MoreViewModel) {
         self._viewModel = StateObject(wrappedValue: viewModel)
         self._paywallViewModel = StateObject(wrappedValue: paywallViewModel)
+        self._moreViewModel = StateObject(wrappedValue: moreViewModel)
     }
     
     
@@ -50,7 +51,7 @@ struct RoutingView: View {
                 
             case .home:
                 NavigationView {
-                    HomeView(paywallViewModel: paywallViewModel, routingViewModel: viewModel)
+                    HomeView(paywallViewModel: paywallViewModel, routingViewModel: viewModel, moreViewModel: moreViewModel)
                         .preferredColorScheme(.light)
                 }
             default:

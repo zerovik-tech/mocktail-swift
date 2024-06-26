@@ -10,9 +10,23 @@ import PhotosUI
 
 struct MockupView: View {
     
+    @StateObject private var paywallViewModel: PaywallViewModel
+    
+    @StateObject private var routingViewModel: RoutingViewModel
+    
+    @StateObject private var moreViewModel : MoreViewModel
+
+    
     @State private var selectedMockup: Mockup = MockupArray.iPhoneMockups[15]
     @State  var selectedImages: [UIImage] = []
     @State private var selectedMockupType: MockupType = .iphone
+    
+    init(paywallViewModel: PaywallViewModel, routingViewModel: RoutingViewModel,moreViewModel : MoreViewModel) {
+        self._paywallViewModel = StateObject(wrappedValue: paywallViewModel)
+        self._routingViewModel = StateObject(wrappedValue: routingViewModel)
+        self._moreViewModel = StateObject(wrappedValue: moreViewModel)
+
+    }
     
         
     var body: some View {
@@ -63,15 +77,17 @@ struct MockupView: View {
             })
             
         }
+        .environmentObject(paywallViewModel)
+        .environmentObject(routingViewModel)
        
     }
-    
-
-    
 
 }
 
 struct TemplateView: View {
+    
+    @EnvironmentObject var paywallViewModel : PaywallViewModel
+    @EnvironmentObject var routingViewModel : RoutingViewModel
     
     
     @State  var mockupArray: [Mockup]
@@ -452,7 +468,7 @@ struct TemplateView: View {
                    
                         if let resizedImage = ImageHelper.resizeImage(image: replacedImage, targetSize: selectedMockup.baseImageSize, contentMode: contentMode, cornerRadius: selectedMockup.radius),
                            let overlayImage = UIImage(named: selectedMockup.mockup.rawValue) {
-                            if let finalImage = ImageHelper.overlayImage(baseImage: resizedImage, overlayImage: overlayImage, mockup: selectedMockup) {
+                            if let finalImage = ImageHelper.overlayImage(baseImage: resizedImage, overlayImage: overlayImage, mockup: selectedMockup, addWatermark: true) {
                                 image = finalImage
                             }
                         }
@@ -517,7 +533,7 @@ struct TemplateView: View {
             for selectedImage in selectedImages {
                 if let resizedImage = ImageHelper.resizeImage(image: selectedImage, targetSize: selectedMockup.baseImageSize, contentMode: contentMode, cornerRadius: selectedMockup.radius),
                    let overlayImage = UIImage(named: selectedMockup.mockup.rawValue) {
-                    if let finalImage = ImageHelper.overlayImage(baseImage: resizedImage, overlayImage: overlayImage, mockup: selectedMockup) {
+                    if let finalImage = ImageHelper.overlayImage(baseImage: resizedImage, overlayImage: overlayImage, mockup: selectedMockup, addWatermark: true) {
                         imageArray.append(finalImage)
                     }
                 }
@@ -530,6 +546,6 @@ struct TemplateView: View {
     }
 }
 
-#Preview {
-    MockupView()
-}
+//#Preview {
+//    MockupView()
+//}

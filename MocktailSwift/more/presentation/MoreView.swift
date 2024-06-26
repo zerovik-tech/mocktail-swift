@@ -14,12 +14,15 @@ struct MoreView: View {
     
     @StateObject private var routingViewModel: RoutingViewModel
     @StateObject private var paywallViewModel: PaywallViewModel
+    @StateObject private var viewModel : MoreViewModel
+
     
-    init(routingViewModel: RoutingViewModel
+    init(viewModel : MoreViewModel,routingViewModel: RoutingViewModel
                   , paywallViewModel: PaywallViewModel
     ) {
         self._routingViewModel = StateObject(wrappedValue: routingViewModel)
                 self._paywallViewModel = StateObject(wrappedValue: paywallViewModel)
+        self._viewModel = StateObject(wrappedValue: viewModel)
     }
     
     @State var showManageSubscriptionSheet: Bool = false

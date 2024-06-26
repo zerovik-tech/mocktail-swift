@@ -77,7 +77,7 @@ class ImageHelper {
         return newImage
     }
     
-    static func overlayImage(baseImage: UIImage, overlayImage: UIImage, mockup: Mockup) -> UIImage? {
+    static func overlayImage(baseImage: UIImage, overlayImage: UIImage, mockup: Mockup,addWatermark : Bool) -> UIImage? {
         let cornerRadius = mockup.radius
         let size = overlayImage.size
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
@@ -104,7 +104,18 @@ class ImageHelper {
         
         overlayImage.draw(in: overlayRect, blendMode: .normal, alpha: 1.0)
         
-        
+        if(addWatermark){
+            let watermarkImg = UIImage(named: "watermark")
+            if let watermarkImg = watermarkImg {
+                let watermarkPoint = CGPoint(x: (size.width / 2 - ((size.width * 0.3) / 2)), y: size.height * 0.05)
+                let watermarkRect = CGRect(origin: watermarkPoint , size: CGSize(width: size.width * 0.3, height: size.width * 0.1))
+                watermarkImg.draw(in: watermarkRect)
+                
+                
+            } else {
+                print("Image not available")
+            }
+        }
         
         
         let newImage = UIGraphicsGetImageFromCurrentImageContext()

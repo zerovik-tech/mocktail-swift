@@ -13,7 +13,7 @@ struct HomeView: View {
     
     @StateObject private var routingViewModel: RoutingViewModel
     
-    
+    @StateObject private var moreViewModel : MoreViewModel
     
     
     @State private var selectedTab = "mockup"
@@ -21,9 +21,10 @@ struct HomeView: View {
 //        UITabBar.appearance().backgroundColor = UIColor.black.withAlphaComponent(0.1)
 //        }
     
-    init(paywallViewModel: PaywallViewModel, routingViewModel: RoutingViewModel) {
+    init(paywallViewModel: PaywallViewModel, routingViewModel: RoutingViewModel,moreViewModel : MoreViewModel) {
         self._paywallViewModel = StateObject(wrappedValue: paywallViewModel)
         self._routingViewModel = StateObject(wrappedValue: routingViewModel)
+        self._moreViewModel = StateObject(wrappedValue: moreViewModel)
     }
     
     
@@ -31,7 +32,7 @@ struct HomeView: View {
         VStack {
             TabView(selection: $selectedTab) {
                 Group {
-                    MockupView()
+                    MockupView(paywallViewModel: paywallViewModel, routingViewModel: routingViewModel, moreViewModel: moreViewModel)
                         .tabItem {
                             Image(systemName: "apps.iphone")
                                 .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
@@ -39,7 +40,7 @@ struct HomeView: View {
                         }
                         .tag("mockup")
                     
-                        MoreView(routingViewModel: routingViewModel, paywallViewModel: paywallViewModel)
+                    MoreView(viewModel : moreViewModel,routingViewModel: routingViewModel, paywallViewModel: paywallViewModel)
                         .tabItem {
                             Image(systemName: "gear")
                             Text("More")
@@ -54,6 +55,9 @@ struct HomeView: View {
             
             
                        
+        }
+        .onAppear {
+            moreViewModel.send(action: .getMore)
         }
     }
 }
