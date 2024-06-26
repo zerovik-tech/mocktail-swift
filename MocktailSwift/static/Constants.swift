@@ -22,7 +22,7 @@ let APP_VERSION = "1.1.1"
 let AMPLITUDE_API_KEY = ""
 
 
-
+let lastRunDate = "lastRunDate"
 
 
 #if DEBUG
