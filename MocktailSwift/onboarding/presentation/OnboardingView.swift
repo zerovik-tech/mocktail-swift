@@ -29,38 +29,38 @@ struct OnboardingView: View {
         ScrollView((selectedPage == 3) ? [] : .horizontal, showsIndicators: false) {
                 ZStack{
                     TabView(selection: $selectedPage) {
-
-                            OnboardingSinglePage(
-                                myIndex: 0,
-                                selectedPage: $selectedPage,
-                                image: "onboarding1",
-                                title: "Real Time\nVoice Translation",
-                                subtitle: "Live Translator translates languages to easy to read text and voice with superior accuracy."
-                            ).tag(0)
-                            OnboardingSinglePage(
-                                myIndex: 1,
-                                selectedPage: $selectedPage,
-                                image: "onboarding2",
-                                title: "60+ Languages\nto Choose From",
-                                subtitle: "Live Translator can easily and accurately translate text and speech in 60+ languages."
-                            ).tag(1)
-                            OnboardingSinglePage(
-                                myIndex: 2,
-                                selectedPage: $selectedPage,
-                                image: "onboarding3",
-                                title: "Fast voice &\nText Translation",
-                                subtitle: "Live Translator gives you accurate voice and text translation with a single tap.",
-                                isLastPage: true
-                            ).tag(2)
-
-                        VStack{
-                            PaywallRouter(viewModel: paywallViewModel, routingViewModel: routingViewModel, showLoadingIndicator: true)
-                               
-                           
-                        }
                         
-                        .tag(3)
+                        OnboardingSinglePage(
+                            myIndex: 0,
+                            selectedPage: $selectedPage,
+                            image: "onboarding1",
+                            title: "Mocktail's Stunning\nMockup Varieties",
+                            subtitle: "Elevate your presentations with Mocktail's intuitive features for crafting professional iPhone mockups in minutes"
+                        ).tag(0)
+                        OnboardingSinglePage(
+                            myIndex: 1,
+                            selectedPage: $selectedPage,
+                            image: "onboarding2",
+                            title: "Craft Impressive\niPhone Mockups",
+                            subtitle: "Whether you're a designer or developer, Mocktail is your go-to app for crafting impressive iPhone mockups"
+                        ).tag(1)
+                        OnboardingSinglePage(
+                            myIndex: 2,
+                            selectedPage: $selectedPage,
+                            image: "onboarding3",
+                            title: "Fast & Easy\nMockups",
+                            subtitle: "Welcome to Mocktail, your ultimate tool for creating stunning iPhone mockups effortlessly",
+                            isLastPage: true
+                        ).tag(2)
+
+                    VStack{
+                        PaywallRouter(viewModel: paywallViewModel, routingViewModel: routingViewModel, showLoadingIndicator: true)
+                           
+                       
                     }
+                    
+                    .tag(3)
+                }
                     .tabViewStyle(.page)
                     .indexViewStyle(.page(backgroundDisplayMode: .never))
                     .frame(

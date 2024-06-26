@@ -58,19 +58,30 @@ struct TwoPaywallView: View {
                         let screenWidth = UIScreen.main.bounds.width
                         let screenHeight = UIScreen.main.bounds.height
 
-                        Arc3()
-                            .edgesIgnoringSafeArea(.all)
-                            .foregroundStyle(appColor1)
+                        VStack {
+                            Spacer()
+                            
+                            UnevenRoundedRectangle(topLeadingRadius: 20, topTrailingRadius: 20)
+                                .edgesIgnoringSafeArea(.all)
+                                .foregroundStyle(appColor1)
+                                .frame(height: UIScreen.main.bounds.height * 0.38)
+                        }
+                        
+                        VStack {
+                            Image("paywallBackground")
+                                .resizable()
+                                .scaledToFit()
+                                .edgesIgnoringSafeArea(.all)
+                            Spacer()
+                        }
                         
                         VStack {
                             HStack {
                                 Image(systemName: "multiply")
                                     .bold()
-                                    .font(.title3)
-                                    .foregroundStyle(appColor2)
+                                    .font(.title2)
+                                    .foregroundStyle(.white)
                                     .padding(.trailing)
-                                    .padding(.trailing)
-                                    .padding(.bottom)
                                     .onTapGesture {
                                         
                                         AmplitudeManager.amplitude.track(eventType: AmplitudeEvents.paywall_cross.rawValue)
@@ -85,11 +96,10 @@ struct TwoPaywallView: View {
                                 Spacer()
                                 
                                 Text("Restore")
-                                    .font(.caption)
+                                    .font(.subheadline)
                                     .bold()
-                                    .foregroundStyle(appColor2)
+                                    .foregroundStyle(.white)
                                     .padding(.leading)
-                                    .padding(.bottom)
                                     .onTapGesture {
                                         AmplitudeManager.amplitude.track(eventType: AmplitudeEvents.paywall_restore.rawValue)
                                         
@@ -144,101 +154,7 @@ struct TwoPaywallView: View {
                         .padding(.horizontal)
 
                         VStack(spacing:verticalSpacing) {
-                            //                            Text("hello")
-                            //                                .font(.system(size: UIScreen.main.bounds.height / 16))
-                            //                                .minimumScaleFactor(0)
-                            //                                .foregroundColor(.clear)
-                            
-                            Text("Unlock Unlimited\nAccess")
-                                .font(.largeTitle)
-                                .bold()
-                                .multilineTextAlignment(.center)
-                                .allowsTightening(true)
-                                .minimumScaleFactor(0.6)
-                            //                                .padding(.bottom)
-                            
-                            HStack {
-                                // app logo will come here
-                                Spacer()
-                                Image("app_icon")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: UIScreen.main.bounds.width / 6)
-                                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                                
-                                Spacer()
-                            }
-                            
-                            VStack(alignment: .leading, spacing: verticalSpacing) {
-                                
-                                
-
-                                HStack {
-                                    
-                                    Image(systemName: "infinity.circle")
-                                        .font(.title3)
-                                        .foregroundStyle(.white)
-                                        .padding(6)
-                                        .background(Circle()
-                                            .fill(appColor2)
-                                        )
-                                    
-                                    
-                                    Text("Unlimited Translation")
-                                        .bold()
-                                }
-                                
-                                HStack {
-                                    Image(systemName: "character.textbox")
-                                        .font(.headline)
-                                        .foregroundStyle(.white)
-                                        .padding(7)
-                                        .background(Circle()
-                                            .fill(appColor2)
-                                        )
-                                    
-                                    
-                                    Text("Share your Texts")
-                                        .bold()
-                                }
-                                HStack {
-                                    
-                                    Image(systemName: "globe")
-                                        .font(.title3)
-                                        .foregroundStyle(.white)
-                                        .padding(6)
-                                        .background(Circle()
-                                            .fill(appColor2)
-                                        )
-                                    
-                                    Text("Translate in 60+ Languages")
-                                        .bold()
-                                }
-                                
-                                
-                            }
-                            
-                            //                            .padding(.vertical)
-                            
-                            
-                            
-                            HStack {
-                                RoundedRectangle(cornerRadius: 12.0)
-                                    .frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.05)
-                                    .padding()
-                                    .foregroundStyle(.white)
-                                    .shadow(color: Color.black.opacity(0.08), radius: 10)
-                                
-                                    .overlay {
-                                        
-                                        Text("**All-in-One Translator with Premium Features**")
-                                            .font(.subheadline)
-                                            .kerning(-0.7)
-                                            
-                                        
-                                    }
-                            }
-                            .padding(.top)
+                            Spacer()
                             
                             PlanCardTwoPaywall(viewModel: viewModel, plan: monthlyPlan, title: monthlyPlan.isTrialEligible ? "\(monthlyTrialPeriod)-days Free Trial" : "Monthly Plan", subtitle: "/month, cancel anytime", trialOffer: "")
                             

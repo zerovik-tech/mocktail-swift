@@ -53,7 +53,7 @@ enum MockupList: String {
     case AppleWatchUltra2 = "Apple Watch Ultra2"
     case iMac24 = "iMac 24"
     case iMac27 = "iMac 27"
-    case iPad = "iPad"
+    case iPad = "iPad 9th Gen"
     case iPadAir11 = "iPad Air 11"
     case iPadAir13 = "iPad Air 13"
     case iPadMini = "iPad Mini"
