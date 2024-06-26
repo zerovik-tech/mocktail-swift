@@ -125,25 +125,65 @@ class ImageHelper {
         return newImage
     }
     
-    static func saveImageToPhotosAlbum(image: UIImage) {
+    static func saveImageToPhotosAlbum(image: UIImage, quality: Quality) {
         // Convert UI Image into a PNG image
-        if let resizedImage = resizeImage(image: image, targetSize: CGSize(width: image.size.width, height: image.size.height), contentMode: .fill, cornerRadius: 0){
-            if let data = resizedImage.pngData() {
-                // Save PNG image to Photos
-                PHPhotoLibrary.shared().performChanges({
-                    let creationRequest = PHAssetCreationRequest.forAsset()
-                    creationRequest.addResource(with: .photo, data: data, options: nil)
-                }, completionHandler: { success, error in
-                    if success {
-                        // Image saved to the Photos app
-                        print("Image saved to the Photos app")
-                    } else {
-                        // Saving Image saved to the Photos app failed
-                        print("Image saved to the Photos app")
-                    }
-                })
+        switch quality {
+        case .low:
+            if let resizedImage = resizeImage(image: image, targetSize: CGSize(width: image.size.width * 0.6, height: image.size.height * 0.6), contentMode: .fill, cornerRadius: 0){
+                if let data = resizedImage.pngData() {
+                    // Save PNG image to Photos
+                    PHPhotoLibrary.shared().performChanges({
+                        let creationRequest = PHAssetCreationRequest.forAsset()
+                        creationRequest.addResource(with: .photo, data: data, options: nil)
+                    }, completionHandler: { success, error in
+                        if success {
+                            // Image saved to the Photos app
+                            print("Image saved to the Photos app")
+                        } else {
+                            // Saving Image saved to the Photos app failed
+                            print("Image saved to the Photos app")
+                        }
+                    })
+                }
             }
+        case .medium:
+            if let resizedImage = resizeImage(image: image, targetSize: CGSize(width: image.size.width, height: image.size.height), contentMode: .fill, cornerRadius: 0){
+                if let data = resizedImage.pngData() {
+                    // Save PNG image to Photos
+                    PHPhotoLibrary.shared().performChanges({
+                        let creationRequest = PHAssetCreationRequest.forAsset()
+                        creationRequest.addResource(with: .photo, data: data, options: nil)
+                    }, completionHandler: { success, error in
+                        if success {
+                            // Image saved to the Photos app
+                            print("Image saved to the Photos app")
+                        } else {
+                            // Saving Image saved to the Photos app failed
+                            print("Image saved to the Photos app")
+                        }
+                    })
+                }
+            }
+        case .high:
+           
+                if let data = image.pngData() {
+                    // Save PNG image to Photos
+                    PHPhotoLibrary.shared().performChanges({
+                        let creationRequest = PHAssetCreationRequest.forAsset()
+                        creationRequest.addResource(with: .photo, data: data, options: nil)
+                    }, completionHandler: { success, error in
+                        if success {
+                            // Image saved to the Photos app
+                            print("Image saved to the Photos app")
+                        } else {
+                            // Saving Image saved to the Photos app failed
+                            print("Image saved to the Photos app")
+                        }
+                    })
+                }
+            
         }
+
     }
     
 

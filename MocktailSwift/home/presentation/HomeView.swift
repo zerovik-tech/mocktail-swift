@@ -39,10 +39,10 @@ struct HomeView: View {
                         }
                         .tag("mockup")
                     
-                    Text("this is paywall view")
+                        MoreView(routingViewModel: routingViewModel, paywallViewModel: paywallViewModel)
                         .tabItem {
-                            Image(systemName: "crown.fill")
-                            Text("Premium")
+                            Image(systemName: "gear")
+                            Text("More")
                         }
                     
                         .tag("paywall")

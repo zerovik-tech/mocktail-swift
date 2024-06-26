@@ -13,7 +13,7 @@ struct MoreView: View {
     
     
     @StateObject private var routingViewModel: RoutingViewModel
-        @StateObject private var paywallViewModel: PaywallViewModel
+    @StateObject private var paywallViewModel: PaywallViewModel
     
     init(routingViewModel: RoutingViewModel
                   , paywallViewModel: PaywallViewModel
