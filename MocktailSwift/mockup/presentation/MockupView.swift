@@ -187,6 +187,8 @@ struct TemplateView: View {
                                         Image(uiImage: finalImages[index])
                                             .resizable()
                                             .scaledToFit()
+                                            .background{ RoundedRectangle(cornerRadius: 8).fill(.blue.opacity(index == selectedFinalImageIndex ? 0.2 : 0))
+                                            }
                                             .frame(width: UIScreen.main.bounds.width * 0.25, height: UIScreen.main.bounds.height * 0.2)
                                             .onTapGesture {
                                                 selectedFinalImageIndex = index
