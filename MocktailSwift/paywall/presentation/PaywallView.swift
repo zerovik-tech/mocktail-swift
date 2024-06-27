@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import AmplitudeSwift
+
 
 struct PaywallView: View {
     
@@ -207,8 +207,7 @@ struct PaywallView: View {
         .padding(16)
         .onAppear(perform: {
             
-            let structName = String(describing: type(of: self))
-            AmplitudeManager.amplitude.track(eventType : structName)
+       
             viewModel.send(action: .subscriptionPlansRequested)
 
         })

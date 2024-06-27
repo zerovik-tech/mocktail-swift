@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 import RevenueCat
-import AmplitudeSwift
+
 
 struct AllPlansView: View {
     
@@ -140,8 +140,7 @@ struct AllPlansView: View {
         }.padding(16)
             .onAppear(perform: {
                 //                    RMetrics.recordEvent("app_paywall_allplans_viewed")
-                let structName = String(describing: type(of: self))
-                AmplitudeManager.amplitude.track(eventType : structName)
+              
             })
         
         .navigationBarTitleDisplayMode(.inline)

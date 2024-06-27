@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import AmplitudeSwift
+
 import PostHog
 
 struct RoutingView: View {

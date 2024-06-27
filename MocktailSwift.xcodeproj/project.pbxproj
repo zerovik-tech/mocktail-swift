@@ -27,11 +27,6 @@
 		57A561142C2AA05400D70D0D /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A561112C2AA05400D70D0D /* MoreView.swift */; };
 		57A5611C2C2AA0A200D70D0D /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A5611B2C2AA0A200D70D0D /* SplashView.swift */; };
 		57A5611E2C2AA0B800D70D0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A5611D2C2AA0B800D70D0D /* AppDelegate.swift */; };
-		57A5616D2C2AA88600D70D0D /* FacebookAEM in Frameworks */ = {isa = PBXBuildFile; productRef = 57A5616C2C2AA88600D70D0D /* FacebookAEM */; };
-		57A5616F2C2AA88600D70D0D /* FacebookBasics in Frameworks */ = {isa = PBXBuildFile; productRef = 57A5616E2C2AA88600D70D0D /* FacebookBasics */; };
-		57A561712C2AA88600D70D0D /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 57A561702C2AA88600D70D0D /* FacebookCore */; };
-		57A561732C2AA88600D70D0D /* FacebookGamingServices in Frameworks */ = {isa = PBXBuildFile; productRef = 57A561722C2AA88600D70D0D /* FacebookGamingServices */; };
-		57A561752C2AA88600D70D0D /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 57A561742C2AA88600D70D0D /* FacebookLogin */; };
 		57A561782C2AA93500D70D0D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 57A561772C2AA93500D70D0D /* FirebaseAnalytics */; };
 		57A5617A2C2AA93500D70D0D /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 57A561792C2AA93500D70D0D /* FirebaseAnalyticsOnDeviceConversion */; };
 		57A5617C2C2AA93500D70D0D /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 57A5617B2C2AA93500D70D0D /* FirebaseAnalyticsSwift */; };
@@ -53,10 +48,7 @@
 		57A561AA2C2AA95F00D70D0D /* PaywallRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A561992C2AA95E00D70D0D /* PaywallRouter.swift */; };
 		57A561AB2C2AA95F00D70D0D /* AllPlansView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A5619A2C2AA95E00D70D0D /* AllPlansView.swift */; };
 		57A561AC2C2AA95F00D70D0D /* VerticalPlanCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A5619C2C2AA95E00D70D0D /* VerticalPlanCard.swift */; };
-		57A561AF2C2AAA2500D70D0D /* AppsFlyerLib in Frameworks */ = {isa = PBXBuildFile; productRef = 57A561AE2C2AAA2500D70D0D /* AppsFlyerLib */; };
-		57A561B22C2AAA5B00D70D0D /* AmplitudeSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 57A561B12C2AAA5B00D70D0D /* AmplitudeSwift */; };
 		57A561B42C2AAAB200D70D0D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A561B32C2AAAB200D70D0D /* SceneDelegate.swift */; };
-		57A561B72C2AAAD500D70D0D /* AmplitudeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A561B62C2AAAD500D70D0D /* AmplitudeManager.swift */; };
 		57A561BD2C2AAAF000D70D0D /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A561BA2C2AAAF000D70D0D /* Event.swift */; };
 		57A561C02C2ABCEB00D70D0D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A561BF2C2ABCEB00D70D0D /* Constants.swift */; };
 		57A6077E2C2C07E200A9F206 /* MoreViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A6077D2C2C07E200A9F206 /* MoreViewState.swift */; };
@@ -118,7 +110,6 @@
 		57A5619A2C2AA95E00D70D0D /* AllPlansView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllPlansView.swift; sourceTree = "<group>"; };
 		57A5619C2C2AA95E00D70D0D /* VerticalPlanCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerticalPlanCard.swift; sourceTree = "<group>"; };
 		57A561B32C2AAAB200D70D0D /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		57A561B62C2AAAD500D70D0D /* AmplitudeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmplitudeManager.swift; sourceTree = "<group>"; };
 		57A561BA2C2AAAF000D70D0D /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		57A561BF2C2ABCEB00D70D0D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		57A6077D2C2C07E200A9F206 /* MoreViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewState.swift; sourceTree = "<group>"; };
@@ -151,20 +142,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57A561B22C2AAA5B00D70D0D /* AmplitudeSwift in Frameworks */,
 				57A5617E2C2AA93500D70D0D /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				5717312D2C2AFC11004862FA /* RevenueCat in Frameworks */,
 				57A5617C2C2AA93500D70D0D /* FirebaseAnalyticsSwift in Frameworks */,
-				57A5616D2C2AA88600D70D0D /* FacebookAEM in Frameworks */,
 				57A561802C2AA93500D70D0D /* FirebaseAppCheck in Frameworks */,
 				57A5617A2C2AA93500D70D0D /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
-				57A561712C2AA88600D70D0D /* FacebookCore in Frameworks */,
-				57A5616F2C2AA88600D70D0D /* FacebookBasics in Frameworks */,
-				57A561752C2AA88600D70D0D /* FacebookLogin in Frameworks */,
-				57A561AF2C2AAA2500D70D0D /* AppsFlyerLib in Frameworks */,
 				57A561782C2AA93500D70D0D /* FirebaseAnalytics in Frameworks */,
 				5704ECF42C2D31EF00463817 /* PostHog in Frameworks */,
-				57A561732C2AA88600D70D0D /* FacebookGamingServices in Frameworks */,
 				6D7390AF2C2ABD5900F1AB57 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -419,7 +403,6 @@
 		57A561B52C2AAAD500D70D0D /* analytics */ = {
 			isa = PBXGroup;
 			children = (
-				57A561B62C2AAAD500D70D0D /* AmplitudeManager.swift */,
 			);
 			path = analytics;
 			sourceTree = "<group>";
@@ -624,18 +607,11 @@
 			);
 			name = MocktailSwift;
 			packageProductDependencies = (
-				57A5616C2C2AA88600D70D0D /* FacebookAEM */,
-				57A5616E2C2AA88600D70D0D /* FacebookBasics */,
-				57A561702C2AA88600D70D0D /* FacebookCore */,
-				57A561722C2AA88600D70D0D /* FacebookGamingServices */,
-				57A561742C2AA88600D70D0D /* FacebookLogin */,
 				57A561772C2AA93500D70D0D /* FirebaseAnalytics */,
 				57A561792C2AA93500D70D0D /* FirebaseAnalyticsOnDeviceConversion */,
 				57A5617B2C2AA93500D70D0D /* FirebaseAnalyticsSwift */,
 				57A5617D2C2AA93500D70D0D /* FirebaseAnalyticsWithoutAdIdSupport */,
 				57A5617F2C2AA93500D70D0D /* FirebaseAppCheck */,
-				57A561AE2C2AAA2500D70D0D /* AppsFlyerLib */,
-				57A561B12C2AAA5B00D70D0D /* AmplitudeSwift */,
 				5717312C2C2AFC11004862FA /* RevenueCat */,
 				5704ECF32C2D31EF00463817 /* PostHog */,
 			);
@@ -668,10 +644,7 @@
 			);
 			mainGroup = B103F28C2C217EC000F9E9C3;
 			packageReferences = (
-				57A5616B2C2AA88600D70D0D /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 				57A561762C2AA93500D70D0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				57A561AD2C2AAA2500D70D0D /* XCRemoteSwiftPackageReference "AppsFlyerFramework" */,
-				57A561B02C2AAA5B00D70D0D /* XCRemoteSwiftPackageReference "Amplitude-Swift" */,
 				5717312B2C2AFC11004862FA /* XCRemoteSwiftPackageReference "purchases-ios" */,
 				5704ECF22C2D31EF00463817 /* XCRemoteSwiftPackageReference "posthog-ios" */,
 			);
@@ -711,7 +684,6 @@
 				57619E422C2C49AA00163E14 /* FaqView.swift in Sources */,
 				5717314E2C2B0021004862FA /* OnboardingView.swift in Sources */,
 				57A561A22C2AA95F00D70D0D /* PaywallRepository.swift in Sources */,
-				57A561B72C2AAAD500D70D0D /* AmplitudeManager.swift in Sources */,
 				57A607902C2C0C1700A9F206 /* MoreRepositoryProtocol.swift in Sources */,
 				57A5611C2C2AA0A200D70D0D /* SplashView.swift in Sources */,
 				571731422C2AFF90004862FA /* RoutingViewModel.swift in Sources */,
@@ -990,36 +962,12 @@
 				minimumVersion = 4.43.1;
 			};
 		};
-		57A5616B2C2AA88600D70D0D /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 17.0.1;
-			};
-		};
 		57A561762C2AA93500D70D0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 10.28.1;
-			};
-		};
-		57A561AD2C2AAA2500D70D0D /* XCRemoteSwiftPackageReference "AppsFlyerFramework" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AppsFlyerSDK/AppsFlyerFramework";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.14.4;
-			};
-		};
-		57A561B02C2AAA5B00D70D0D /* XCRemoteSwiftPackageReference "Amplitude-Swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/amplitude/Amplitude-Swift";
-			requirement = {
-				branch = main;
-				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1034,31 +982,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5717312B2C2AFC11004862FA /* XCRemoteSwiftPackageReference "purchases-ios" */;
 			productName = RevenueCat;
-		};
-		57A5616C2C2AA88600D70D0D /* FacebookAEM */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 57A5616B2C2AA88600D70D0D /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
-			productName = FacebookAEM;
-		};
-		57A5616E2C2AA88600D70D0D /* FacebookBasics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 57A5616B2C2AA88600D70D0D /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
-			productName = FacebookBasics;
-		};
-		57A561702C2AA88600D70D0D /* FacebookCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 57A5616B2C2AA88600D70D0D /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
-			productName = FacebookCore;
-		};
-		57A561722C2AA88600D70D0D /* FacebookGamingServices */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 57A5616B2C2AA88600D70D0D /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
-			productName = FacebookGamingServices;
-		};
-		57A561742C2AA88600D70D0D /* FacebookLogin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 57A5616B2C2AA88600D70D0D /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
-			productName = FacebookLogin;
 		};
 		57A561772C2AA93500D70D0D /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1084,16 +1007,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 57A561762C2AA93500D70D0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAppCheck;
-		};
-		57A561AE2C2AAA2500D70D0D /* AppsFlyerLib */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 57A561AD2C2AAA2500D70D0D /* XCRemoteSwiftPackageReference "AppsFlyerFramework" */;
-			productName = AppsFlyerLib;
-		};
-		57A561B12C2AAA5B00D70D0D /* AmplitudeSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 57A561B02C2AAA5B00D70D0D /* XCRemoteSwiftPackageReference "Amplitude-Swift" */;
-			productName = AmplitudeSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 

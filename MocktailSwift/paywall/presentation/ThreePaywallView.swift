@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import AmplitudeSwift
+
 
 struct ThreePaywallView: View {
     
@@ -294,8 +294,7 @@ struct ThreePaywallView: View {
                 .ignoresSafeArea(.container, edges: .top)
             }
         } .onAppear(perform: {
-            let structName = String(describing: type(of: self))
-            AmplitudeManager.amplitude.track(eventType : structName)
+           
             viewModel.send(action: .subscriptionPlansRequested)
         })
     }

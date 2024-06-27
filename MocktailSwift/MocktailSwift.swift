@@ -7,10 +7,9 @@
 
 import SwiftUI
 import RevenueCat
-import FacebookCore
 import AppTrackingTransparency
 import PostHog
-//import AppsFlyerLib
+
 
 @main
 struct Hashtag_Generator_ProApp: App {
