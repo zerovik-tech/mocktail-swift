@@ -141,18 +141,18 @@ class ImageHelper {
             let waterMarkImage = UIImage(named: "Made with Mocktail")
             if let waterMarkImage = waterMarkImage {
                 
-                var waterMarkOrigin = CGPoint(x: ((size.width / 2) - (waterMarkImage.size.width / 2)) , y: (((size.height - mockup.baseImageSize.height) / 2) + (mockup.baseImageSize.height - waterMarkImage.size.height)))
+                var waterMarkOrigin = CGPoint(x: ((size.width / 2) - (waterMarkImage.size.width / 2)) , y: ((((size.height - mockup.baseImageSize.height) / 2) + (mockup.baseImageSize.height - waterMarkImage.size.height)) - size.height * 0.025))
                 
                 // these cases are used for non symmetrical mockups :
                 
                 if mockup.mockup.rawValue == MockupList.iMac24.rawValue{
-                    waterMarkOrigin = CGPoint(x: waterMarkOrigin.x, y: (159 + (mockup.baseImageSize.height - waterMarkImage.size.height)) )
+                    waterMarkOrigin = CGPoint(x: waterMarkOrigin.x, y: (159 + (mockup.baseImageSize.height - waterMarkImage.size.height)) - size.height * 0.025)
                 } else if mockup.mockup.rawValue == MockupList.iMac27.rawValue {
-                    waterMarkOrigin = CGPoint(x: waterMarkOrigin.x, y: (249 + (mockup.baseImageSize.height - waterMarkImage.size.height)))
+                    waterMarkOrigin = CGPoint(x: waterMarkOrigin.x, y: (249 + (mockup.baseImageSize.height - waterMarkImage.size.height)) - size.height * 0.025)
                 } else if mockup.mockup.rawValue == MockupList.MacBookPro16_4thGen.rawValue {
-                    waterMarkOrigin = CGPoint(x: waterMarkOrigin.x, y: (112 + (mockup.baseImageSize.height - waterMarkImage.size.height)))
+                    waterMarkOrigin = CGPoint(x: waterMarkOrigin.x, y: (112 + (mockup.baseImageSize.height - waterMarkImage.size.height)) - size.height * 0.025)
                 } else if mockup.mockup.rawValue == MockupList.MacBookPro15_4thGen.rawValue {
-                    waterMarkOrigin = CGPoint(x: waterMarkOrigin.x, y: (196 + (mockup.baseImageSize.height - waterMarkImage.size.height)) )
+                    waterMarkOrigin = CGPoint(x: waterMarkOrigin.x, y: (196 + (mockup.baseImageSize.height - waterMarkImage.size.height)) - size.height * 0.025)
                 }
                 
                 let waterMarkRect = CGRect(origin: waterMarkOrigin, size: waterMarkImage.size)

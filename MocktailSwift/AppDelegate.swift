@@ -35,6 +35,7 @@ class AppDelegate : UIResponder,UIApplicationDelegate, PurchasesDelegate {
         
         
         let config = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST)
+        config.captureScreenViews = false
         PostHogSDK.shared.setup(config)
         
         FirebaseApp.configure()

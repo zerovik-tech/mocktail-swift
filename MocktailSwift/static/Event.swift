@@ -25,9 +25,22 @@ enum PostHogEvents: String {
     
     
         case mockup_ = " mockup_"
+        case mockup_image_uploaded = "mockup_image_uploaded"
+        case mockup_image_saved = "mockup_image_saved"
+        case mockup_image_replace = "mockup_image_replace"
+        case mockup_device_ = "mockup_device_ "
+        case mockup_image_fit = "mockup_image_fit"
+        case mockup_image_fill = "mockup_image_fill"
+        case mockup_image_stretch = "mockup_image_stretch"
+        case mockup_star = "mockup_star"
+        case mockup_clear = "mockup_clear"
     
-    
-       
+        case alert_save_permission_denied = "alert_save_permission_denied"
+        case alert_save_permission_denied_cancel = "alert_save_permission_denied_cancel"
+        case alert_save_permission_denied_settings = "alert_save_permission_denied_settings"
+        case alert_daily_limit = "alert_daily_limit"
+        case alert_daily_limit_unlock = "alert_daily_limit_unlock"
+        case alert_daily_limit_cancel = "alert_daily_limit_cancel"
         
         case more_rateus = "more_rateus"
         case more_upgrade_to_pro = "more_upgrade_to_pro"
@@ -42,27 +55,7 @@ enum PostHogEvents: String {
         case faq_customer_support = "faq_customer_support"
         case faq_query = "faq_query"
         
-    case email_change_ol_ = "email_change_ol_"
-        case email_change_tf_ = "email_change_tf_"
-        case email_write_submit = "email_write_submit"
-        case ask_ai_submit = "ask_ai_submit"
-        case email_reply_changestatus_ = "email_reply_changestatus_"
-        case email_reply_submit = "email_reply_submit"
-        case email_output_rewrite = "email_output_rewrite"
-        case email_output_copy = "email_output_copy"
-        case email_output_share = "email_output_share"
-        case keyboard_activated = "keyboard_activated"
-        case keyboard_full_accessed = "keyboard_full_accessed"
-        
-        case activation_notification_scheduled_ = "activation_notification_scheduled_"
-        case activation_notification_shown_ = "activation_notification_shown_"
-        case activation_notification_tap_ = "activation_notification_tap_"
-        case activation_watch_more_issue = "activation_watch_more_issue"
-        case activation_watch_setup_issue = "activation_watch_setup_issue"
-        case activation_email = "activation_email"
-        case activation_cross = "activation_cross"
-        case activation_goto_more = "activation_goto_more"
-        case activation_watch_goto_more = "activation_watch_goto_more"
+
     
         case notification_allowed = "notification_allowed"
         case notification_not_allowed = "notification_not_allowed"

@@ -22,6 +22,9 @@ struct MockupView: View {
     @State  var selectedImages: [UIImage] = []
     @State private var selectedMockupType: MockupType = .iphone
     
+    
+
+    
     init(paywallViewModel: PaywallViewModel, routingViewModel: RoutingViewModel,moreViewModel : MoreViewModel) {
         self._paywallViewModel = StateObject(wrappedValue: paywallViewModel)
         self._routingViewModel = StateObject(wrappedValue: routingViewModel)
@@ -116,6 +119,11 @@ struct TemplateView: View {
     @State private var showAccessDeniedAlert : Bool = false
     
     
+    enum SaveOption {
+        case download
+        case save
+    }
+    
     var body: some View {
         VStack {
             HStack {
@@ -126,7 +134,8 @@ struct TemplateView: View {
                 Spacer()
                 
                 Button(action: {
-                   
+                    PostHogSDK.shared.capture(PostHogEvents.mockup_star.rawValue)
+
                     if let url = URL(string: "itms-apps://itunes.apple.com/app/id\(APP_ID)?action=write-review") {
                         UIApplication.shared.open(url)
                     }
@@ -143,7 +152,8 @@ struct TemplateView: View {
 
                 
                 Button(action: {
-                   
+                    PostHogSDK.shared.capture(PostHogEvents.mockup_clear.rawValue)
+
                     selectedImages = []
                     finalImages = []
                     selectedFinalImageIndex = 0
@@ -166,9 +176,11 @@ struct TemplateView: View {
                             title: Text("Access Denied"),
                             message: Text("Please allow access to the photo library in Settings."),
                             primaryButton: .cancel() {
+                                PostHogSDK.shared.capture(PostHogEvents.alert_save_permission_denied_cancel.rawValue)
 
                             },
                             secondaryButton: .default(Text("Open Settings")) {
+                                PostHogSDK.shared.capture(PostHogEvents.alert_save_permission_denied_settings.rawValue)
                                 if let url = URL(string: UIApplication.openSettingsURLString) {
                                     UIApplication.shared.open(url)
                                 }
@@ -258,45 +270,48 @@ struct TemplateView: View {
                     
                     HStack {
                         
-                        Menu {
+                        if(!isProcessing && finalImages.count != 0) {
                             
-                            Button("Low Quality") {
-                                if selectedFinalImageIndex < finalImages.count {
-                                    saveImages(finalImagesArray: [finalImages[selectedFinalImageIndex]], quality: .low)
+                            Menu {
+                                
+                                Button("Low Quality") {
                                     
+                                    if selectedFinalImageIndex < finalImages.count {
+                                        saveImages(finalImagesArray: [finalImages[selectedFinalImageIndex]], quality: .low,via:.save)
+                                        
+                                    }
                                 }
-                            }
-                            
-                            Button("Medium Quality") {
-                                if selectedFinalImageIndex < finalImages.count {
-                                    saveImages(finalImagesArray: [finalImages[selectedFinalImageIndex]], quality: .medium)
-
+                                
+                                Button("Medium Quality") {
+                                    if selectedFinalImageIndex < finalImages.count {
+                                        saveImages(finalImagesArray: [finalImages[selectedFinalImageIndex]], quality: .medium,via:.save)
+                                        
+                                    }
                                 }
-                            }
-                            
-                            Button("High Quality") {
-                                if selectedFinalImageIndex < finalImages.count {
-                                    saveImages(finalImagesArray: [finalImages[selectedFinalImageIndex]], quality: .high)
+                                
+                                Button("High Quality") {
+                                    if selectedFinalImageIndex < finalImages.count {
+                                        saveImages(finalImagesArray: [finalImages[selectedFinalImageIndex]], quality: .high,via:.save)
+                                    }
                                 }
+                                
+                                
+                            } label: {
+                                HStack {
+                                    Image(systemName: "square.and.arrow.down")
+                                        .font(.footnote)
+                                        .bold()
+                                    Text("Save")
+                                        .font(.footnote)
+                                        .bold()
+                                }
+                                .padding(4)
+                                .padding(.horizontal, 2)
+                                .background(RoundedRectangle(cornerRadius: 12).fill(.black.opacity(0.1)))
+                                
                             }
-                            
-                            
-                        } label: {
-                            HStack {
-                                Image(systemName: "square.and.arrow.down")
-                                    .font(.footnote)
-                                    .bold()
-                                Text("Save")
-                                    .font(.footnote)
-                                    .bold()
-                            }
-                            .padding(4)
-                            .padding(.horizontal, 2)
-                            .background((isProcessing || finalImages.count == 0) ? RoundedRectangle(cornerRadius: 12).fill(.gray.opacity(0.1)) : RoundedRectangle(cornerRadius: 12).fill(.black.opacity(0.1)))
-                            .disabled((isProcessing || finalImages.count == 0) ? true : false)
-                            
+                            .padding(.trailing)
                         }
-                        .padding(.trailing)
 
                         
                         PhotosPicker(selection: $replacePhotoPickerItem) {
@@ -337,6 +352,7 @@ struct TemplateView: View {
                                 Menu {
                                     ForEach (mockupArray){item in
                                         Button {
+                                            PostHogSDK.shared.capture(PostHogEvents.mockup_device_.rawValue + item.mockup.rawValue)
                                             finalImages = []
                                             selectedFinalImageIndex = 0
                                             selectedMockup = item
@@ -379,18 +395,21 @@ struct TemplateView: View {
                             Menu {
                                 
                                 Button("Fit") {
+                                    PostHogSDK.shared.capture(PostHogEvents.mockup_image_fit.rawValue)
                                     contentMode = .fit
                                     finalImages = []
                                     processImages()
                                 }
                                 
                                 Button("Fill") {
+                                    PostHogSDK.shared.capture(PostHogEvents.mockup_image_fill.rawValue)
                                     contentMode = .fill
                                     finalImages = []
                                     processImages()
                                 }
                                 
                                 Button("Stretch") {
+                                    PostHogSDK.shared.capture(PostHogEvents.mockup_image_stretch.rawValue)
                                     contentMode = .stretch
                                     finalImages = []
                                     processImages()
@@ -422,30 +441,32 @@ struct TemplateView: View {
                     .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(.black.opacity(0.1)))
                     
                     
-                    Menu {
+                    if(!isProcessing && finalImages.count != 0){
                         
-                        Button("Low Quality") {
-                            saveImages(finalImagesArray: finalImages, quality: .low)
+                        Menu {
+                            
+                            Button("Low Quality") {
+                                saveImages(finalImagesArray: finalImages, quality: .low,via:.download)
+                            }
+                            
+                            Button("Medium Quality") {
+                                saveImages(finalImagesArray: finalImages, quality: .medium,via:.download)
+                            }
+                            
+                            Button("High Quality") {
+                                saveImages(finalImagesArray: finalImages, quality: .low,via:.download)
+                            }
+                            
+                            
+                        } label: {
+                            Text("Download")
+                                .font(.callout)
+                                .foregroundStyle(.white)
+                                .bold()
+                                .padding(6)
+                                .background(RoundedRectangle(cornerRadius: 8).fill(.blue))
+                            
                         }
-                        
-                        Button("Medium Quality") {
-                            saveImages(finalImagesArray: finalImages, quality: .medium)
-                        }
-                        
-                        Button("High Quality") {
-                            saveImages(finalImagesArray: finalImages, quality: .low)
-                        }
-                        
-                        
-                    } label: {
-                        Text("Download")
-                            .font(.callout)
-                            .foregroundStyle(.white)
-                            .bold()
-                            .padding(6)
-                            .background((isProcessing || finalImages.count == 0) ? RoundedRectangle(cornerRadius: 8).fill(.gray) : RoundedRectangle(cornerRadius: 8).fill(.blue))
-                            .disabled((isProcessing || finalImages.count == 0) ? true : false)
-                        
                     }
                     
 
@@ -473,11 +494,11 @@ struct TemplateView: View {
                     title: Text("Free Mockups Left : \(moreViewModel.viewState.more.dailyFreeLimit)"),
                     message: Text("You can download up to \(DAILY_FREE_LIMIT) mockups per day for free. Upgrade to Pro for unlimited downloads."),
                     primaryButton: .cancel() {
-    //                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.autotag_upload_alert_cancel.rawValue)
+                        PostHogSDK.shared.capture(PostHogEvents.alert_daily_limit_cancel.rawValue)
 
                     },
                     secondaryButton: .default(Text("Unlock")) {
-    //                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.autotag_upload_alert_unlock.rawValue)
+                        PostHogSDK.shared.capture(PostHogEvents.alert_daily_limit_unlock.rawValue)
 
                         routingViewModel.send(action: .updateUserFlow(userflow: .paywall))
                         
@@ -518,6 +539,8 @@ struct TemplateView: View {
 
         }
         .onChange(of: replacedImage) { value in
+            PostHogSDK.shared.capture(PostHogEvents.mockup_image_replace.rawValue)
+
             if replacedImage != UIImage() {
                 isProcessing = true
                 DispatchQueue.global(qos: .userInitiated).async {
@@ -544,7 +567,8 @@ struct TemplateView: View {
             
         }
         .onChange(of: photosPickerItems) {newValue in
-           
+            PostHogSDK.shared.capture(PostHogEvents.mockup_image_uploaded.rawValue)
+
             Task {
                 
                 var imagesArray : [UIImage] = []
@@ -572,7 +596,19 @@ struct TemplateView: View {
                
 
     }
-    func saveImages (finalImagesArray : [UIImage],quality: Quality) {
+
+    func saveImages (finalImagesArray : [UIImage],quality: Quality,via : SaveOption) {
+
+        
+        switch via {
+        case .download:
+        PostHogSDK.shared.capture(PostHogEvents.mockup_.rawValue + "download_" + quality.rawValue)
+        case .save:
+        PostHogSDK.shared.capture(PostHogEvents.mockup_.rawValue + "save_" + quality.rawValue)
+            
+
+        }
+        
         let authStatus = PHPhotoLibrary.authorizationStatus()
         
         if authStatus == .authorized {
@@ -587,10 +623,13 @@ struct TemplateView: View {
                             else {
                                 print("permission not granted")
                                 showAccessDeniedAlert = true
+                                PostHogSDK.shared.capture(PostHogEvents.alert_save_permission_denied.rawValue)
                             }
                         })
         } else {
             showAccessDeniedAlert = true
+            PostHogSDK.shared.capture(PostHogEvents.alert_save_permission_denied.rawValue)
+
         }
         
     }
@@ -619,6 +658,7 @@ struct TemplateView: View {
                 moreViewModel.send(action: .updateDailyLimit(to: currLimit - imagesCount))
                 moreViewModel.send(action: .setMore(moreType: .dailyFreeLimit))
                 showDownloadAlert = true
+                PostHogSDK.shared.capture(PostHogEvents.mockup_image_saved.rawValue)
             }
         }
 

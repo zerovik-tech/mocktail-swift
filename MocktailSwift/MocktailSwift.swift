@@ -137,6 +137,7 @@ struct Hashtag_Generator_ProApp: App {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
                         if let status = routingViewModel.viewState.firstRunStatus {
                             PostHogSDK.shared.capture(PostHogEvents.first_app_launch.rawValue)
+                            PostHogSDK.shared.identify(Purchases.shared.appUserID)
                         }
                         
                         if(moreViewModel.viewState.daysFirstRun){
