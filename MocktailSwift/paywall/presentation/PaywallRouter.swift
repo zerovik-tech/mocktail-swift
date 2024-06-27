@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PostHog
 
 struct PaywallRouter: View {
     
@@ -64,7 +65,8 @@ struct PaywallRouter: View {
         }
         .onAppear {
                         viewModel.send(action: .currentOfferingRequested)
-            
+            let structName = String(describing: type(of: self))
+            PostHogSDK.shared.capture(structName)
            
                     }
         .onDisappear {

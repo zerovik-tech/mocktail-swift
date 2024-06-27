@@ -8,6 +8,7 @@
 import SwiftUI
 //import AppsFlyerLib
 import AmplitudeSwift
+import PostHog
 
 struct TwoPaywallView: View {
     
@@ -84,7 +85,8 @@ struct TwoPaywallView: View {
                                     .padding(.trailing)
                                     .onTapGesture {
                                         
-                                        AmplitudeManager.amplitude.track(eventType: AmplitudeEvents.paywall_cross.rawValue)
+                        
+                                        PostHogSDK.shared.capture(PostHogEvents.paywall_cross.rawValue)
                                         
 //                                        AppsFlyerLib.shared().logEvent(Event.af_paywall_cross.rawValue, withValues: nil)
                                         
@@ -101,7 +103,8 @@ struct TwoPaywallView: View {
                                     .foregroundStyle(.white)
                                     .padding(.leading)
                                     .onTapGesture {
-                                        AmplitudeManager.amplitude.track(eventType: AmplitudeEvents.paywall_restore.rawValue)
+                                    
+                                        PostHogSDK.shared.capture(PostHogEvents.paywall_restore.rawValue)
                                         
 //                                        AppsFlyerLib.shared().logEvent(Event.af_paywall_restore.rawValue, withValues: nil)
                                         viewModel.send(action: .restorePressed)
@@ -123,7 +126,8 @@ struct TwoPaywallView: View {
                                     .underline()
                                     .onTapGesture {
                                         
-                                        AmplitudeManager.amplitude.track(eventType: AmplitudeEvents.paywall_terms.rawValue)
+                                        
+                                        PostHogSDK.shared.capture(PostHogEvents.paywall_terms.rawValue)
                                         
 //                                        AppsFlyerLib.shared().logEvent(Event.af_paywall_terms.rawValue, withValues: nil)
                                         if let url = URL(string: TERMS_OF_USE) {
@@ -142,8 +146,8 @@ struct TwoPaywallView: View {
                                     .foregroundStyle(appColor2)
                                     .underline()
                                     .onTapGesture {
-                                        AmplitudeManager.amplitude.track(eventType: AmplitudeEvents.paywall_restore.rawValue)
-                                        
+                                        PostHogSDK.shared.capture(PostHogEvents.paywall_restore.rawValue)
+
 //                                        AppsFlyerLib.shared().logEvent(Event.af_paywall_restore.rawValue, withValues: nil)
                                         viewModel.send(action: .restorePressed)
                                     }
@@ -167,7 +171,8 @@ struct TwoPaywallView: View {
                             
                             
                             Button(action: {
-                                AmplitudeManager.amplitude.track(eventType: AmplitudeEvents.paywall_start_plan.rawValue)
+                                PostHogSDK.shared.capture(PostHogEvents.paywall_start_plan.rawValue)
+
                                 
 //                                AppsFlyerLib.shared().logEvent(Event.af_paywall_start_plan.rawValue, withValues: nil)
                                 viewModel.send(action: .continuePressed)
@@ -280,7 +285,7 @@ struct TwoPaywallView: View {
         }
         .onAppear(perform: {
             let structName = String(describing: type(of: self))
-            AmplitudeManager.amplitude.track(eventType : structName)
+            PostHogSDK.shared.capture(structName)
             viewModel.send(action: .subscriptionPlansRequested)
             
         })
@@ -398,13 +403,16 @@ struct PlanCardTwoPaywall: View {
         .clipShape(RoundedRectangle(cornerRadius: 15))
         .overlay(RoundedRectangle(cornerRadius: 15).stroke(lineWidth: 1.2).fill(viewModel.viewState.selectedPlan == plan ? appColor2 : appColor2.opacity(0.5)))
         .onTapGesture {
-            if(title == "Weekly Plan"){
+            if(title == "Monthly Plan"){
 //                AmplitudeManager.amplitude.track(eventType: AmplitudeEvents.paywall_weekly.rawValue)
                 
 //                AppsFlyerLib.shared().logEvent(Event.af_paywall_weekly.rawValue, withValues: nil)
+                PostHogSDK.shared.capture(PostHogEvents.paywall_monthly.rawValue)
+
             }
             if(title == "Annual Plan"){
-                AmplitudeManager.amplitude.track(eventType: AmplitudeEvents.paywall_annual.rawValue)
+                PostHogSDK.shared.capture(PostHogEvents.paywall_annual.rawValue)
+
                 
 //                AppsFlyerLib.shared().logEvent(Event.af_paywall_annual.rawValue, withValues: nil)
             }

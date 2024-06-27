@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5704ECF42C2D31EF00463817 /* PostHog in Frameworks */ = {isa = PBXBuildFile; productRef = 5704ECF32C2D31EF00463817 /* PostHog */; };
 		5717311F2C2ACEEB004862FA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5717311E2C2ACEEB004862FA /* GoogleService-Info.plist */; };
 		571731212C2AD995004862FA /* shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571731202C2AD995004862FA /* shapes.swift */; };
 		5717312D2C2AFC11004862FA /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 5717312C2C2AFC11004862FA /* RevenueCat */; };
@@ -162,6 +163,7 @@
 				57A561752C2AA88600D70D0D /* FacebookLogin in Frameworks */,
 				57A561AF2C2AAA2500D70D0D /* AppsFlyerLib in Frameworks */,
 				57A561782C2AA93500D70D0D /* FirebaseAnalytics in Frameworks */,
+				5704ECF42C2D31EF00463817 /* PostHog in Frameworks */,
 				57A561732C2AA88600D70D0D /* FacebookGamingServices in Frameworks */,
 				6D7390AF2C2ABD5900F1AB57 /* StoreKit.framework in Frameworks */,
 			);
@@ -635,6 +637,7 @@
 				57A561AE2C2AAA2500D70D0D /* AppsFlyerLib */,
 				57A561B12C2AAA5B00D70D0D /* AmplitudeSwift */,
 				5717312C2C2AFC11004862FA /* RevenueCat */,
+				5704ECF32C2D31EF00463817 /* PostHog */,
 			);
 			productName = MocktailIosTemp;
 			productReference = B103F2952C217EC000F9E9C3 /* MocktailSwift.app */;
@@ -670,6 +673,7 @@
 				57A561AD2C2AAA2500D70D0D /* XCRemoteSwiftPackageReference "AppsFlyerFramework" */,
 				57A561B02C2AAA5B00D70D0D /* XCRemoteSwiftPackageReference "Amplitude-Swift" */,
 				5717312B2C2AFC11004862FA /* XCRemoteSwiftPackageReference "purchases-ios" */,
+				5704ECF22C2D31EF00463817 /* XCRemoteSwiftPackageReference "posthog-ios" */,
 			);
 			productRefGroup = B103F2962C217EC000F9E9C3 /* Products */;
 			projectDirPath = "";
@@ -970,6 +974,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5704ECF22C2D31EF00463817 /* XCRemoteSwiftPackageReference "posthog-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/PostHog/posthog-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.6.1;
+			};
+		};
 		5717312B2C2AFC11004862FA /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RevenueCat/purchases-ios.git";
@@ -1013,6 +1025,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5704ECF32C2D31EF00463817 /* PostHog */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5704ECF22C2D31EF00463817 /* XCRemoteSwiftPackageReference "posthog-ios" */;
+			productName = PostHog;
+		};
 		5717312C2C2AFC11004862FA /* RevenueCat */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5717312B2C2AFC11004862FA /* XCRemoteSwiftPackageReference "purchases-ios" */;

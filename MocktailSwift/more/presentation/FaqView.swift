@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PostHog
 
 struct FaqView: View {
     let verticalGap: CGFloat = 1
@@ -29,7 +30,7 @@ struct FaqView: View {
                             } label: {
                                 Text(faqItem.question)
                                     .onTapGesture {
-                                        AmplitudeManager.amplitude.track(eventType: AmplitudeEvents.faq_query.rawValue)
+                                        PostHogSDK.shared.capture(PostHogEvents.faq_query.rawValue)
                                     }
                             }
                         }
@@ -70,7 +71,7 @@ struct FaqView: View {
             }
             .onAppear {
                 let structName = String(describing: type(of: self))
-                AmplitudeManager.amplitude.track(eventType : structName)
+                PostHogSDK.shared.capture(structName)
                 
             }
         }

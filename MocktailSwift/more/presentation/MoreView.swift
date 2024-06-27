@@ -8,6 +8,7 @@
 import SwiftUI
 import StoreKit
 import RevenueCat
+import PostHog
 
 struct MoreView: View {
     
@@ -61,7 +62,8 @@ struct MoreView: View {
                                     if paywallViewModel.viewState.isUserSubscribed == true {
                 Button(action: {
                     //                        RMetrics.recordEvent("app_setting_purchase_managed")
-//                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_manage_subscription.rawValue)
+                  
+                    PostHogSDK.shared.capture(PostHogEvents.more_manage_subscription.rawValue)
 
                     
                     showManageSubscriptionSheet = true
@@ -76,6 +78,7 @@ struct MoreView: View {
                 //pro upgrade link
                 Button {
 //                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_upgrade_to_pro.rawValue)
+                    PostHogSDK.shared.capture(PostHogEvents.more_upgrade_to_pro.rawValue)
 
                     routingViewModel.send(action: .updateUserFlow(userflow: .paywallWithLoading))
                 } label: {
@@ -91,6 +94,8 @@ struct MoreView: View {
                 
                 Button {
 //                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_restore_purchases.rawValue)
+                    PostHogSDK.shared.capture(PostHogEvents.more_restore_purchases.rawValue)
+
 
                                                 paywallViewModel.send(action: .restorePressed)
                 } label: {
@@ -139,7 +144,7 @@ struct MoreView: View {
                 }
                 
                 Button {
-//                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_rateus.rawValue)
+                    PostHogSDK.shared.capture(PostHogEvents.more_rateus.rawValue)
 
                     rateApp()
                 } label: {
@@ -166,8 +171,10 @@ struct MoreView: View {
                 //                    }
                
                 Button(action: {
-//                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_terms.rawValue)
+                    
+                    PostHogSDK.shared.capture(PostHogEvents.more_about.rawValue)
 
+                    
                     if let url = URL(string: ABOUT) {
                         if #available(iOS 10, *) {
                             UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -197,8 +204,8 @@ struct MoreView: View {
                 
                 
                 Button(action: {
-//                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_privacy_policy.rawValue)
-
+           
+                    PostHogSDK.shared.capture(PostHogEvents.more_privacy_policy.rawValue)
                     if let url = URL(string: PRIVACY_POLICY) {
                         if #available(iOS 10, *) {
                             UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -214,7 +221,7 @@ struct MoreView: View {
                     
                 }
                 Button(action: {
-//                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_terms.rawValue)
+                    PostHogSDK.shared.capture(PostHogEvents.more_terms.rawValue)
 
                     if let url = URL(string: TERMS_OF_USE) {
                         if #available(iOS 10, *) {
@@ -254,7 +261,7 @@ struct MoreView: View {
     }
         .onAppear {
             let structName = String(describing: type(of: self))
-            AmplitudeManager.amplitude.track(eventType : structName)
+            PostHogSDK.shared.capture(structName)
         }
 }
     

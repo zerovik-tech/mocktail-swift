@@ -7,6 +7,7 @@
 
 import SwiftUI
 import PhotosUI
+import PostHog
 
 struct MockupView: View {
     
@@ -35,7 +36,7 @@ struct MockupView: View {
             
             TabView(selection: $selectedMockupType,
                     content:  {
-                TemplateView(mockupArray: MockupArray.iPhoneMockups, selectedMockup: MockupArray.iPhoneMockups[15], selectedImages: $selectedImages)
+                TemplateView(selectedMockupType: selectedMockupType, mockupArray: MockupArray.iPhoneMockups, selectedMockup: MockupArray.iPhoneMockups[15], selectedImages: $selectedImages)
                     .tabItem {
                         Image(systemName: "iphone")
                         Text("iPhone")
@@ -44,7 +45,7 @@ struct MockupView: View {
                     }
                     .tag(MockupType.iphone.rawValue)
                 
-                TemplateView(mockupArray: MockupArray.iPadMockups, selectedMockup: MockupArray.iPadMockups[0], selectedImages: $selectedImages)
+                TemplateView(selectedMockupType: selectedMockupType, mockupArray: MockupArray.iPadMockups, selectedMockup: MockupArray.iPadMockups[0], selectedImages: $selectedImages)
                      .tabItem {
                          
                          Image(systemName: "ipad")
@@ -54,7 +55,7 @@ struct MockupView: View {
                      }
                      .tag(MockupType.ipad.rawValue)
                 
-                TemplateView(mockupArray: MockupArray.macMockups, selectedMockup: MockupArray.macMockups[2], selectedImages: $selectedImages)
+                TemplateView(selectedMockupType: selectedMockupType,mockupArray: MockupArray.macMockups, selectedMockup: MockupArray.macMockups[2], selectedImages: $selectedImages)
                     .tabItem {
                         Image(systemName: "macbook")
                         Text("Mac")
@@ -63,7 +64,7 @@ struct MockupView: View {
                     }
                     .tag(MockupType.mac.rawValue)
                 
-                TemplateView(mockupArray: MockupArray.appleWatchMockups, selectedMockup: MockupArray.appleWatchMockups[0], selectedImages: $selectedImages)
+                TemplateView(selectedMockupType: selectedMockupType,mockupArray: MockupArray.appleWatchMockups, selectedMockup: MockupArray.appleWatchMockups[0], selectedImages: $selectedImages)
                     .tabItem {
                         Image(systemName: "applewatch")
                         Text("Watch")
@@ -80,6 +81,10 @@ struct MockupView: View {
         .environmentObject(paywallViewModel)
         .environmentObject(routingViewModel)
         .environmentObject(moreViewModel)
+        .onAppear {
+            let structName = String(describing: type(of: self))
+            PostHogSDK.shared.capture(structName)
+        }
        
     }
 
@@ -92,6 +97,7 @@ struct TemplateView: View {
     @EnvironmentObject var moreViewModel : MoreViewModel
     
     
+    @State var selectedMockupType : MockupType
     @State  var mockupArray: [Mockup]
     @State  var selectedMockup: Mockup
     @Binding  var selectedImages: [UIImage]
@@ -440,6 +446,7 @@ struct TemplateView: View {
             if selectedImages != [] {
                 processImages()
             }
+            PostHogSDK.shared.capture(PostHogEvents.mockup_.rawValue + selectedMockupType.rawValue)
             
         })
         .onChange(of: selectedImages, perform: { value in

@@ -8,6 +8,7 @@
 import Foundation
 
 import RevenueCat
+import PostHog
 
 protocol PaywallRemoteDataSourceProtocol {
     
@@ -146,13 +147,15 @@ class PaywallRemoteDataSource: PaywallRemoteDataSourceProtocol {
             
             if let error = error {
                 completion(.failure(error))
-                AmplitudeManager.amplitude.track(eventType: AmplitudeEvents.paywall_plan_errored_.rawValue + modifiedString,eventProperties: ["planIdentifier" : planIdentifier ?? "nil"])
+                PostHogSDK.shared.capture(PostHogEvents.paywall_plan_errored_.rawValue + modifiedString,properties: ["planIdentifier" : planIdentifier ?? "nil"])
+
                 return
             }
             
             if userCancelled {
                 completion(.failure(PaywallError.failureReason("Customer Cancelled the Purchase")))
-                AmplitudeManager.amplitude.track(eventType: AmplitudeEvents.paywall_plan_cancelled_.rawValue + modifiedString,eventProperties: ["planIdentifier" : planIdentifier ?? "nil"])
+                PostHogSDK.shared.capture(PostHogEvents.paywall_plan_cancelled_.rawValue + modifiedString,properties: ["planIdentifier" : planIdentifier ?? "nil"])
+
                 return
             }
             
@@ -160,15 +163,18 @@ class PaywallRemoteDataSource: PaywallRemoteDataSourceProtocol {
                 if customerInfo.entitlements["app_premium"]?.isActive == true {
                     let date: Date = (customerInfo.entitlements["app_premium"]?.expirationDate)!
                     completion(.success(date))
-                    AmplitudeManager.amplitude.track(eventType: AmplitudeEvents.paywall_plan_subscribed_.rawValue + modifiedString,eventProperties: ["planIdentifier" : planIdentifier ?? "nil"])
+                    PostHogSDK.shared.capture(PostHogEvents.paywall_plan_subscribed_.rawValue + modifiedString,properties: ["planIdentifier" : planIdentifier ?? "nil"])
+
                 } else {
                     completion(.failure(PaywallError.failureReason("Customer Info Not Available")))
-                    AmplitudeManager.amplitude.track(eventType: AmplitudeEvents.paywall_plan_errored_.rawValue + modifiedString,eventProperties: ["planIdentifier" : planIdentifier ?? "nil"])
+                    PostHogSDK.shared.capture(PostHogEvents.paywall_plan_errored_.rawValue + modifiedString,properties: ["planIdentifier" : planIdentifier ?? "nil"])
+
                     return
                 }
             } else {
                 completion(.failure(PaywallError.failureReason("Customer Info Not Available")))
-                AmplitudeManager.amplitude.track(eventType: AmplitudeEvents.paywall_plan_errored_.rawValue + modifiedString,eventProperties: ["planIdentifier" : planIdentifier ?? "nil"])
+                PostHogSDK.shared.capture(PostHogEvents.paywall_plan_errored_.rawValue + modifiedString,properties: ["planIdentifier" : planIdentifier ?? "nil"])
+
                 return
             }
         }

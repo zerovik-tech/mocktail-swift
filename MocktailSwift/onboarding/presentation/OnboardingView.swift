@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PostHog
 //import Foundation
 //import UIKit
 
@@ -80,7 +81,7 @@ struct OnboardingView: View {
             .edgesIgnoringSafeArea(.all)
             .onAppear {
                 let structName = String(describing: type(of: self))
-                AmplitudeManager.amplitude.track(eventType : structName)
+                PostHogSDK.shared.capture(structName)
 
             }
         
@@ -130,7 +131,7 @@ struct OnboardingView: View {
                     }
                     Spacer()
                     Button(action: {
-//                        AmplitudeManager.amplitude.track(eventType: AmplitudeEvents.onboarding_continue.rawValue)
+                        PostHogSDK.shared.capture(PostHogEvents.onboarding_continue.rawValue)
                         //MARK: Set the onboarding shown to true if new user presses continue on third page aka 2th page
                         if isLastPage ?? false {
                             #if DEBUG

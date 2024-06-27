@@ -9,6 +9,7 @@ import SwiftUI
 import RevenueCat
 import FacebookCore
 import AppTrackingTransparency
+import PostHog
 //import AppsFlyerLib
 
 @main
@@ -69,7 +70,8 @@ struct Hashtag_Generator_ProApp: App {
 //                    AppEvents.shared.logEvent(AppEvents.Name("hekk"), parameters: [AppEvents.ParameterName("count") : 10])
                     
         
-                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.tracking_allow.rawValue)
+                    PostHogSDK.shared.capture(PostHogEvents.tracking_allow.rawValue)
+
 
                     
 //                    Settings.shared.isAutoLogAppEventsEnabled = true
@@ -94,7 +96,8 @@ struct Hashtag_Generator_ProApp: App {
                     
 //                    Purchases.shared.attribution.setAppsflyerID(AppsFlyerLib.shared().getAppsFlyerUID())
                     
-                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.tracking_not_allow.rawValue)
+                    PostHogSDK.shared.capture(PostHogEvents.tracking_not_allow.rawValue)
+
 
                     
 //                    FacebookCore.Settings.shared.isAdvertiserTrackingEnabled = false
@@ -133,8 +136,7 @@ struct Hashtag_Generator_ProApp: App {
              
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
                         if let status = routingViewModel.viewState.firstRunStatus {
-                            AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.first_app_launch.rawValue)
-
+                            PostHogSDK.shared.capture(PostHogEvents.first_app_launch.rawValue)
                         }
                         
                         if(moreViewModel.viewState.daysFirstRun){
@@ -171,6 +173,7 @@ struct Hashtag_Generator_ProApp: App {
 }
 
 import SystemConfiguration
+
 
 public class Reachability {
     

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PostHog
 
 struct HomeView: View {
     
@@ -58,6 +59,8 @@ struct HomeView: View {
         }
         .onAppear {
             moreViewModel.send(action: .getMore)
+            let structName = String(describing: type(of: self))
+            PostHogSDK.shared.capture(structName)
         }
     }
 }

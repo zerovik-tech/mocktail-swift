@@ -12,6 +12,7 @@ import RevenueCat
 import FirebaseCore
 import FirebaseAnalytics
 //import AppsFlyerLib
+import PostHog
 
 
 class AppDelegate : UIResponder,UIApplicationDelegate, PurchasesDelegate {
@@ -32,6 +33,9 @@ class AppDelegate : UIResponder,UIApplicationDelegate, PurchasesDelegate {
 //        //  Set isDebug to true to see AppsFlyer debug logs
 //        AppsFlyerLib.shared().isDebug = true
         
+        
+        let config = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST)
+        PostHogSDK.shared.setup(config)
         
         FirebaseApp.configure()
         

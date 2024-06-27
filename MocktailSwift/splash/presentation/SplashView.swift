@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PostHog
 
 struct SplashView: View {
     var body: some View {
@@ -38,7 +39,8 @@ struct SplashView: View {
         }
         .onAppear {
             let structName = String(describing: type(of: self))
-            AmplitudeManager.amplitude.track(eventType : structName)
+            PostHogSDK.shared.capture(structName)
+
         }
     }
 }

@@ -24,6 +24,9 @@ let FEATURE_REQUEST_URL = "https://tally.so/r/wMOWqM"
 let APP_VERSION = "1.1.1"
 let AMPLITUDE_API_KEY = ""
 
+let POSTHOG_API_KEY = "phc_vf8rKT0RLU4z9Rci8j7nOvPaPuFFEp4PkwxkA7NDtsB"
+let POSTHOG_HOST = "https://us.i.posthog.com"
+
 
 let lastRunDate = "lastRunDate"
 

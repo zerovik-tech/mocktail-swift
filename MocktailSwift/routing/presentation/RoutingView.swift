@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AmplitudeSwift
+import PostHog
 
 struct RoutingView: View {
     
@@ -72,7 +73,7 @@ struct RoutingView: View {
         }
         .onAppear {
             let structName = String(describing: type(of: self))
-            AmplitudeManager.amplitude.track(eventType : structName)
+            PostHogSDK.shared.capture(structName)
         }
         
     }

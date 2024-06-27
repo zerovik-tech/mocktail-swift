@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PostHog
 
 struct URLView: View {
     
@@ -23,13 +24,13 @@ struct URLView: View {
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             if(title == "Customer Support"){
-//                AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_contact_support.rawValue)
+                PostHogSDK.shared.capture(PostHogEvents.more_customer_support.rawValue)
 
             } else if(title == "Request Feature"){
-//                AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_request_feature.rawValue)
+                PostHogSDK.shared.capture(PostHogEvents.more_request_feature.rawValue)
 
             } else if(title == "Feedback Form") {
-//                AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.more_give_feedback.rawValue)
+                PostHogSDK.shared.capture(PostHogEvents.more_give_feedback.rawValue)
 
             } 
         }
