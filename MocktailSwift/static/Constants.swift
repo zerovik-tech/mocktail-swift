@@ -30,7 +30,7 @@ let POSTHOG_HOST = "https://us.i.posthog.com"
 
 let lastRunDate = "lastRunDate"
 
-let MAX_SELECTION_COUNT = 20
+let MAX_SELECTION_COUNT = 15
 
 #if DEBUG
 let DAILY_FREE_LIMIT = 5
