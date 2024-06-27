@@ -27,7 +27,7 @@ let AMPLITUDE_API_KEY = ""
 
 let lastRunDate = "lastRunDate"
 
-let MAX_SELECTION_COUNT = 20
+let MAX_SELECTION_COUNT = 15
 
 #if DEBUG
 let DAILY_FREE_LIMIT = 5

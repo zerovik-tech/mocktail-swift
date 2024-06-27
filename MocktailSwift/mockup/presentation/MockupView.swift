@@ -76,6 +76,7 @@ struct MockupView: View {
                 
             })
             
+            
         }
         .environmentObject(paywallViewModel)
         .environmentObject(routingViewModel)
@@ -106,6 +107,7 @@ struct TemplateView: View {
     @State private var showDownloadAlert = false
     @State private var count = 0
     @State private var showUpgradeAlert : Bool = false
+    @State private var showAccessDeniedAlert : Bool = false
     
     
     var body: some View {
@@ -153,6 +155,21 @@ struct TemplateView: View {
                 
             }
             .padding(.horizontal)
+            .alert(isPresented: $showAccessDeniedAlert, content: {
+                        Alert(
+                            title: Text("Access Denied"),
+                            message: Text("Please allow access to the photo library in Settings."),
+                            primaryButton: .cancel() {
+
+                            },
+                            secondaryButton: .default(Text("Open Settings")) {
+                                if let url = URL(string: UIApplication.openSettingsURLString) {
+                                    UIApplication.shared.open(url)
+                                }
+                            }
+                        )
+                    }
+                  )
             
             Spacer()
             
@@ -434,6 +451,34 @@ struct TemplateView: View {
 
                     
             }
+            VStack {
+                
+            }
+            .alert("Mockup Saved Successfully" , isPresented: $showDownloadAlert) {
+                Button("OK", role: .cancel) {
+                    
+                }
+            }
+            VStack {
+                
+            }
+            .alert(isPresented: $showUpgradeAlert, content: {
+                Alert(
+                    title: Text("Free Mockups Left : \(moreViewModel.viewState.more.dailyFreeLimit)"),
+                    message: Text("You can download up to \(DAILY_FREE_LIMIT) mockups per day for free. Upgrade to Pro for unlimited downloads."),
+                    primaryButton: .cancel() {
+    //                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.autotag_upload_alert_cancel.rawValue)
+
+                    },
+                    secondaryButton: .default(Text("Unlock")) {
+    //                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.autotag_upload_alert_unlock.rawValue)
+
+                        routingViewModel.send(action: .updateUserFlow(userflow: .paywall))
+                        
+                    }
+                )
+            }
+          )
             
         }
         .onAppear(perform: {
@@ -441,6 +486,9 @@ struct TemplateView: View {
                 processImages()
             }
             
+        })
+        .onDisappear(perform: {
+            finalImages.removeAll()
         })
         .onChange(of: selectedImages, perform: { value in
             selectedFinalImageIndex = 0
@@ -511,33 +559,37 @@ struct TemplateView: View {
                 photosPickerItems.removeAll()
             }
         }
-        .alert("Mockup Saved Successfully" , isPresented: $showDownloadAlert) {
-            Button("OK", role: .cancel) {
-                
-            }
-        }
-        .alert(isPresented: $showUpgradeAlert, content: {
-            Alert(
-                title: Text("Free Mockups Left : \(moreViewModel.viewState.more.dailyFreeLimit)"),
-                message: Text("You can download up to \(DAILY_FREE_LIMIT) mockups per day for free. Upgrade to Pro for unlimited downloads."),
-                primaryButton: .cancel() {
-//                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.autotag_upload_alert_cancel.rawValue)
 
-                },
-                secondaryButton: .default(Text("Unlock")) {
-//                    AmplitudeManager.amplitude.track(eventType : AmplitudeEvents.autotag_upload_alert_unlock.rawValue)
-
-                    routingViewModel.send(action: .updateUserFlow(userflow: .paywall))
-                    
-                }
-            )
-        }
-      )
+        
+        
                
 
     }
-    
     func saveImages (finalImagesArray : [UIImage],quality: Quality) {
+        let authStatus = PHPhotoLibrary.authorizationStatus()
+        
+        if authStatus == .authorized {
+            saveImagesToAlbum(finalImagesArray: finalImagesArray, quality: quality)
+        } else if authStatus == .notDetermined {
+            PHPhotoLibrary.requestAuthorization({ (newStatus) in
+                            if (newStatus == PHAuthorizationStatus.authorized) {
+                                print("permission granted")
+                                saveImagesToAlbum(finalImagesArray: finalImagesArray, quality: quality)
+                                
+                            }
+                            else {
+                                print("permission not granted")
+                                showAccessDeniedAlert = true
+                            }
+                        })
+        } else {
+            showAccessDeniedAlert = true
+        }
+        
+    }
+    
+    
+    func saveImagesToAlbum (finalImagesArray : [UIImage],quality: Quality) {
         if(paywallViewModel.viewState.isUserSubscribed ?? false){
             // if user is subscribed
             for image in finalImagesArray {

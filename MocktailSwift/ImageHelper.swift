@@ -81,7 +81,44 @@ class ImageHelper {
         
         let cornerRadius = mockup.radius
         let size = overlayImage.size
+        UIGraphicsBeginImageContextWithOptions(mockup.baseImageSize, false, 0.0)
+        
+        var baseImageOrigin = CGPoint(x: ((size.width / 2) - (mockup.baseImageSize.width / 2)) , y: ((size.height / 2) - (mockup.baseImageSize.height / 2)))
+        
+        // these cases are used for non symmetrical mockups :
+        
+        if mockup.mockup.rawValue == MockupList.iMac24.rawValue{
+            baseImageOrigin = CGPoint(x: baseImageOrigin.x, y: 159 )
+        } else if mockup.mockup.rawValue == MockupList.iMac27.rawValue {
+            baseImageOrigin = CGPoint(x: baseImageOrigin.x, y: 249 )
+        } else if mockup.mockup.rawValue == MockupList.MacBookPro16_4thGen.rawValue {
+            baseImageOrigin = CGPoint(x: baseImageOrigin.x, y: 112 )
+        } else if mockup.mockup.rawValue == MockupList.MacBookPro15_4thGen.rawValue {
+            baseImageOrigin = CGPoint(x: baseImageOrigin.x, y: 196 )
+        }
+        
+        // Define the background rect based on mockup.baseImageSize
+        let backgroundRect = CGRect(origin: .zero, size: mockup.baseImageSize)
+        
+        if mockup.radius != 0 {
+            let path = UIBezierPath(roundedRect: backgroundRect, cornerRadius: mockup.radius)
+            path.addClip()
+            
+        }
+
+        // Draw the white background
+        UIColor.white.setFill()
+        UIRectFill(backgroundRect)
+      
+        let backgroundImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+        
+        let rect = CGRect(origin: baseImageOrigin, size: mockup.baseImageSize)
+        
+        backgroundImage?.draw(in: rect)
+        
         var cornerPoint: CGPoint = CGPoint(x: ((size.width / 2) - (baseImage.size.width / 2)) , y: ((size.height / 2) - (baseImage.size.height / 2)))
         
         // these cases are used for non symmetrical mockups :
@@ -101,25 +138,25 @@ class ImageHelper {
         baseImage.draw(in: baseRect)
         
         if(true){
-            let waterMarkImage = UIImage(named: "watermark")
+            let waterMarkImage = UIImage(named: "Made with Mocktail")
             if let waterMarkImage = waterMarkImage {
-
-                var waterMarkOrigin = CGPoint(x: ((size.width / 2) - (mockup.baseImageSize.width / 2)) , y: ((size.height / 2) - (mockup.baseImageSize.height / 2)))
+                
+                var waterMarkOrigin = CGPoint(x: ((size.width / 2) - (waterMarkImage.size.width / 2)) , y: (((size.height - mockup.baseImageSize.height) / 2) + (mockup.baseImageSize.height - waterMarkImage.size.height)))
                 
                 // these cases are used for non symmetrical mockups :
                 
                 if mockup.mockup.rawValue == MockupList.iMac24.rawValue{
-                    waterMarkOrigin = CGPoint(x: waterMarkOrigin.x, y: 159 )
+                    waterMarkOrigin = CGPoint(x: waterMarkOrigin.x, y: (159 + (mockup.baseImageSize.height - waterMarkImage.size.height)) )
                 } else if mockup.mockup.rawValue == MockupList.iMac27.rawValue {
-                    waterMarkOrigin = CGPoint(x: waterMarkOrigin.x, y: 249 )
+                    waterMarkOrigin = CGPoint(x: waterMarkOrigin.x, y: (249 + (mockup.baseImageSize.height - waterMarkImage.size.height)))
                 } else if mockup.mockup.rawValue == MockupList.MacBookPro16_4thGen.rawValue {
-                    waterMarkOrigin = CGPoint(x: waterMarkOrigin.x, y: 112 )
+                    waterMarkOrigin = CGPoint(x: waterMarkOrigin.x, y: (112 + (mockup.baseImageSize.height - waterMarkImage.size.height)))
                 } else if mockup.mockup.rawValue == MockupList.MacBookPro15_4thGen.rawValue {
-                    waterMarkOrigin = CGPoint(x: waterMarkOrigin.x, y: 196 )
+                    waterMarkOrigin = CGPoint(x: waterMarkOrigin.x, y: (196 + (mockup.baseImageSize.height - waterMarkImage.size.height)) )
                 }
                 
-                           let waterMarkRect = CGRect(origin: waterMarkOrigin, size: mockup.baseImageSize)
-                           waterMarkImage.draw(in: waterMarkRect, blendMode: .normal, alpha: 0.2)
+                let waterMarkRect = CGRect(origin: waterMarkOrigin, size: waterMarkImage.size)
+                           waterMarkImage.draw(in: waterMarkRect, blendMode: .normal, alpha: 0.5)
                 
                 
             } else {
@@ -168,7 +205,7 @@ class ImageHelper {
                             print("Image saved to the Photos app")
                         } else {
                             // Saving Image saved to the Photos app failed
-                            print("Image saved to the Photos app")
+                            print("Saving Image saved to the Photos app failed")
                         }
                     })
                 }
@@ -186,7 +223,7 @@ class ImageHelper {
                             print("Image saved to the Photos app")
                         } else {
                             // Saving Image saved to the Photos app failed
-                            print("Image saved to the Photos app")
+                            print("Saving Image saved to the Photos app failed")
                         }
                     })
                 }
@@ -204,7 +241,7 @@ class ImageHelper {
                             print("Image saved to the Photos app")
                         } else {
                             // Saving Image saved to the Photos app failed
-                            print("Image saved to the Photos app")
+                            print("Saving Image saved to the Photos app failed")
                         }
                     })
                 }
