@@ -16,7 +16,7 @@ struct MockupView: View {
     @StateObject private var routingViewModel: RoutingViewModel
     
     @StateObject private var moreViewModel : MoreViewModel
-
+    
     
     @State private var selectedMockup: Mockup = MockupArray.iPhoneMockups[15]
     @State  var selectedImages: [UIImage] = []
@@ -26,16 +26,16 @@ struct MockupView: View {
     @State var selectedTab: Tab = .iphone
     
     
-
+    
     
     init(paywallViewModel: PaywallViewModel, routingViewModel: RoutingViewModel,moreViewModel : MoreViewModel) {
         self._paywallViewModel = StateObject(wrappedValue: paywallViewModel)
         self._routingViewModel = StateObject(wrappedValue: routingViewModel)
         self._moreViewModel = StateObject(wrappedValue: moreViewModel)
-
+        
     }
     
-        
+    
     var body: some View {
         
         VStack {
@@ -49,43 +49,43 @@ struct MockupView: View {
                 
                 Button(action: {
                     PostHogSDK.shared.capture(PostHogEvents.mockup_star.rawValue)
-
+                    
                     if let url = URL(string: "itms-apps://itunes.apple.com/app/id\(APP_ID)?action=write-review") {
                         UIApplication.shared.open(url)
                     }
-
-
+                    
+                    
                 }) {
                     Image(systemName: "star")
-                       .font(.title2)
-                       .foregroundStyle(.black)
-                       .padding(.horizontal)
-
+                        .font(.title2)
+                        .foregroundStyle(.black)
+                        .padding(.horizontal)
+                    
                 }
                 
-
+                
                 
                 Button(action: {
                     PostHogSDK.shared.capture(PostHogEvents.mockup_clear.rawValue)
-
+                    
                     selectedImages = []
                     finalImages = []
                     selectedFinalImageIndex = 0
                     
-
+                    
                 }) {
                     Text("Clear")
                         .font(.callout)
                         .bold()
-
+                    
                 }
                 
-               
+                
                 
                 
             }
             .padding(.horizontal)
-
+            
             
             CustomTabBar(selectedTab: $selectedTab)
                 .padding(.horizontal, 4)
@@ -93,61 +93,61 @@ struct MockupView: View {
             switch selectedTab {
             case .iphone:
                 TemplateView(selectedMockupType: selectedMockupType, mockupArray: MockupArray.iPhoneMockups, selectedMockup: MockupArray.iPhoneMockups[15], selectedImages: $selectedImages, selectedFinalImageIndex: $selectedFinalImageIndex, finalImages: $finalImages)
-                    
+                
             case .ipad:
                 TemplateView(selectedMockupType: selectedMockupType, mockupArray: MockupArray.iPadMockups, selectedMockup: MockupArray.iPadMockups[0], selectedImages: $selectedImages, selectedFinalImageIndex: $selectedFinalImageIndex, finalImages: $finalImages)
-                    
+                
             case .macbook:
                 TemplateView(selectedMockupType: selectedMockupType,mockupArray: MockupArray.macMockups, selectedMockup: MockupArray.macMockups[2], selectedImages: $selectedImages, selectedFinalImageIndex: $selectedFinalImageIndex, finalImages: $finalImages)
-                    
+                
             case .applewatch:
                 TemplateView(selectedMockupType: selectedMockupType,mockupArray: MockupArray.appleWatchMockups, selectedMockup: MockupArray.appleWatchMockups[0], selectedImages: $selectedImages, selectedFinalImageIndex: $selectedFinalImageIndex, finalImages: $finalImages)
-                    
-            }
                 
+            }
             
-//            TabView(selection: $selectedMockupType,
-//                    content:  {
-//                TemplateView(selectedMockupType: selectedMockupType, mockupArray: MockupArray.iPhoneMockups, selectedMockup: MockupArray.iPhoneMockups[15], selectedImages: $selectedImages)
-//                    .tabItem {
-//                        Image(systemName: "iphone")
-//                        Text("iPhone")
-//                            
-//                            
-//                    }
-//                    .tag(MockupType.iphone.rawValue)
-//                
-//                TemplateView(selectedMockupType: selectedMockupType, mockupArray: MockupArray.iPadMockups, selectedMockup: MockupArray.iPadMockups[0], selectedImages: $selectedImages)
-//                     .tabItem {
-//                         
-//                         Image(systemName: "ipad")
-//                         Text("iPad")
-//                             
-//                             
-//                     }
-//                     .tag(MockupType.ipad.rawValue)
-//                
-//                TemplateView(selectedMockupType: selectedMockupType,mockupArray: MockupArray.macMockups, selectedMockup: MockupArray.macMockups[2], selectedImages: $selectedImages)
-//                    .tabItem {
-//                        Image(systemName: "macbook")
-//                        Text("Mac")
-//                            
-//                            
-//                    }
-//                    .tag(MockupType.mac.rawValue)
-//                
-//                TemplateView(selectedMockupType: selectedMockupType,mockupArray: MockupArray.appleWatchMockups, selectedMockup: MockupArray.appleWatchMockups[0], selectedImages: $selectedImages)
-//                    .tabItem {
-//                        Image(systemName: "applewatch")
-//                        Text("Watch")
-//                            
-//                            
-//                    }
-//                    .tag(MockupType.appleWatch.rawValue)
-//                
-//                
-//                
-//            })
+            
+            //            TabView(selection: $selectedMockupType,
+            //                    content:  {
+            //                TemplateView(selectedMockupType: selectedMockupType, mockupArray: MockupArray.iPhoneMockups, selectedMockup: MockupArray.iPhoneMockups[15], selectedImages: $selectedImages)
+            //                    .tabItem {
+            //                        Image(systemName: "iphone")
+            //                        Text("iPhone")
+            //                            
+            //                            
+            //                    }
+            //                    .tag(MockupType.iphone.rawValue)
+            //                
+            //                TemplateView(selectedMockupType: selectedMockupType, mockupArray: MockupArray.iPadMockups, selectedMockup: MockupArray.iPadMockups[0], selectedImages: $selectedImages)
+            //                     .tabItem {
+            //                         
+            //                         Image(systemName: "ipad")
+            //                         Text("iPad")
+            //                             
+            //                             
+            //                     }
+            //                     .tag(MockupType.ipad.rawValue)
+            //                
+            //                TemplateView(selectedMockupType: selectedMockupType,mockupArray: MockupArray.macMockups, selectedMockup: MockupArray.macMockups[2], selectedImages: $selectedImages)
+            //                    .tabItem {
+            //                        Image(systemName: "macbook")
+            //                        Text("Mac")
+            //                            
+            //                            
+            //                    }
+            //                    .tag(MockupType.mac.rawValue)
+            //                
+            //                TemplateView(selectedMockupType: selectedMockupType,mockupArray: MockupArray.appleWatchMockups, selectedMockup: MockupArray.appleWatchMockups[0], selectedImages: $selectedImages)
+            //                    .tabItem {
+            //                        Image(systemName: "applewatch")
+            //                        Text("Watch")
+            //                            
+            //                            
+            //                    }
+            //                    .tag(MockupType.appleWatch.rawValue)
+            //                
+            //                
+            //                
+            //            })
             
             
         }
@@ -158,9 +158,9 @@ struct MockupView: View {
             let structName = String(describing: type(of: self))
             PostHogSDK.shared.capture(structName)
         }
-       
+        
     }
-
+    
 }
 
 struct TemplateView: View {
@@ -199,22 +199,22 @@ struct TemplateView: View {
                 
             }
             .alert(isPresented: $showAccessDeniedAlert, content: {
-                        Alert(
-                            title: Text("Access Denied"),
-                            message: Text("Please allow access to the photo library in Settings."),
-                            primaryButton: .cancel() {
-                                PostHogSDK.shared.capture(PostHogEvents.alert_save_permission_denied_cancel.rawValue)
-
-                            },
-                            secondaryButton: .default(Text("Open Settings")) {
-                                PostHogSDK.shared.capture(PostHogEvents.alert_save_permission_denied_settings.rawValue)
-                                if let url = URL(string: UIApplication.openSettingsURLString) {
-                                    UIApplication.shared.open(url)
-                                }
-                            }
-                        )
+                Alert(
+                    title: Text("Access Denied"),
+                    message: Text("Please allow access to the photo library in Settings."),
+                    primaryButton: .cancel() {
+                        PostHogSDK.shared.capture(PostHogEvents.alert_save_permission_denied_cancel.rawValue)
+                        
+                    },
+                    secondaryButton: .default(Text("Open Settings")) {
+                        PostHogSDK.shared.capture(PostHogEvents.alert_save_permission_denied_settings.rawValue)
+                        if let url = URL(string: UIApplication.openSettingsURLString) {
+                            UIApplication.shared.open(url)
+                        }
                     }
-                  )
+                )
+            }
+            )
             
             Spacer()
             
@@ -237,9 +237,9 @@ struct TemplateView: View {
                                     Text("Tap to add images")
                                         .bold()
                                         .foregroundStyle(.black)
-//                                    Text("Tap to add images")
-//                                        .font(.callout)
-//                                        .foregroundStyle(.gray)
+                                    //                                    Text("Tap to add images")
+                                    //                                        .font(.callout)
+                                    //                                        .foregroundStyle(.gray)
                                 }
                             }
                         
@@ -339,7 +339,7 @@ struct TemplateView: View {
                             }
                             .padding(.trailing)
                         }
-
+                        
                         
                         PhotosPicker(selection: $replacePhotoPickerItem) {
                             HStack(spacing: 2) {
@@ -367,7 +367,7 @@ struct TemplateView: View {
                 }
                 
                 Spacer()
-               
+                
                 HStack{
                     VStack {
                         HStack {
@@ -496,15 +496,15 @@ struct TemplateView: View {
                         }
                     }
                     
-
+                    
                 }
                 .padding(.bottom)
-
-            
-
                 
-
-                    
+                
+                
+                
+                
+                
             }
             VStack {
                 
@@ -523,17 +523,17 @@ struct TemplateView: View {
                     message: Text("You can download up to \(DAILY_FREE_LIMIT) mockups per day for free. Upgrade to Pro for unlimited downloads."),
                     primaryButton: .cancel() {
                         PostHogSDK.shared.capture(PostHogEvents.alert_daily_limit_cancel.rawValue)
-
+                        
                     },
                     secondaryButton: .default(Text("Unlock")) {
                         PostHogSDK.shared.capture(PostHogEvents.alert_daily_limit_unlock.rawValue)
-
+                        
                         routingViewModel.send(action: .updateUserFlow(userflow: .paywall))
                         
                     }
                 )
             }
-          )
+            )
             
         }
         .onAppear(perform: {
@@ -565,25 +565,25 @@ struct TemplateView: View {
                 
                 
             }
-
+            
         }
         .onChange(of: replacedImage) { value in
             PostHogSDK.shared.capture(PostHogEvents.mockup_image_replace.rawValue)
-
+            
             if replacedImage != UIImage() {
                 isProcessing = true
                 DispatchQueue.global(qos: .userInitiated).async {
                     var image: UIImage = UIImage()
-                   
-                        if let resizedImage = ImageHelper.resizeImage(image: replacedImage, targetSize: selectedMockup.baseImageSize, contentMode: contentMode, cornerRadius: selectedMockup.radius),
-                           let overlayImage = UIImage(named: selectedMockup.mockup.rawValue) {
-                            if let finalImage = ImageHelper.overlayImage(baseImage: resizedImage, overlayImage: overlayImage, mockup: selectedMockup, addWatermark: paywallViewModel.viewState.isUserSubscribed ?? false ? false : true) {
-                                image = finalImage
-                            }
+                    
+                    if let resizedImage = ImageHelper.resizeImage(image: replacedImage, targetSize: selectedMockup.baseImageSize, contentMode: contentMode, cornerRadius: selectedMockup.radius),
+                       let overlayImage = UIImage(named: selectedMockup.mockup.rawValue) {
+                        if let finalImage = ImageHelper.overlayImage(baseImage: resizedImage, overlayImage: overlayImage, mockup: selectedMockup, addWatermark: paywallViewModel.viewState.isUserSubscribed ?? false ? false : true) {
+                            image = finalImage
                         }
+                    }
                     
                     DispatchQueue.main.async {
-                    
+                        
                         finalImages.remove(at: selectedFinalImageIndex)
                         finalImages.insert(image, at: selectedFinalImageIndex)
                         isProcessing = false
@@ -592,12 +592,15 @@ struct TemplateView: View {
                 }
             }
             
-
+            
             
         }
         .onChange(of: photosPickerItems) {newValue in
-            PostHogSDK.shared.capture(PostHogEvents.mockup_image_uploaded.rawValue)
-
+            if photosPickerItems.count > 0 {
+                PostHogSDK.shared.capture(PostHogEvents.mockup_image_uploaded.rawValue)
+                
+            }
+            
             Task {
                 
                 var imagesArray : [UIImage] = []
@@ -609,33 +612,33 @@ struct TemplateView: View {
                     }
                 }
                 if imagesArray != [] {
-           
+                    
                     selectedImages = imagesArray
-                                
-                                processImages()
+                    
+                    processImages()
                 }
                 
                 
                 photosPickerItems.removeAll()
             }
         }
-
         
         
-               
-
+        
+        
+        
     }
-
+    
     func saveImages (finalImagesArray : [UIImage],quality: Quality,via : SaveOption) {
-
+        
         
         switch via {
         case .download:
-        PostHogSDK.shared.capture(PostHogEvents.mockup_.rawValue + "download_" + quality.rawValue)
+            PostHogSDK.shared.capture(PostHogEvents.mockup_.rawValue + "download_" + quality.rawValue)
         case .save:
-        PostHogSDK.shared.capture(PostHogEvents.mockup_.rawValue + "save_" + quality.rawValue)
+            PostHogSDK.shared.capture(PostHogEvents.mockup_.rawValue + "save_" + quality.rawValue)
             
-
+            
         }
         
         let authStatus = PHPhotoLibrary.authorizationStatus()
@@ -644,21 +647,21 @@ struct TemplateView: View {
             saveImagesToAlbum(finalImagesArray: finalImagesArray, quality: quality)
         } else if authStatus == .notDetermined {
             PHPhotoLibrary.requestAuthorization({ (newStatus) in
-                            if (newStatus == PHAuthorizationStatus.authorized) {
-                                print("permission granted")
-                                saveImagesToAlbum(finalImagesArray: finalImagesArray, quality: quality)
-                                
-                            }
-                            else {
-                                print("permission not granted")
-                                showAccessDeniedAlert = true
-                                PostHogSDK.shared.capture(PostHogEvents.alert_save_permission_denied.rawValue)
-                            }
-                        })
+                if (newStatus == PHAuthorizationStatus.authorized) {
+                    print("permission granted")
+                    saveImagesToAlbum(finalImagesArray: finalImagesArray, quality: quality)
+                    
+                }
+                else {
+                    print("permission not granted")
+                    showAccessDeniedAlert = true
+                    PostHogSDK.shared.capture(PostHogEvents.alert_save_permission_denied.rawValue)
+                }
+            })
         } else {
             showAccessDeniedAlert = true
             PostHogSDK.shared.capture(PostHogEvents.alert_save_permission_denied.rawValue)
-
+            
         }
         
     }
@@ -690,7 +693,7 @@ struct TemplateView: View {
                 PostHogSDK.shared.capture(PostHogEvents.mockup_image_saved.rawValue)
             }
         }
-
+        
     }
     
     func processImages() {
