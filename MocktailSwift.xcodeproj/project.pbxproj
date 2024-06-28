@@ -72,6 +72,7 @@
 		B14844D12C295762004B7B76 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14844D02C295762004B7B76 /* HomeView.swift */; };
 		B14844D32C295A6C004B7B76 /* Merienda-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B14844D22C295A6C004B7B76 /* Merienda-Regular.ttf */; };
 		B14844D82C2ADCBB004B7B76 /* YatraOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B14844D72C2ADCBB004B7B76 /* YatraOne-Regular.ttf */; };
+		B1F963772C2EBE6F0014DA76 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F963762C2EBE6F0014DA76 /* CustomTabBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -135,6 +136,7 @@
 		B14844D22C295A6C004B7B76 /* Merienda-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merienda-Regular.ttf"; sourceTree = "<group>"; };
 		B14844D42C295AC1004B7B76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B14844D72C2ADCBB004B7B76 /* YatraOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YatraOne-Regular.ttf"; sourceTree = "<group>"; };
+		B1F963762C2EBE6F0014DA76 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -554,6 +556,7 @@
 			isa = PBXGroup;
 			children = (
 				B14844C92C294DDF004B7B76 /* MockupView.swift */,
+				B1F963762C2EBE6F0014DA76 /* CustomTabBar.swift */,
 			);
 			path = presentation;
 			sourceTree = "<group>";
@@ -694,6 +697,7 @@
 				57A561C02C2ABCEB00D70D0D /* Constants.swift in Sources */,
 				57A561A42C2AA95F00D70D0D /* PaywallRepositoryProtocol.swift in Sources */,
 				57A6078C2C2C088E00A9F206 /* MoreType.swift in Sources */,
+				B1F963772C2EBE6F0014DA76 /* CustomTabBar.swift in Sources */,
 				57A561AC2C2AA95F00D70D0D /* VerticalPlanCard.swift in Sources */,
 				B103F2A52C217EC200F9E9C3 /* MocktailSwift.xcdatamodeld in Sources */,
 				571731442C2AFF90004862FA /* RoutingLocalDataSource.swift in Sources */,

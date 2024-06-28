@@ -20,7 +20,10 @@ struct MockupView: View {
     
     @State private var selectedMockup: Mockup = MockupArray.iPhoneMockups[15]
     @State  var selectedImages: [UIImage] = []
+    @State private var finalImages: [UIImage] = []
+    @State private var selectedFinalImageIndex: Int = 0
     @State private var selectedMockupType: MockupType = .iphone
+    @State var selectedTab: Tab = .iphone
     
     
 
@@ -37,95 +40,6 @@ struct MockupView: View {
         
         VStack {
             
-            TabView(selection: $selectedMockupType,
-                    content:  {
-                TemplateView(selectedMockupType: selectedMockupType, mockupArray: MockupArray.iPhoneMockups, selectedMockup: MockupArray.iPhoneMockups[15], selectedImages: $selectedImages)
-                    .tabItem {
-                        Image(systemName: "iphone")
-                        Text("iPhone")
-                            
-                            
-                    }
-                    .tag(MockupType.iphone.rawValue)
-                
-                TemplateView(selectedMockupType: selectedMockupType, mockupArray: MockupArray.iPadMockups, selectedMockup: MockupArray.iPadMockups[0], selectedImages: $selectedImages)
-                     .tabItem {
-                         
-                         Image(systemName: "ipad")
-                         Text("iPad")
-                             
-                             
-                     }
-                     .tag(MockupType.ipad.rawValue)
-                
-                TemplateView(selectedMockupType: selectedMockupType,mockupArray: MockupArray.macMockups, selectedMockup: MockupArray.macMockups[2], selectedImages: $selectedImages)
-                    .tabItem {
-                        Image(systemName: "macbook")
-                        Text("Mac")
-                            
-                            
-                    }
-                    .tag(MockupType.mac.rawValue)
-                
-                TemplateView(selectedMockupType: selectedMockupType,mockupArray: MockupArray.appleWatchMockups, selectedMockup: MockupArray.appleWatchMockups[0], selectedImages: $selectedImages)
-                    .tabItem {
-                        Image(systemName: "applewatch")
-                        Text("Watch")
-                            
-                            
-                    }
-                    .tag(MockupType.appleWatch.rawValue)
-                
-                
-                
-            })
-            
-            
-        }
-        .environmentObject(paywallViewModel)
-        .environmentObject(routingViewModel)
-        .environmentObject(moreViewModel)
-        .onAppear {
-            let structName = String(describing: type(of: self))
-            PostHogSDK.shared.capture(structName)
-        }
-       
-    }
-
-}
-
-struct TemplateView: View {
-    
-    @EnvironmentObject var paywallViewModel : PaywallViewModel
-    @EnvironmentObject var routingViewModel : RoutingViewModel
-    @EnvironmentObject var moreViewModel : MoreViewModel
-    
-    
-    @State var selectedMockupType : MockupType
-    @State  var mockupArray: [Mockup]
-    @State  var selectedMockup: Mockup
-    @Binding  var selectedImages: [UIImage]
-    @State private var finalImages: [UIImage] = []
-    @State private var replacedImage: UIImage = UIImage()
-    @State private var isImagePickerPresented = false
-    @State private var photosPickerItems: [PhotosPickerItem] = []
-    @State private var replacePhotoPickerItem: PhotosPickerItem?
-    @State private var isProcessing = false
-    @State private var contentMode: ContentMode = .fit
-    @State private var selectedFinalImageIndex: Int = 0
-    @State private var showDownloadAlert = false
-    @State private var count = 0
-    @State private var showUpgradeAlert : Bool = false
-    @State private var showAccessDeniedAlert : Bool = false
-    
-    
-    enum SaveOption {
-        case download
-        case save
-    }
-    
-    var body: some View {
-        VStack {
             HStack {
                 Text("Mocktail")
                     .font(.custom("YatraOne-Regular", size: 24))
@@ -171,6 +85,119 @@ struct TemplateView: View {
                 
             }
             .padding(.horizontal)
+
+            
+            CustomTabBar(selectedTab: $selectedTab)
+                .padding(.horizontal, 4)
+            
+            switch selectedTab {
+            case .iphone:
+                TemplateView(selectedMockupType: selectedMockupType, mockupArray: MockupArray.iPhoneMockups, selectedMockup: MockupArray.iPhoneMockups[15], selectedImages: $selectedImages, selectedFinalImageIndex: $selectedFinalImageIndex, finalImages: $finalImages)
+                    
+            case .ipad:
+                TemplateView(selectedMockupType: selectedMockupType, mockupArray: MockupArray.iPadMockups, selectedMockup: MockupArray.iPadMockups[0], selectedImages: $selectedImages, selectedFinalImageIndex: $selectedFinalImageIndex, finalImages: $finalImages)
+                    
+            case .macbook:
+                TemplateView(selectedMockupType: selectedMockupType,mockupArray: MockupArray.macMockups, selectedMockup: MockupArray.macMockups[2], selectedImages: $selectedImages, selectedFinalImageIndex: $selectedFinalImageIndex, finalImages: $finalImages)
+                    
+            case .applewatch:
+                TemplateView(selectedMockupType: selectedMockupType,mockupArray: MockupArray.appleWatchMockups, selectedMockup: MockupArray.appleWatchMockups[0], selectedImages: $selectedImages, selectedFinalImageIndex: $selectedFinalImageIndex, finalImages: $finalImages)
+                    
+            }
+                
+            
+//            TabView(selection: $selectedMockupType,
+//                    content:  {
+//                TemplateView(selectedMockupType: selectedMockupType, mockupArray: MockupArray.iPhoneMockups, selectedMockup: MockupArray.iPhoneMockups[15], selectedImages: $selectedImages)
+//                    .tabItem {
+//                        Image(systemName: "iphone")
+//                        Text("iPhone")
+//                            
+//                            
+//                    }
+//                    .tag(MockupType.iphone.rawValue)
+//                
+//                TemplateView(selectedMockupType: selectedMockupType, mockupArray: MockupArray.iPadMockups, selectedMockup: MockupArray.iPadMockups[0], selectedImages: $selectedImages)
+//                     .tabItem {
+//                         
+//                         Image(systemName: "ipad")
+//                         Text("iPad")
+//                             
+//                             
+//                     }
+//                     .tag(MockupType.ipad.rawValue)
+//                
+//                TemplateView(selectedMockupType: selectedMockupType,mockupArray: MockupArray.macMockups, selectedMockup: MockupArray.macMockups[2], selectedImages: $selectedImages)
+//                    .tabItem {
+//                        Image(systemName: "macbook")
+//                        Text("Mac")
+//                            
+//                            
+//                    }
+//                    .tag(MockupType.mac.rawValue)
+//                
+//                TemplateView(selectedMockupType: selectedMockupType,mockupArray: MockupArray.appleWatchMockups, selectedMockup: MockupArray.appleWatchMockups[0], selectedImages: $selectedImages)
+//                    .tabItem {
+//                        Image(systemName: "applewatch")
+//                        Text("Watch")
+//                            
+//                            
+//                    }
+//                    .tag(MockupType.appleWatch.rawValue)
+//                
+//                
+//                
+//            })
+            
+            
+        }
+        .environmentObject(paywallViewModel)
+        .environmentObject(routingViewModel)
+        .environmentObject(moreViewModel)
+        .onAppear {
+            let structName = String(describing: type(of: self))
+            PostHogSDK.shared.capture(structName)
+        }
+       
+    }
+
+}
+
+struct TemplateView: View {
+    
+    @EnvironmentObject var paywallViewModel : PaywallViewModel
+    @EnvironmentObject var routingViewModel : RoutingViewModel
+    @EnvironmentObject var moreViewModel : MoreViewModel
+    
+    
+    @State var selectedMockupType : MockupType
+    @State  var mockupArray: [Mockup]
+    @State  var selectedMockup: Mockup
+    @Binding  var selectedImages: [UIImage]
+    @Binding  var selectedFinalImageIndex: Int
+    @Binding  var finalImages: [UIImage]
+    @State private var replacedImage: UIImage = UIImage()
+    @State private var isImagePickerPresented = false
+    @State private var photosPickerItems: [PhotosPickerItem] = []
+    @State private var replacePhotoPickerItem: PhotosPickerItem?
+    @State private var isProcessing = false
+    @State private var contentMode: ContentMode = .fit
+    @State private var showDownloadAlert = false
+    @State private var count = 0
+    @State private var showUpgradeAlert : Bool = false
+    @State private var showAccessDeniedAlert : Bool = false
+    
+    
+    enum SaveOption {
+        case download
+        case save
+    }
+    
+    var body: some View {
+        VStack {
+            VStack {
+                
+            }
             .alert(isPresented: $showAccessDeniedAlert, content: {
                         Alert(
                             title: Text("Access Denied"),
@@ -459,7 +486,7 @@ struct TemplateView: View {
                             
                             
                         } label: {
-                            Text("Save All")
+                            Text(selectedImages.count == 1 ? "Save" : "Save All")
                                 .font(.callout)
                                 .foregroundStyle(.white)
                                 .bold()
@@ -471,6 +498,7 @@ struct TemplateView: View {
                     
 
                 }
+                .padding(.bottom)
 
             
 
@@ -517,6 +545,7 @@ struct TemplateView: View {
         })
         .onDisappear(perform: {
             finalImages.removeAll()
+            selectedFinalImageIndex = 0
         })
         .onChange(of: selectedImages, perform: { value in
             selectedFinalImageIndex = 0
