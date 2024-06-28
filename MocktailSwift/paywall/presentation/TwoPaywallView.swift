@@ -62,10 +62,10 @@ struct TwoPaywallView: View {
                         VStack {
                             Spacer()
                             
-                            UnevenRoundedRectangle(topLeadingRadius: 20, topTrailingRadius: 20)
+                           Rectangle()
                                 .edgesIgnoringSafeArea(.all)
                                 .foregroundStyle(appColor1)
-                                .frame(height: UIScreen.main.bounds.height * 0.38)
+                                
                         }
                         
                         VStack {
