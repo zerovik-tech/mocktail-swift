@@ -52,7 +52,7 @@ struct MockupView: View {
                      .tabItem {
                          
                          Image(systemName: "ipad")
-                         Text("ipad")
+                         Text("iPad")
                              
                              
                      }
@@ -207,12 +207,12 @@ struct TemplateView: View {
                             .scaledToFit()
                             .overlay {
                                 VStack {
-                                    Text("Drag and drop your file")
+                                    Text("Tap to add images")
                                         .bold()
                                         .foregroundStyle(.black)
-                                    Text("Tap to add images")
-                                        .font(.callout)
-                                        .foregroundStyle(.gray)
+//                                    Text("Tap to add images")
+//                                        .font(.callout)
+//                                        .foregroundStyle(.gray)
                                 }
                             }
                         
@@ -297,7 +297,7 @@ struct TemplateView: View {
                                 
                                 
                             } label: {
-                                HStack {
+                                HStack(spacing: 2) {
                                     Image(systemName: "square.and.arrow.down")
                                         .font(.footnote)
                                         .bold()
@@ -307,7 +307,7 @@ struct TemplateView: View {
                                 }
                                 .padding(4)
                                 .padding(.horizontal, 2)
-                                .background(RoundedRectangle(cornerRadius: 12).fill(.black.opacity(0.1)))
+                                .background(RoundedRectangle(cornerRadius: 6).fill(.black.opacity(0.1)))
                                 
                             }
                             .padding(.trailing)
@@ -315,7 +315,7 @@ struct TemplateView: View {
 
                         
                         PhotosPicker(selection: $replacePhotoPickerItem) {
-                            HStack {
+                            HStack(spacing: 2) {
                                 Image(systemName: "repeat")
                                     .font(.footnote)
                                 Text("Replace")
@@ -326,7 +326,7 @@ struct TemplateView: View {
                             .padding(.horizontal, 2)
                             
                             .background {
-                                RoundedRectangle(cornerRadius: 12).fill(.black.opacity(0.8))
+                                RoundedRectangle(cornerRadius: 6).fill(.black.opacity(0.8))
                             }
                             
                         }
@@ -459,7 +459,7 @@ struct TemplateView: View {
                             
                             
                         } label: {
-                            Text("Download")
+                            Text("Save All")
                                 .font(.callout)
                                 .foregroundStyle(.white)
                                 .bold()
