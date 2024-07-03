@@ -53,6 +53,8 @@ enum PostHogEvents: String {
         case more_privacy_policy = "more_privacy_policy"
         case more_terms = "more_terms"
         case more_customer_support = "more_customer_support"
+        case more_manage_subscription_change = "more_manage_subscription_change"
+        case more_manage_subscription_cancel = "more_manage_subscription_cancel"
         case faq_customer_support = "faq_customer_support"
         case faq_query = "faq_query"
         

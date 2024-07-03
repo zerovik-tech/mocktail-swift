@@ -60,18 +60,16 @@ struct MoreView: View {
             Section(header:Text("PRO SETTINGS")) {
                 
                                     if paywallViewModel.viewState.isUserSubscribed == true {
-                Button(action: {
-                    //                        RMetrics.recordEvent("app_setting_purchase_managed")
-                  
-                    PostHogSDK.shared.capture(PostHogEvents.more_manage_subscription.rawValue)
-
-                    
-                    showManageSubscriptionSheet = true
-                }) {
-                    Label("Manage Subscription", systemImage: "info.circle")
-                        .labelStyle(.titleOnly)
-                        .foregroundColor(Color(UIColor.label))
-                }.manageSubscriptionsSheet(isPresented: $showManageSubscriptionSheet)
+                                        
+                                        NavigationLink(destination: PlanOptionView()) {
+                                            Label("Manage Subscription", systemImage: "info.circle")
+                                                .labelStyle(.titleOnly)
+                                                .foregroundColor(Color(UIColor.label))
+                                        }
+                                        
+                                        
+                                        
+              
                                     }
                                     if paywallViewModel.viewState.isUserSubscribed != true {
                 
