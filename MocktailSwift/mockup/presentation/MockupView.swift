@@ -92,16 +92,16 @@ struct MockupView: View {
             
             switch selectedTab {
             case .iphone:
-                TemplateView(selectedMockupType: selectedMockupType, mockupArray: MockupArray.iPhoneMockups, selectedMockup: MockupArray.iPhoneMockups[15], selectedImages: $selectedImages, selectedFinalImageIndex: $selectedFinalImageIndex, finalImages: $finalImages)
+                TemplateView(selectedMockupType: .iphone, mockupArray: MockupArray.iPhoneMockups, selectedMockup: MockupArray.iPhoneMockups[15], selectedImages: $selectedImages, selectedFinalImageIndex: $selectedFinalImageIndex, finalImages: $finalImages)
                 
             case .ipad:
-                TemplateView(selectedMockupType: selectedMockupType, mockupArray: MockupArray.iPadMockups, selectedMockup: MockupArray.iPadMockups[0], selectedImages: $selectedImages, selectedFinalImageIndex: $selectedFinalImageIndex, finalImages: $finalImages)
+                TemplateView(selectedMockupType: .ipad, mockupArray: MockupArray.iPadMockups, selectedMockup: MockupArray.iPadMockups[0], selectedImages: $selectedImages, selectedFinalImageIndex: $selectedFinalImageIndex, finalImages: $finalImages)
                 
             case .macbook:
-                TemplateView(selectedMockupType: selectedMockupType,mockupArray: MockupArray.macMockups, selectedMockup: MockupArray.macMockups[2], selectedImages: $selectedImages, selectedFinalImageIndex: $selectedFinalImageIndex, finalImages: $finalImages)
+                TemplateView(selectedMockupType: .mac,mockupArray: MockupArray.macMockups, selectedMockup: MockupArray.macMockups[2], selectedImages: $selectedImages, selectedFinalImageIndex: $selectedFinalImageIndex, finalImages: $finalImages)
                 
             case .applewatch:
-                TemplateView(selectedMockupType: selectedMockupType,mockupArray: MockupArray.appleWatchMockups, selectedMockup: MockupArray.appleWatchMockups[0], selectedImages: $selectedImages, selectedFinalImageIndex: $selectedFinalImageIndex, finalImages: $finalImages)
+                TemplateView(selectedMockupType: .appleWatch,mockupArray: MockupArray.appleWatchMockups, selectedMockup: MockupArray.appleWatchMockups[0], selectedImages: $selectedImages, selectedFinalImageIndex: $selectedFinalImageIndex, finalImages: $finalImages)
                 
             }
             
@@ -255,6 +255,7 @@ struct TemplateView: View {
                     }
                     
                 } else {
+                    Spacer()
                     
                     HStack {
                         Spacer()
@@ -264,12 +265,14 @@ struct TemplateView: View {
                                 
                                 
                                 HStack {
+                                    let width = UIScreen.main.bounds.width * 0.25
+                                    let height = (selectedMockupType.rawValue == MockupType.mac.rawValue ? (UIScreen.main.bounds.width * 0.25 * 0.7) : (UIScreen.main.bounds.height * 0.2))
                                     ForEach(finalImages.indices, id: \.self) { index in
                                         Image(uiImage: finalImages[index])
                                             .resizable()
                                             .scaledToFit()
                                             .shadow(color: .blue, radius: index == selectedFinalImageIndex ? 5 : 0)
-                                            .frame(width: UIScreen.main.bounds.width * 0.25, height: UIScreen.main.bounds.height * 0.2)
+                                            .frame(width: width , height: height )
                                             .onTapGesture {
                                                 selectedFinalImageIndex = index
                                             }
@@ -285,7 +288,7 @@ struct TemplateView: View {
                     }
                     
                     
-                    
+                    Spacer()
                     
                     PhotosPicker(selection: $photosPickerItems, maxSelectionCount:MAX_SELECTION_COUNT, matching: .images) {
                         if selectedFinalImageIndex < finalImages.count {
@@ -295,7 +298,10 @@ struct TemplateView: View {
                         }
                     }
                     
+                    Spacer()
+                    
                     HStack {
+                        Spacer()
                         
                         if(!isProcessing && finalImages.count != 0) {
                             
@@ -332,14 +338,16 @@ struct TemplateView: View {
                                         .font(.footnote)
                                         .bold()
                                 }
+                                .foregroundStyle(.white)
                                 .padding(4)
                                 .padding(.horizontal, 2)
-                                .background(RoundedRectangle(cornerRadius: 6).fill(.black.opacity(0.1)))
+                                .background(RoundedRectangle(cornerRadius: 6).fill(.black.opacity(0.8)))
                                 
                             }
-                            .padding(.trailing)
+                            
                         }
                         
+                        Spacer()
                         
                         PhotosPicker(selection: $replacePhotoPickerItem) {
                             HStack(spacing: 2) {
@@ -357,12 +365,42 @@ struct TemplateView: View {
                             }
                             
                         }
-                        .padding(.leading)
+                        
+                        Spacer()
+                        
+                        if (paywallViewModel.viewState.isUserSubscribed != true) {
+                            
+                            Button {
+                                PostHogSDK.shared.capture(PostHogEvents.mockup_remove_watermark.rawValue)
+                                
+                                routingViewModel.send(action: .updateUserFlow(userflow: .paywallWithLoading))
+                            } label: {
+                                HStack(spacing: 2) {
+                                    Image(systemName: "eraser.line.dashed")
+                                        .font(.footnote)
+                                    Text("Remove Watermark")
+                                        .font(.footnote)
+                                }
+                                .foregroundStyle(.white)
+                                .padding(4)
+                                .padding(.horizontal, 2)
+                                
+                                .background {
+                                    RoundedRectangle(cornerRadius: 6).fill(.black.opacity(0.8))
+                                }
+                                
+                            }
+                            
+                            Spacer()
+
+                        }
+
+                        
                         
                         
                     }
                     
-                    
+                    Spacer()
                     
                 }
                 

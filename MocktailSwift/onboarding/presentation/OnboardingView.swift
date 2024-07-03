@@ -36,32 +36,35 @@ struct OnboardingView: View {
                             selectedPage: $selectedPage,
                             image: "onboarding1",
                             title: "Mocktail's Stunning\nMockup Varieties",
-                            subtitle: "Elevate your presentations with Mocktail's intuitive features for crafting professional iPhone mockups in minutes"
+                            subtitle: "Design professional iPhone, iPad, Apple Watch and Mac mockups in seconds"
                         ).tag(0)
                         OnboardingSinglePage(
                             myIndex: 1,
                             selectedPage: $selectedPage,
                             image: "onboarding2",
                             title: "Craft Impressive\niPhone Mockups",
-                            subtitle: "Whether you're a designer or developer, Mocktail is your go-to app for crafting impressive iPhone mockups"
+                            subtitle: "Whether you're a designer or developer, Mocktail is your go-to app for impressive mockups"
                         ).tag(1)
                         OnboardingSinglePage(
                             myIndex: 2,
                             selectedPage: $selectedPage,
                             image: "onboarding3",
                             title: "Fast & Easy\nMockups",
-                            subtitle: "Welcome to Mocktail, your ultimate tool for creating stunning iPhone mockups effortlessly",
+                            subtitle: "Welcome to Mocktail, your ultimate tool for creating stunning mockups effortlessly",
                             isLastPage: true
                         ).tag(2)
 
                     VStack{
                         PaywallRouter(viewModel: paywallViewModel, routingViewModel: routingViewModel, showLoadingIndicator: true)
+                            
                            
                        
                     }
                     
+                    
                     .tag(3)
                 }
+                    
                     .tabViewStyle(.page)
                     .indexViewStyle(.page(backgroundDisplayMode: .never))
                     .frame(

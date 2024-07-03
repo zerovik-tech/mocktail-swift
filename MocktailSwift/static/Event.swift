@@ -28,6 +28,7 @@ enum PostHogEvents: String {
         case mockup_image_uploaded = "mockup_image_uploaded"
         case mockup_image_saved = "mockup_image_saved"
         case mockup_image_replace = "mockup_image_replace"
+        case mockup_remove_watermark = "mockup_remove_watermark"
         case mockup_device_ = "mockup_device_ "
         case mockup_image_fit = "mockup_image_fit"
         case mockup_image_fill = "mockup_image_fill"

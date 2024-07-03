@@ -68,52 +68,11 @@ struct TwoPaywallView: View {
                                 
                         }
                         
-                        VStack {
-                            Image("paywallBackground")
-                                .resizable()
-                                .scaledToFit()
-                                .edgesIgnoringSafeArea(.all)
-                            Spacer()
-                        }
+//                        VStack {
+//
+//                            Spacer()
+//                        }
                         
-                        VStack {
-                            HStack {
-                                Image(systemName: "multiply")
-                                    .bold()
-                                    .font(.title2)
-                                    .foregroundStyle(.white)
-                                    .padding(.trailing)
-                                    .onTapGesture {
-                                        
-                        
-                                        PostHogSDK.shared.capture(PostHogEvents.paywall_cross.rawValue)
-                                        
-//                                        AppsFlyerLib.shared().logEvent(Event.af_paywall_cross.rawValue, withValues: nil)
-                                        
-                                        
-                                        routingViewModel.send(action: .updateUserFlow(userflow: .home))
-                                    }
-                                    .disabled(viewModel.viewState.isProcessingPurchase)
-                                
-                                Spacer()
-                                
-                                Text("Restore")
-                                    .font(.subheadline)
-                                    .bold()
-                                    .foregroundStyle(.white)
-                                    .padding(.leading)
-                                    .onTapGesture {
-                                    
-                                        PostHogSDK.shared.capture(PostHogEvents.paywall_restore.rawValue)
-                                        
-//                                        AppsFlyerLib.shared().logEvent(Event.af_paywall_restore.rawValue, withValues: nil)
-                                        viewModel.send(action: .restorePressed)
-                                    }
-                                    .disabled(viewModel.viewState.isProcessingPurchase)
-                            }
-                            Spacer()
-                        }
-                        .frame(width: screenWidth * 0.9, height: screenHeight * 0.9)
                         
                        
                         
@@ -155,10 +114,20 @@ struct TwoPaywallView: View {
                             }
                             .padding(.bottom)
                         }
-                        .padding(.horizontal)
+                        .padding()
 
                         VStack(spacing:verticalSpacing) {
-                            Spacer()
+                            HStack {
+                              
+                                Image("paywallBackground")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: UIScreen.main.bounds.width , height: UIScreen.main.bounds.height * 0.6)
+//                                    .edgesIgnoringSafeArea(.top)
+                           
+                            }
+//                            .padding(.bottom)
+                            
                             
                             PlanCardTwoPaywall(viewModel: viewModel, plan: monthlyPlan, title: monthlyPlan.isTrialEligible ? "\(monthlyTrialPeriod)-days Free Trial" : "Monthly Plan", subtitle: "/month, cancel anytime", trialOffer: "")
                             
@@ -252,8 +221,50 @@ struct TwoPaywallView: View {
                                 //
                             }
                             
+                            Spacer()
                             
                         }
+                        .edgesIgnoringSafeArea(.top)
+                        
+                        VStack {
+                            HStack {
+                                Image(systemName: "multiply")
+                                    .bold()
+                                    .font(.title2)
+                                    .foregroundStyle(.white)
+                                    .padding(.trailing)
+                                    .onTapGesture {
+                                        
+                        
+                                        PostHogSDK.shared.capture(PostHogEvents.paywall_cross.rawValue)
+                                        
+//                                        AppsFlyerLib.shared().logEvent(Event.af_paywall_cross.rawValue, withValues: nil)
+                                        
+                                        
+                                        routingViewModel.send(action: .updateUserFlow(userflow: .home))
+                                    }
+                                    .disabled(viewModel.viewState.isProcessingPurchase)
+                                
+                                Spacer()
+                                
+                                Text("Restore")
+                                    .font(.subheadline)
+                                    .bold()
+                                    .foregroundStyle(.white)
+                                    .padding(.leading)
+                                    .onTapGesture {
+                                    
+                                        PostHogSDK.shared.capture(PostHogEvents.paywall_restore.rawValue)
+                                        
+//                                        AppsFlyerLib.shared().logEvent(Event.af_paywall_restore.rawValue, withValues: nil)
+                                        viewModel.send(action: .restorePressed)
+                                    }
+                                    .disabled(viewModel.viewState.isProcessingPurchase)
+                            }
+                            Spacer()
+                        }
+                        .frame(width: screenWidth * 0.95, height: screenHeight * 0.9)
+
                         
                     }
                     .onAppear {

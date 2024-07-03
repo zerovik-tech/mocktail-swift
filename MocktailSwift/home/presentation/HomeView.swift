@@ -35,9 +35,9 @@ struct HomeView: View {
                 Group {
                     MockupView(paywallViewModel: paywallViewModel, routingViewModel: routingViewModel, moreViewModel: moreViewModel)
                         .tabItem {
-                            Image(systemName: "apps.iphone")
+                            Image(systemName: "house")
                                 .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                            Text("Mockups")
+                            Text("Home")
                         }
                         .tag("mockup")
                     

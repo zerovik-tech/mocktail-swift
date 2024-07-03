@@ -12,7 +12,7 @@ import PostHog
 
 
 @main
-struct Hashtag_Generator_ProApp: App {
+struct MocktailApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     let persistenceController = PersistenceController.shared
