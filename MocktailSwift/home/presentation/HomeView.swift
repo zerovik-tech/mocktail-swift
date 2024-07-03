@@ -6,25 +6,42 @@
 //
 
 import SwiftUI
+import PostHog
 
 struct HomeView: View {
+    
+    @StateObject private var paywallViewModel: PaywallViewModel
+    
+    @StateObject private var routingViewModel: RoutingViewModel
+    
+    @StateObject private var moreViewModel : MoreViewModel
+    
+    
     @State private var selectedTab = "mockup"
 //    init() {
 //        UITabBar.appearance().backgroundColor = UIColor.black.withAlphaComponent(0.1)
 //        }
+    
+    init(paywallViewModel: PaywallViewModel, routingViewModel: RoutingViewModel,moreViewModel : MoreViewModel) {
+        self._paywallViewModel = StateObject(wrappedValue: paywallViewModel)
+        self._routingViewModel = StateObject(wrappedValue: routingViewModel)
+        self._moreViewModel = StateObject(wrappedValue: moreViewModel)
+    }
+    
+    
     var body: some View {
         VStack {
             TabView(selection: $selectedTab) {
                 Group {
-                    MockupView()
+                    MockupView(paywallViewModel: paywallViewModel, routingViewModel: routingViewModel, moreViewModel: moreViewModel)
                         .tabItem {
-                            Image(systemName: "apps.iphone")
+                            Image(systemName: "house")
                                 .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                            Text("Mockups")
+                            Text("Home")
                         }
                         .tag("mockup")
                     
-                    Text("this is paywall view")
+                    MoreView(viewModel : moreViewModel,routingViewModel: routingViewModel, paywallViewModel: paywallViewModel)
                         .tabItem {
                             Image(systemName: "gear")
                             Text("More")
@@ -40,9 +57,14 @@ struct HomeView: View {
             
                        
         }
+        .onAppear {
+            moreViewModel.send(action: .getMore)
+            let structName = String(describing: type(of: self))
+            PostHogSDK.shared.capture(structName)
+        }
     }
 }
 
-#Preview {
-    HomeView()
-}
+//#Preview {
+//    HomeView()
+//}

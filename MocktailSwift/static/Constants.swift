@@ -1,13 +1,45 @@
 //
-//  Const.swift
-//  MocktailSwift
+//  Constants.swift
+//  Keys AI AI Keyboard
 //
-//  Created by Sachin Pandey on 20/06/24.
+//  Created by Sachin Pandey on 22/02/24.
 //
 
 import Foundation
+import RevenueCat
 
-let APP_ID = "6483859706"
+
+let APP_ID = "6504801633"
+
+let RC_API_KEY = "appl_pzkKiUeolRvKCsZFUwTDXVDCcYz"
+//let APPS_FLYER_DEVKEY = "NbV4N3m54YbZrX6Gp7xypY"
+let PRIVACY_POLICY = "https://zerovik.com/mocktail-privacy-policy/?u="+Purchases.shared.appUserID
+let TERMS_OF_USE = "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"
+let ABOUT = "https://zerovik.com/"
+
+let CUSTOMER_SUPPORT_URL = "https://tally.so/r/31KLyp"
+let FEEDBACK_FORM_URL = "https://tally.so/r/mJRQxo"
+let FEATURE_REQUEST_URL = "https://tally.so/r/wMOWqM"
+
+let APP_VERSION = "1.1.1"
+let AMPLITUDE_API_KEY = ""
+
+let POSTHOG_API_KEY = "phc_vf8rKT0RLU4z9Rci8j7nOvPaPuFFEp4PkwxkA7NDtsB"
+let POSTHOG_HOST = "https://us.i.posthog.com"
+
+
+let lastRunDate = "lastRunDate"
+
+let MAX_SELECTION_COUNT = 15
+
+#if DEBUG
+let DAILY_FREE_LIMIT = 5
+#else
+let DAILY_FREE_LIMIT = 5
+#endif
+let DEFAULT_SPEED = 0.4
+var appShareText = "Live Translator:\n https://apps.apple.com/us/app/id\(APP_ID)"
+
 
 enum MockupList: String {
     case AppleWatchSeries6 = "Apple Watch Series 6"
@@ -20,7 +52,7 @@ enum MockupList: String {
     case AppleWatchUltra2 = "Apple Watch Ultra2"
     case iMac24 = "iMac 24"
     case iMac27 = "iMac 27"
-    case iPad = "iPad"
+    case iPad = "iPad 9th Gen"
     case iPadAir11 = "iPad Air 11"
     case iPadAir13 = "iPad Air 13"
     case iPadMini = "iPad Mini"
@@ -52,6 +84,7 @@ enum MockupList: String {
     case MacBookPro16_4thGen = "MacBook Pro 16 - 4th Gen"
     case MacBookPro16_5thGen = "MacBook Pro 16 - 5th Gen"
 }
+
 
 struct MockupArray {
     
@@ -89,8 +122,8 @@ struct MockupArray {
     ]
     
     static let macMockups: [Mockup] = [
-        Mockup(mockup: MockupList.iMac24, baseImageSize: CGSize(width: 4482, height: 2522), radius: 0),
-        Mockup(mockup: MockupList.iMac27, baseImageSize: CGSize(width: 5120, height: 2881), radius: 0),
+//        Mockup(mockup: MockupList.iMac24, baseImageSize: CGSize(width: 4482, height: 2522), radius: 0),
+//        Mockup(mockup: MockupList.iMac27, baseImageSize: CGSize(width: 5120, height: 2881), radius: 0),
         Mockup(mockup: MockupList.MacBookAir13_4th_Gen, baseImageSize: CGSize(width: 2560, height: 1664), radius: 0),
         Mockup(mockup: MockupList.MacBookPro15_4thGen, baseImageSize: CGSize(width: 2579, height: 1613), radius: 0),
         Mockup(mockup: MockupList.MacBookPro16_4thGen, baseImageSize: CGSize(width: 2965, height: 1856), radius: 0),
@@ -110,3 +143,8 @@ struct MockupArray {
     ]
     
 }
+
+
+
+
+
