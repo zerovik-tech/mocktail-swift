@@ -481,7 +481,7 @@ struct TemplateView: View {
                             }
                             
                             Button("High Quality") {
-                                saveImages(finalImagesArray: finalImages, quality: .low,via:.download)
+                                saveImages(finalImagesArray: finalImages, quality: .high,via:.download)
                             }
                             
                             
@@ -697,20 +697,27 @@ struct TemplateView: View {
     }
     
     func processImages() {
-        isProcessing = true
-        DispatchQueue.global(qos: .userInitiated).async {
-            var imageArray: [UIImage] = []
-            for selectedImage in selectedImages {
-                if let resizedImage = ImageHelper.resizeImage(image: selectedImage, targetSize: selectedMockup.baseImageSize, contentMode: contentMode, cornerRadius: selectedMockup.radius),
-                   let overlayImage = UIImage(named: selectedMockup.mockup.rawValue) {
-                    if let finalImage = ImageHelper.overlayImage(baseImage: resizedImage, overlayImage: overlayImage, mockup: selectedMockup, addWatermark: paywallViewModel.viewState.isUserSubscribed ?? false ? false : true) {
-                        imageArray.append(finalImage)
+        autoreleasepool {
+            
+            
+            isProcessing = true
+            DispatchQueue.global(qos: .userInitiated).async {
+                var imageArray: [UIImage] = []
+                for selectedImage in selectedImages {
+                    if let resizedImage = ImageHelper.resizeImage(image: selectedImage, targetSize: selectedMockup.baseImageSize, contentMode: contentMode, cornerRadius: selectedMockup.radius),
+                       let overlayImage = UIImage(named: selectedMockup.mockup.rawValue) {
+                        if let finalImage = ImageHelper.overlayImage(baseImage: resizedImage, overlayImage: overlayImage, mockup: selectedMockup, addWatermark: paywallViewModel.viewState.isUserSubscribed ?? false ? false : true) {
+                            if let thumbnailImage = ImageHelper.resizeImage(image: finalImage, targetSize: finalImage.size, contentMode: .fit, cornerRadius: 0){
+                                imageArray.append(thumbnailImage)
+                                
+                            }
+                        }
                     }
                 }
-            }
-            DispatchQueue.main.async {
-                finalImages = imageArray
-                isProcessing = false
+                DispatchQueue.main.async {
+                    finalImages = imageArray
+                    isProcessing = false
+                }
             }
         }
     }
