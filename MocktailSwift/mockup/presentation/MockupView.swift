@@ -254,6 +254,56 @@ struct TemplateView: View {
                         
                     }
                     
+                    HStack {
+                        Spacer()
+                        
+                        PhotosPicker(selection: $replacePhotoPickerItem) {
+                            HStack(spacing: 2) {
+                                Image(systemName: "repeat")
+                                    .font(.footnote)
+                                Text("Replace")
+                                    .font(.footnote)
+                            }
+                            .foregroundStyle(.white)
+                            .padding(4)
+                            .padding(.horizontal, 2)
+                            
+                            .background {
+                                RoundedRectangle(cornerRadius: 6).fill(.black.opacity(0.8))
+                            }
+                            
+                        }
+                        
+                        Spacer()
+                        
+                        if (paywallViewModel.viewState.isUserSubscribed != true) {
+                            
+                            Button {
+                                PostHogSDK.shared.capture(PostHogEvents.mockup_remove_watermark.rawValue)
+                                
+                                routingViewModel.send(action: .updateUserFlow(userflow: .paywallWithLoading))
+                            } label: {
+                                HStack(spacing: 2) {
+                                    Image(systemName: "eraser.line.dashed")
+                                        .font(.footnote)
+                                    Text("Remove Watermark")
+                                        .font(.footnote)
+                                }
+                                .foregroundStyle(.white)
+                                .padding(4)
+                                .padding(.horizontal, 2)
+                                
+                                .background {
+                                    RoundedRectangle(cornerRadius: 6).fill(.black.opacity(0.8))
+                                }
+                                
+                            }
+                            
+                            Spacer()
+
+                        }
+                    }
+                    
                 } else {
                     Spacer()
                     
