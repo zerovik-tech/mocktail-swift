@@ -15,7 +15,7 @@ struct TwoPaywallView: View {
     @StateObject private var viewModel: PaywallViewModel
     @StateObject private var routingViewModel: RoutingViewModel
     
-    let verticalSpacing = UIScreen.main.bounds.height / 64
+    let verticalSpacing = UIScreen.main.bounds.height / 94
     var showLoadingIndicator : Bool = false
     
     init(viewModel: PaywallViewModel, routingViewModel: RoutingViewModel, showLoadingIndicator: Bool) {
@@ -63,15 +63,60 @@ struct TwoPaywallView: View {
                             Spacer()
                             
                            Rectangle()
-                                .edgesIgnoringSafeArea(.all)
                                 .foregroundStyle(appColor1)
+                                .edgesIgnoringSafeArea(.all)
                                 
                         }
                         
-//                        VStack {
-//
-//                            Spacer()
-//                        }
+                        VStack {
+                            Image("paywallBackground")
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: screenWidth * 1.01, height: screenWidth * 1.22 )
+                                .edgesIgnoringSafeArea(.all)
+                               
+                            Spacer()
+                        }
+                        
+                        VStack {
+                            HStack {
+                                Image(systemName: "multiply")
+                                    .bold()
+                                    .font(.title2)
+                                    .foregroundStyle(.white)
+                                    .padding(.trailing)
+                                    .onTapGesture {
+                                        
+                        
+                                        PostHogSDK.shared.capture(PostHogEvents.paywall_cross.rawValue)
+                                        
+//                                        AppsFlyerLib.shared().logEvent(Event.af_paywall_cross.rawValue, withValues: nil)
+                                        
+                                        
+                                        routingViewModel.send(action: .updateUserFlow(userflow: .home))
+                                    }
+                                    .disabled(viewModel.viewState.isProcessingPurchase)
+                                
+                                Spacer()
+                                
+                                Text("Restore")
+                                    .font(.subheadline)
+                                    .bold()
+                                    .foregroundStyle(.white)
+                                    .padding(.leading)
+                                    .onTapGesture {
+                                    
+                                        PostHogSDK.shared.capture(PostHogEvents.paywall_restore.rawValue)
+                                        
+//                                        AppsFlyerLib.shared().logEvent(Event.af_paywall_restore.rawValue, withValues: nil)
+                                        viewModel.send(action: .restorePressed)
+                                    }
+                                    .disabled(viewModel.viewState.isProcessingPurchase)
+                            }
+                            Spacer()
+                        }
+                        
+                        .frame(width: screenWidth * 0.9, height: screenHeight * 0.9)
                         
                         
                        
@@ -114,20 +159,102 @@ struct TwoPaywallView: View {
                             }
                             .padding(.bottom)
                         }
-                        .padding()
+                        .padding(.horizontal)
 
                         VStack(spacing:verticalSpacing) {
-                            HStack {
-                              
-                                Image("paywallBackground")
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: UIScreen.main.bounds.width , height: UIScreen.main.bounds.height * 0.6)
-//                                    .edgesIgnoringSafeArea(.top)
-                           
-                            }
-//                            .padding(.bottom)
+                            Spacer()
                             
+                            Text("Mocktail Unlimited\nAccess")
+                                .font(.largeTitle)
+                                .foregroundStyle(.white)
+                                .bold()
+                                .multilineTextAlignment(.center)
+                                .allowsTightening(true)
+                                .minimumScaleFactor(0.55)
+                                
+                                
+                            //                                .padding(.bottom)
+                            
+                            
+                            
+                            VStack(alignment: .leading, spacing: verticalSpacing) {
+                                
+                                
+                                HStack {
+                                    Image(systemName: "iphone")
+                                        .font(.title2)
+                                        .foregroundStyle(.white)
+                                        .padding(6)
+    
+                                    
+                                    Text("Unlimited mockup generation")
+                                        .foregroundStyle(.white)
+                                        .bold()
+                                }
+                                HStack {
+                                    
+                                    Image(systemName: "plus.square.dashed")
+                                        .font(.title2)
+                                        .foregroundStyle(.white)
+                                        .padding(6)
+                                        
+                                    
+                                    
+                                    Text("High quality mockups")
+                                        .foregroundStyle(.white)
+                                        .bold()
+                                }
+                                
+                                HStack {
+                                    Image(systemName: "drop.triangle")
+                                        .font(.title3)
+                                        .foregroundStyle(.white)
+                                        .padding(6)
+
+                                    
+                                    
+                                    Text("Remove watermarks")
+                                        .foregroundStyle(.white)
+                                        .bold()
+                                }
+                                HStack {
+                                    
+                                    Image(systemName: "lightbulb.max")
+                                        .font(.title3)
+                                        .foregroundStyle(.white)
+                                        .padding(6)
+
+                                    
+                                    Text("Unlock all features")
+                                        .foregroundStyle(.white)
+                                        .bold()
+                                }
+                                
+                                
+                            }
+//                            .minimumScaleFactor(0.9)
+                            
+                            VStack {
+                                Text("⭐️⭐️⭐️⭐️⭐️")
+                                    .padding(2)
+                                    
+                                Text("\"It helped me a lot while creating mockups. It is easy to use, and you can generate multiple mockups\"")
+                                    .font(.caption2)
+                                    .bold()
+                                    .foregroundStyle(.white)
+                                    .multilineTextAlignment(.center)
+                                    .lineLimit(nil)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    .padding(.horizontal)
+                                
+                                Text("-Ashutosh")
+                                    .font(.caption)
+                                    .bold()
+                                    .foregroundStyle(.white)
+                                    
+                            }
+                            
+                            Spacer()
                             
                             PlanCardTwoPaywall(viewModel: viewModel, plan: monthlyPlan, title: monthlyPlan.isTrialEligible ? "\(monthlyTrialPeriod)-days Free Trial" : "Monthly Plan", subtitle: "/month, cancel anytime", trialOffer: "")
                             
@@ -221,50 +348,8 @@ struct TwoPaywallView: View {
                                 //
                             }
                             
-                            Spacer()
-                            
+                          Spacer()
                         }
-                        .edgesIgnoringSafeArea(.top)
-                        
-                        VStack {
-                            HStack {
-                                Image(systemName: "multiply")
-                                    .bold()
-                                    .font(.title2)
-                                    .foregroundStyle(.white)
-                                    .padding(.trailing)
-                                    .onTapGesture {
-                                        
-                        
-                                        PostHogSDK.shared.capture(PostHogEvents.paywall_cross.rawValue)
-                                        
-//                                        AppsFlyerLib.shared().logEvent(Event.af_paywall_cross.rawValue, withValues: nil)
-                                        
-                                        
-                                        routingViewModel.send(action: .updateUserFlow(userflow: .home))
-                                    }
-                                    .disabled(viewModel.viewState.isProcessingPurchase)
-                                
-                                Spacer()
-                                
-                                Text("Restore")
-                                    .font(.subheadline)
-                                    .bold()
-                                    .foregroundStyle(.white)
-                                    .padding(.leading)
-                                    .onTapGesture {
-                                    
-                                        PostHogSDK.shared.capture(PostHogEvents.paywall_restore.rawValue)
-                                        
-//                                        AppsFlyerLib.shared().logEvent(Event.af_paywall_restore.rawValue, withValues: nil)
-                                        viewModel.send(action: .restorePressed)
-                                    }
-                                    .disabled(viewModel.viewState.isProcessingPurchase)
-                            }
-                            Spacer()
-                        }
-                        .frame(width: screenWidth * 0.95, height: screenHeight * 0.9)
-
                         
                     }
                     .onAppear {

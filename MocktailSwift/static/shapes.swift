@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-let appColor1: Color = Color(red: 0.87, green: 0.96, blue: 1.00, opacity: 1)
+let appColor1: Color = Color(red: 0.87, green: 0.96, blue: 1.00, opacity: 0.5)
 let appColor2: Color = Color(red: 0.00, green: 0.48, blue: 1.00)
 //let appColor3: Color = Color(red: 0.27, green: 0.59, blue: 0.32)
 let paywallButtonColor: Color = Color(red: 0.87, green: 0.96, blue: 1.00)
