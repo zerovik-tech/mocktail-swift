@@ -51,10 +51,10 @@ struct RoutingView: View {
                 }
                 
             case .home:
-                NavigationView {
+                
                     HomeView(paywallViewModel: paywallViewModel, routingViewModel: viewModel, moreViewModel: moreViewModel)
                         .preferredColorScheme(.light)
-                }
+                
             default:
                 SplashView()
                     .onAppear {

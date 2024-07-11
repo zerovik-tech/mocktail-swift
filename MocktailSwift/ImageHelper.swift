@@ -273,5 +273,130 @@ class ImageHelper {
 
     }
     
+    
+//    static func addBackground(image: UIImage, color backgroundColor: UIColor, aspectRatio: CGFloat) -> UIImage? {
+//           autoreleasepool {
+//               
+//               
+//               // Define the desired aspect ratio
+//               let aspectRatio = aspectRatio
+//               
+//               // Calculate the new size based on the aspect ratio
+//               var imageWidth: CGFloat = .zero
+//               var newHeight: CGFloat = .zero
+//               
+//               if image.size.width > image.size.height {
+//                   imageWidth = image.size.width * 1.4
+//                   newHeight = imageWidth / aspectRatio
+//               } else {
+//                   newHeight = image.size.height * 1.4
+//                   imageWidth = newHeight * aspectRatio
+//               }
+//               
+//               print("imageWidth: \(imageWidth), newHeight: \(newHeight)")
+//               // Create a CGRect for the new background with the desired aspect ratio
+//               let backgroundRect = CGRect(x: 0, y: 0, width: imageWidth, height: newHeight)
+//               
+//               // Create a renderer with the background size
+//               let renderer = UIGraphicsImageRenderer(size: backgroundRect.size)
+//               
+//               // Render the image with the background
+//               let newImage = renderer.image { context in
+//                   // Set the background color
+//                   backgroundColor.setFill()
+//                   context.fill(backgroundRect)
+//                   
+//                   // Calculate the position to draw the image to center it on the background
+//                   let imageRect = CGRect(
+//                       x: (backgroundRect.size.width - image.size.width) / 2.0,
+//                       y: (backgroundRect.size.height - image.size.height) / 2.0,
+//                       width: image.size.width,
+//                       height: image.size.height
+//                   )
+//                   
+//                   // Draw the image on top of the background
+//                   image.draw(in: imageRect)
+//               }
+//               
+//               return newImage
+//           }
+//          }
+    
+//  static  func addBackground(to image: UIImage, backgroundColor: UIColor, backgroundSize: CGSize) -> UIImage? {
+//      autoreleasepool {
+//          
+//          
+//          let renderer = UIGraphicsImageRenderer(size: backgroundSize)
+//          let newImage = renderer.image { context in
+//              // Fill the background with the specified color
+//              backgroundColor.setFill()
+//              context.fill(CGRect(origin: .zero, size: backgroundSize))
+//              
+//              // Calculate the aspect ratio
+//              let aspectWidth = backgroundSize.width / image.size.width
+//              let aspectHeight = backgroundSize.height / image.size.height
+//              let aspectRatio = min(aspectWidth, aspectHeight)
+//              
+//              // Calculate the size to fit the image within the background
+//              let scaledImageSize = CGSize(width: image.size.width * aspectRatio, height: image.size.height * aspectRatio)
+//              
+//              // Calculate the position to center the image
+//              let x = (backgroundSize.width - scaledImageSize.width) / 2
+//              let y = (backgroundSize.height - scaledImageSize.height) / 2
+//              let imageRect = CGRect(x: x, y: y, width: scaledImageSize.width, height: scaledImageSize.height)
+//              
+//              // Draw the original image on top
+//              image.draw(in: imageRect)
+//          }
+//          return newImage
+//      }
+//    }
+       
+    static func addBackground(to image: UIImage, backgroundColor: UIColor, gradientColors: [UIColor], backgroundType: MockupBackground, backgroundSize: CGSize, margin: CGFloat) -> UIImage? {
+        autoreleasepool {
+            
+            
+            let renderer = UIGraphicsImageRenderer(size: backgroundSize)
+            let newImage = renderer.image { context in
+                // Fill the background with the specified color
+                if backgroundType == .linear {
+                    backgroundColor.setFill()
+                    context.fill(CGRect(origin: .zero, size: backgroundSize))
+                } else {
+                    let cgColors = gradientColors.map { $0.cgColor }
+                            let colorSpace = CGColorSpaceCreateDeviceRGB()
+                            let gradient = CGGradient(colorsSpace: colorSpace, colors: cgColors as CFArray, locations: nil)
+                            let startPoint = CGPoint(x: 0, y: 0)
+                            let endPoint = CGPoint(x: backgroundSize.width, y: backgroundSize.height)
+                            context.cgContext.drawLinearGradient(gradient!, start: startPoint, end: endPoint, options: [])
+                }
+                
+                
+                // Calculate the maximum size for the image within the background considering the margin
+                let maxImageSize = CGSize(width: backgroundSize.width - (2 * margin), height: backgroundSize.height - (2 * margin))
+                
+                // Calculate the aspect ratio
+                let aspectWidth = maxImageSize.width / image.size.width
+                let aspectHeight = maxImageSize.height / image.size.height
+                let aspectRatio = min(aspectWidth, aspectHeight)
+                
+                // Calculate the size to fit the image within the background with the margin
+                let scaledImageSize = CGSize(width: image.size.width * aspectRatio, height: image.size.height * aspectRatio)
+                
+                // Calculate the position to center the image with the margin
+                let x = (backgroundSize.width - scaledImageSize.width) / 2
+                let y = (backgroundSize.height - scaledImageSize.height) / 2
+                let imageRect = CGRect(x: x, y: y, width: scaledImageSize.width, height: scaledImageSize.height)
+                
+                // Draw the original image on top
+                image.draw(in: imageRect)
+            }
+            return newImage
+        }
+    }
 
-}
+   }
+
+    
+
+

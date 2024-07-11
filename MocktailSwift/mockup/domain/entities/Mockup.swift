@@ -31,3 +31,15 @@ enum DownloadMessage: String {
     case saved = "Mockup Saved Successfully"
     case error = "Error Saving Mockup"
 }
+
+struct PostFormatSize {
+    static let instagramSqare: CGSize = CGSize(width: 1080, height: 1080)
+    static let instagramStory: CGSize = CGSize(width: 1080, height: 1920)
+    static let xLandscape: CGSize = CGSize(width: 1600, height: 900)
+    static let xPotrait: CGSize = CGSize(width: 1080, height: 1350)
+    static let xSquare: CGSize = CGSize(width: 1080, height: 1080)
+    static let facebook: CGSize = CGSize(width: 1200, height: 630)
+   
+}
+
+
