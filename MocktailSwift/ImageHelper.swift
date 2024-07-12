@@ -24,8 +24,7 @@ class ImageHelper {
             
             let widthRatio  = targetSize.width  / size.width
             let heightRatio = targetSize.height / size.height
-            print("widthRatio: \(widthRatio)")
-            print("heightRatio: \(heightRatio)")
+           
             
             
             var newSize: CGSize
@@ -75,8 +74,7 @@ class ImageHelper {
             if let newImage = newImage {
                 let newWidthRatio = targetSize.width / newImage.size.width
                 let newHeightRatio = targetSize.height / newImage.size.height
-                print("newWidthRatio: \(newWidthRatio)")
-                print("newHeightRatio: \(newHeightRatio)")
+              
                 if cornerRadius != 0 {
                     
                     
@@ -352,7 +350,7 @@ class ImageHelper {
 //      }
 //    }
        
-    static func addBackground(to image: UIImage, backgroundColor: UIColor, gradientColors: [UIColor], backgroundType: MockupBackground, backgroundSize: CGSize, margin: CGFloat) -> UIImage? {
+    static func addBackground(to image: UIImage, backgroundColor: UIColor, gradientColors: [UIColor], backgroundType: MockupBackground, backgroundSize: CGSize, margin: CGFloat, offset: CGSize, rotation: CGFloat) -> UIImage? {
         autoreleasepool {
             
             
@@ -384,15 +382,27 @@ class ImageHelper {
                 let scaledImageSize = CGSize(width: image.size.width * aspectRatio, height: image.size.height * aspectRatio)
                 
                 // Calculate the position to center the image with the margin
-                let x = (backgroundSize.width - scaledImageSize.width) / 2
-                let y = (backgroundSize.height - scaledImageSize.height) / 2
+                let x = ((backgroundSize.width - scaledImageSize.width) / 2) + offset.width
+                let y = ((backgroundSize.height - scaledImageSize.height) / 2) + offset.height
                 let imageRect = CGRect(x: x, y: y, width: scaledImageSize.width, height: scaledImageSize.height)
                 
+                // Save the current graphics state
+                context.cgContext.saveGState()
+                        
+                // Apply rotation around the center of the image
+                context.cgContext.translateBy(x: imageRect.midX, y: imageRect.midY)
+                context.cgContext.rotate(by: rotation)
+                context.cgContext.translateBy(x: -imageRect.midX, y: -imageRect.midY)
                 // Draw the original image on top
                 image.draw(in: imageRect)
+                
+                // Restore the graphics state
+                context.cgContext.restoreGState()
             }
             return newImage
         }
+    
+
     }
 
    }

@@ -797,7 +797,7 @@ struct TemplateView: View {
     
     
      func saveImagesToAlbum (finalImagesArray : [UIImage],quality: Quality) {
-        if(true){
+        if(paywallViewModel.viewState.isUserSubscribed ?? false){
             // if user is subscribed
             for image in finalImagesArray {
                 ImageHelper.saveImageToPhotosAlbum(image: image, quality: quality)
