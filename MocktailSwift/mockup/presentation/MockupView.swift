@@ -47,18 +47,7 @@ struct MockupView: View {
                     
                     Spacer()
                     
-                    if finalImages.count > 0 {
-                        NavigationLink {
-                            EditView(finalImages: finalImages).environmentObject(paywallViewModel)
-                                .environmentObject(routingViewModel)
-                                .environmentObject(moreViewModel)
-                        } label: {
-                            Text("Edit")
-                                .font(.callout)
-                                .bold()
-                                .foregroundStyle(.purple)
-                        }
-                    }
+                 
                     
                     Button(action: {
                         PostHogSDK.shared.capture(PostHogEvents.mockup_star.rawValue)
@@ -537,7 +526,7 @@ struct TemplateView: View {
                                     
                                 }
                             }
-                            .padding(.horizontal)
+                           
                             
                             Menu {
                                 
@@ -580,9 +569,26 @@ struct TemplateView: View {
                                 .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(.white))
                                 
                             }
-                            .padding(.horizontal)
+                           
+                            
+                            if finalImages.count > 0 {
+                                NavigationLink {
+                                    EditView(finalImages: finalImages).environmentObject(paywallViewModel)
+                                        .environmentObject(routingViewModel)
+                                        .environmentObject(moreViewModel)
+                                } label: {
+                                    Text("Edit")
+                                        .font(.subheadline)
+                                        .bold()
+                                        .padding(.horizontal, 4)
+                                        .foregroundStyle(.white)
+                                        .padding(4)
+                                        .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(.blue))
+                                }
+                            }
                             
                         }
+                        .padding(.horizontal, 4)
                     }
                     .padding(4)
                     .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(.black.opacity(0.1)))

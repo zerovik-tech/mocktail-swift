@@ -51,60 +51,12 @@ struct EditView: View {
     @State private var didMove = false
     @State private var frameWidth: CGFloat = 0
     @State private var frameHeight: CGFloat = 0
+    
+    @State private var selectedOption: SelectedOption = .format
+    let bottomBackground = Color(red: 0.21, green: 0.21, blue: 0.21)
+    let selectedOptionColor: Color = .gray.opacity(0.2)
     var body: some View {
         VStack {
-            //            HStack{
-            //                HStack {
-            //                    Image(systemName: "chevron.left")
-            //                        .font(.title3)
-            //                        .bold()
-            //                    Text("Mockup Edits")
-            //                        .font(.title3)
-            //                        .bold()
-            //                }
-            //                .padding()
-            //                .onTapGesture {
-            //                    showEditView = false
-            //                }
-            //
-            //                Spacer()
-            //            }
-            //            .padding(.horizontal)
-            //            .alert(isPresented: $showUpgradeAlert, content: {
-            //                Alert(
-            //                    title: Text("Free Mockups Left : \(moreViewModel.viewState.more.dailyFreeLimit)"),
-            //                    message: Text("You can download up to \(DAILY_FREE_LIMIT) mockups per day for free. Upgrade to Pro for unlimited downloads."),
-            //                    primaryButton: .cancel() {
-            //                        PostHogSDK.shared.capture(PostHogEvents.alert_daily_limit_cancel.rawValue)
-            //
-            //                    },
-            //                    secondaryButton: .default(Text("Unlock")) {
-            //                        PostHogSDK.shared.capture(PostHogEvents.alert_daily_limit_unlock.rawValue)
-            //
-            //                        routingViewModel.send(action: .updateUserFlow(userflow: .paywall))
-            //
-            //                    }
-            //                )
-            //            }
-            //            )
-            //            Text("Instagram Post")
-            //                .bold()
-            //                .onTapGesture {
-            //                    selectedAspectRatio = PostAspectRatio.instagram
-            //                    addBackground(aspectRatio: selectedAspectRatio)
-            //                }
-            //            Text("Facebook Post")
-            //                .bold()
-            //                .onTapGesture {
-            //                    selectedAspectRatio = PostAspectRatio.facebook
-            //                    addBackground(aspectRatio: selectedAspectRatio)
-            //                }
-            //            Text("Twitter Post")
-            //                .bold()
-            //                .onTapGesture {
-            //                    selectedAspectRatio = PostAspectRatio.twitter
-            //                    addBackground(aspectRatio: selectedAspectRatio)
-            //                }
             VStack {
                 
             }
@@ -159,22 +111,25 @@ struct EditView: View {
                 
                 
                 let adjustedMargin = margin * (frameWidth / imageSize.width)
-                ZStack {
-                    Rectangle()
-                        .frame(
-                            width: frameWidth ,
-                            height: frameHeight
-                        )
-                        .foregroundStyle(mockupBackgroundType == .linear ? AnyShapeStyle(mockupBackground) :
-                                            AnyShapeStyle(
-                                                LinearGradient(
-                                                    colors: [gradient1, gradient2],
-                                                    startPoint: .topLeading,
-                                                    endPoint: .bottomTrailing
-                                                ))
-                        )
+                VStack {
+
                     
                     if (finalImages.count == 1) {
+                        ZStack {
+                            Rectangle()
+                                .frame(
+                                    width: frameWidth ,
+                                    height: frameHeight
+                                )
+                                .foregroundStyle(mockupBackgroundType == .linear ? AnyShapeStyle(mockupBackground) :
+                                                    AnyShapeStyle(
+                                                        LinearGradient(
+                                                            colors: [gradient1, gradient2],
+                                                            startPoint: .topLeading,
+                                                            endPoint: .bottomTrailing
+                                                        ))
+                                )
+                            
                         HStack{
                             Spacer()
                             Image(uiImage: finalImages[0])
@@ -207,18 +162,17 @@ struct EditView: View {
                                             didMove = false
                                         }
                                 )
-                                                            .mask(
-                                                                Rectangle()
-                                                                    .frame(
-                                                                        width: frameWidth ,
-                                                                        height: frameHeight
-                                                                    )
-                            
-                                                                //                                        .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
-                                                            )
+                                .mask(
+                                    Rectangle()
+                                        .frame(
+                                            width: frameWidth ,
+                                            height: frameHeight
+                                        )
+                                )
                                 .padding(.vertical)
                             Spacer()
                         }
+                    }
                         
                     }else {
                         ScrollView(.horizontal){
@@ -229,6 +183,21 @@ struct EditView: View {
                                 .frame(width: 10)
                                 
                                 ForEach(finalImages.indices, id: \.self) { index in
+                                    ZStack {
+                                        Rectangle()
+                                            .frame(
+                                                width: frameWidth ,
+                                                height: frameHeight
+                                            )
+                                            .foregroundStyle(mockupBackgroundType == .linear ? AnyShapeStyle(mockupBackground) :
+                                                                AnyShapeStyle(
+                                                                    LinearGradient(
+                                                                        colors: [gradient1, gradient2],
+                                                                        startPoint: .topLeading,
+                                                                        endPoint: .bottomTrailing
+                                                                    ))
+                                            )
+                                        
                                     Image(uiImage: finalImages[0])
                                         .resizable()
                                         .scaledToFit()
@@ -237,15 +206,38 @@ struct EditView: View {
                                             width: frameWidth ,
                                             height: frameHeight
                                         )
-                                        .background(mockupBackgroundType == .linear ? AnyView(mockupBackground) :
-                                                        AnyView(
-                                                            LinearGradient(
-                                                                colors: [gradient1, gradient2],
-                                                                startPoint: .topLeading,
-                                                                endPoint: .bottomTrailing
-                                                            ))
+                                        .rotationEffect(Angle(degrees: rotationAngle))
+                                        .offset(finalPosition)
+                                        .gesture(
+                                            DragGesture()
+                                                .onChanged { value in
+                                                    print("value: \(value)")
+                                                    print("translation: \(value.translation)")
+                                                    
+                                                    
+                                                    if didMove == false {
+                                                        didMove = true
+                                                        initialPosition = finalPosition
+                                                    }
+                                                    finalPosition.width = initialPosition.width + value.translation.width
+                                                    finalPosition.height = initialPosition.height + value.translation.height
+                                                    print("finalPosition: \(finalPosition)")
+                                                }
+                                                .onEnded { _ in
+                                                    initialPosition = .zero
+                                                    didMove = false
+                                                }
+                                        )
+                                        .mask(
+                                            Rectangle()
+                                                .frame(
+                                                    width: frameWidth ,
+                                                    height: frameHeight
+                                                )
                                         )
                                         .padding(.vertical)
+                                }
+                                    Spacer()
                                 }
                                 
                                 VStack{
@@ -264,7 +256,8 @@ struct EditView: View {
                          frameWidth = UIScreen.main.bounds.width * 0.9
                          frameHeight = frameWidth * (imageSize.height / imageSize.width)
                     } else {
-                        frameHeight = UIScreen.main.bounds.height * 0.35
+                        
+                        frameHeight = UIScreen.main.bounds.height * 0.5
                     frameWidth = frameHeight * (imageSize.width / imageSize.height)
                     }
                     scalingFactor = (frameWidth / imageSize.width)
@@ -275,7 +268,7 @@ struct EditView: View {
                          frameWidth = UIScreen.main.bounds.width * 0.9
                          frameHeight = frameWidth * (imageSize.height / imageSize.width)
                     } else {
-                        frameHeight = UIScreen.main.bounds.height * 0.35
+                        frameHeight = UIScreen.main.bounds.height * 0.5
                     frameWidth = frameHeight * (imageSize.width / imageSize.height)
                     }
                     scalingFactor = (frameWidth / imageSize.width)
@@ -285,16 +278,68 @@ struct EditView: View {
         }
            
             
+            Spacer()
+            //MARK: - bottomView
             
+            bottomView
             
-            VStack(spacing: 0){
-                HStack {
-                    Text("Format")
-                        .bold()
-                    Spacer()
-                }
-                .padding(.horizontal)
+
+        }
+        .onAppear(perform: {
+            let structName = String(describing: type(of: self))
+            PostHogSDK.shared.capture(structName)
+        })
+        .background(.black.opacity(0.1))
+        .navigationTitle("Mockup Edits")
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
                 
+                
+                if  !isProcessing {
+                    Menu {
+                        
+                        Button("Low Quality") {
+                            
+                            saveImages(quality: .low, via: .saveWithBackground)
+                        }
+                        
+                        Button("Medium Quality") {
+                            saveImages(quality: .medium,via:.saveWithBackground)
+                        }
+                        
+                        Button("High Quality") {
+                            saveImages(quality: .high,via:.saveWithBackground)
+                        }
+                        
+                        
+                    } label: {
+                        VStack(spacing: 0) {
+                            Image(systemName: "square.and.arrow.down")
+                           
+                        }
+                        
+                        
+                        
+                    }
+                    
+                } else {
+                    HStack {
+                        Text("Processing ")
+                        
+                        ProgressView()
+                    }
+                }
+            }
+        }
+        
+
+        
+    }
+    
+    var bottomView: some View {
+        VStack{
+            switch selectedOption {
+            case .format:
                 ScrollView(.horizontal){
                     HStack {
                         HStack{
@@ -424,235 +469,221 @@ struct EditView: View {
                     
                 }
                 .padding(.horizontal)
-            }
-            
-            VStack(spacing: 4) {
-                
-                HStack {
-                    Text("Mockup Background")
-                        .bold()
-                    Spacer()
-                }
-                .padding(.horizontal)
-                
-                HStack {
-                    Text("Linear")
-                        .font(.footnote)
-                        .foregroundStyle(mockupBackgroundType == MockupBackground.linear ? .white : .black)
-                        .padding(2)
-                        .background(RoundedRectangle(cornerRadius: 6).fill(mockupBackgroundType == MockupBackground.linear ? .black.opacity(0.4) : .black.opacity(0)))
-                        .onTapGesture {
-                            mockupBackgroundType = .linear
-                        }
-                    
-                    Text("Gradient")
-                        .font(.footnote)
-                        .foregroundStyle(mockupBackgroundType == MockupBackground.gradient ? .white : .black)
-                        .padding(2)
-                        .background(RoundedRectangle(cornerRadius: 6).fill(mockupBackgroundType == MockupBackground.gradient ? .black.opacity(0.4) : .black.opacity(0)))
-                        .onTapGesture {
-                            mockupBackgroundType = .gradient
-                        }
-                }
-                .padding(4)
-                .background(RoundedRectangle(cornerRadius: 6).fill(.black.opacity(0.2)))
-                
-                if mockupBackgroundType == .linear{
-                    ScrollView(.horizontal) {
-                        
-                        HStack{
-                            
-                            ColorPicker(selection: $mockupBackground) {
-                                Text("")
-                            }
-                            ColorCircle(color: .black)
-                                .onTapGesture {
-                                    mockupBackground = .black
-                                }
-                            ColorCircle(color: .white)
-                                .onTapGesture {
-                                    mockupBackground = .white
-                                }
-                            ColorCircle(color: .blue)
-                                .onTapGesture {
-                                    mockupBackground = .blue
-                                }
-                            ColorCircle(color: .red)
-                                .onTapGesture {
-                                    mockupBackground = .red
-                                }
-                            ColorCircle(color: .yellow)
-                                .onTapGesture {
-                                    mockupBackground = .yellow
-                                }
-                            
-                            
-                            
-                        }
-                    }
-                    .padding(4)
-                    .background(RoundedRectangle(cornerRadius: 8).fill(.gray.opacity(0.2)))
-                    .padding(.horizontal)
-                    
-                } else {
-                    
+
+            case .color:
+                ScrollView(.horizontal, showsIndicators: false) {
                     
                     HStack{
                         
-                        
-                        
-                        ColorPicker(selection: $gradient1) {
+                        ColorPicker(selection: $mockupBackground) {
                             Text("")
                         }
-                        .padding(.horizontal)
-                        .labelsHidden()
                         
-                        
-                        
-                        
-                        ColorPicker(selection: $gradient2) {
-                            Text("")
+                        ForEach(0..<BackgroundColors.all.count, id: \.self) { index in
+                            ColorCircle(color: BackgroundColors.all[index])
+                                .onTapGesture {
+                                    mockupBackground = BackgroundColors.all[index]
+                                }
                         }
-                        .padding(.horizontal)
-                        .labelsHidden()
+                      
                         
                         
                         
                     }
+                }
+                .padding(4)
+                .background(RoundedRectangle(cornerRadius: 8).fill(.gray.opacity(0.2)))
+                .padding(.horizontal)
+
+                
+            case .gradient:
+                HStack{
                     
-                    .padding(4)
-                    .background(RoundedRectangle(cornerRadius: 8).fill(.gray.opacity(0.2)))
+                    
+                    
+                    ColorPicker(selection: $gradient1) {
+                        Text("")
+                    }
                     .padding(.horizontal)
+                    .labelsHidden()
+                    
+                    
+                    
+                    
+                    ColorPicker(selection: $gradient2) {
+                        Text("")
+                    }
+                    .padding(.horizontal)
+                    .labelsHidden()
+                    
+                    
                     
                 }
                 
-            }
-            
-            //            .onChange(of: mockupBackgroundType) { oldValue, newValue in
-            //                if newValue == MockupBackground.linear {
-            //                    mockupBackground = .white
-            //                } else {
-            //                    let color = Gradient(colors: [gradient1, gradient2])
-            //                }
-            //
-            //            }
-            VStack(spacing: 4) {
-            HStack {
-                HStack{
-                    Text("Margin:")
+                .padding(4)
+                .background(RoundedRectangle(cornerRadius: 8).fill(.gray.opacity(0.2)))
+                .padding(.horizontal)
+
+            case .margin:
+                VStack(spacing: 0){
                     Text("\(Int(margin))")
-                        .font(.caption2)
-                        .fontWeight(.semibold)
-                }
-                .font(.footnote)
-                .foregroundStyle(adjustment == Adjustment.margin ? .white : .black)
-                .padding(2)
-                .background(RoundedRectangle(cornerRadius: 6).fill(adjustment == Adjustment.margin ? .black.opacity(0.4) : .black.opacity(0)))
-                .onTapGesture {
-                    adjustment = .margin
-                }
-                HStack{
-                    Text("Rotate:")
-                    Text("\(Int(rotationAngle))")
-                        .font(.caption2)
-                        .fontWeight(.semibold)
-                }
-                    .font(.footnote)
-                    .foregroundStyle(adjustment == Adjustment.rotate ? .white : .black)
-                    .padding(2)
-                    .background(RoundedRectangle(cornerRadius: 6).fill(adjustment == Adjustment.rotate ? .black.opacity(0.4) : .black.opacity(0)))
-                    .onTapGesture {
-                        adjustment = .rotate
+                    Slider(value: $margin, in: 0...200, step: 1)
+                    {
+                        Text("")
+                    } minimumValueLabel: {
+                        Text("0")
+                            .foregroundStyle(.black)
+                    } maximumValueLabel: {
+                        Text("200")
+                            .foregroundStyle(.black)
                     }
-            }
-            .padding(4)
-            .background(RoundedRectangle(cornerRadius: 6).fill(.black.opacity(0.2)))
-            
-            
-            
-            if adjustment == .margin {
-                Slider(value: $margin, in: 0...200, step: 1)
-                {
-                    Text("")
-                } minimumValueLabel: {
-                    Text("0")
-                        .foregroundStyle(.black)
-                } maximumValueLabel: {
-                    Text("200")
-                        .foregroundStyle(.black)
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal)
-            } else {
                 
-                Slider(value: $rotationAngle, in: 0...360, step: 1)
-                {
-                    Text("")
-                } minimumValueLabel: {
-                    Text("0")
-                        .foregroundStyle(.black)
-                } maximumValueLabel: {
-                    Text("360")
-                        .foregroundStyle(.black)
+            case .rotate:
+                VStack(spacing: 0){
+                    Text("\(Int(rotationAngle))")
+                    Slider(value: $rotationAngle, in: 0...360, step: 1)
+                    {
+                        Text("")
+                    } minimumValueLabel: {
+                        Text("0")
+                            .foregroundStyle(.black)
+                    } maximumValueLabel: {
+                        Text("360")
+                            .foregroundStyle(.black)
+                    }
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal)
             }
-        }
-            
-            
-            Spacer()
-            
-            
-            if  !isProcessing {
-                Menu {
-                    
-                    Button("Low Quality") {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(alignment: .bottom) {
+                    VStack {
+                        Image(systemName: "aspectratio")
+                            .font(.largeTitle)
+                            .fontWeight(.medium)
+                            
+                           
                         
-                        saveImages(quality: .low, via: .saveWithBackground)
-                    }
-                    
-                    Button("Medium Quality") {
-                        saveImages(quality: .medium,via:.saveWithBackground)
-                    }
-                    
-                    Button("High Quality") {
-                        saveImages(quality: .high,via:.saveWithBackground)
-                    }
-                    
-                    
-                } label: {
-                    HStack(spacing: 2) {
-                        Image(systemName: "square.and.arrow.down")
-                            .font(.footnote)
+                        Text("Format")
+                            .font(.caption)
                             .bold()
-                        Text("Save")
-                            .font(.headline)
-                            .bold()
+//
                     }
-                    .frame(width: UIScreen.main.bounds.width / 2)
-                    .foregroundStyle(.white)
-                    .padding()
-                    .padding(.horizontal, 2)
+                    .padding(2)
+                    .foregroundStyle(selectedOption == SelectedOption.format ? Color(UIColor.systemBlue) : Color(UIColor.systemGray))
+                    .padding(.horizontal)
+                    .onTapGesture {
+                        PostHogSDK.shared.capture(PostHogEvents.edit_format.rawValue)
+                        selectedOption = .format
+                    }
+                    
+                    VStack {
+                        Image(systemName: "circle.fill")
+                            .font(.title)
+                            .fontWeight(.medium)
+                            .foregroundStyle(mockupBackground)
+                            .background(selectedOption == SelectedOption.color ? Color(UIColor.systemBlue) : Color(UIColor.systemGray))
+                            .clipShape(Circle())
+                            
+                           
+                        
+                        Text("Color")
+                            .font(.caption)
+                            .bold()
+                            
+                    }
+                    .padding(4)
+                    .foregroundStyle(selectedOption == SelectedOption.color ? Color(UIColor.systemBlue) : Color(UIColor.systemGray))
+                    .padding(.horizontal)
+                    .onTapGesture {
+                        PostHogSDK.shared.capture(PostHogEvents.edit_color.rawValue)
+                        selectedOption = .color
+                        mockupBackgroundType = .linear
+                    }
+                    
+                    VStack {
+                        Image(systemName: "circle.fill")
+                            .font(.title)
+                            .fontWeight(.medium)
+                            .foregroundStyle(LinearGradient(colors: [ gradient1, gradient2 ], startPoint: .topLeading, endPoint: .bottomTrailing))
+                            .background(selectedOption == SelectedOption.gradient ? Color(UIColor.systemBlue) : Color(UIColor.systemGray))
+                            .clipShape(Circle())
+                            
+                           
+                        
+                        Text("Gradient")
+                            .font(.caption)
+                            .bold()
+                          
+                    }
+                    .padding(4)
+                    .foregroundStyle(selectedOption == SelectedOption.gradient ? Color(UIColor.systemBlue) : Color(UIColor.systemGray))
+                    .padding(.horizontal)
+                    .onTapGesture {
+                        PostHogSDK.shared.capture(PostHogEvents.edit_gradient.rawValue)
+                        selectedOption = .gradient
+                        mockupBackgroundType = .gradient
+                    }
+                    
+                    VStack {
+                        Image(systemName: "square.grid.3x3.square")
+                            .font(.largeTitle)
+                            .fontWeight(.medium)
+                            
+                           
+                        
+                        Text("Margin")
+                            .font(.caption)
+                            .bold()
+                            
+                    }
+                    .padding(2)
+                    .foregroundStyle(selectedOption == SelectedOption.margin ? Color(UIColor.systemBlue) : Color(UIColor.systemGray))
+                    .padding(.horizontal)
+                    .onTapGesture {
+                        PostHogSDK.shared.capture(PostHogEvents.edit_margin.rawValue)
+                        selectedOption = .margin
+                    }
+                    
+                    VStack {
+                        Image(systemName: "arrow.clockwise")
+                            .font(.title)
+                            .fontWeight(.medium)
+                            
+                           
+                        
+                        Text("Rotate")
+                            .font(.caption)
+                            .bold()
+                            
+                    }
+                    .padding(2)
+                    .foregroundStyle(selectedOption == SelectedOption.rotate ? Color(UIColor.systemBlue) : Color(UIColor.systemGray))
+                    .padding(.horizontal)
+                    .onTapGesture {
+                        PostHogSDK.shared.capture(PostHogEvents.edit_rotate.rawValue)
+                        selectedOption = .rotate
+                    }
+                    
                     
                     
                     
                 }
-                .background(RoundedRectangle(cornerRadius: 8).fill(.blue))
-            } else {
-                HStack {
-                    Text("Processing ")
-                    
-                    ProgressView()
+                
+            }
+            .padding(2)
+//            .background(Color(UIColor.systemGray))
+            .overlay {
+                HStack{
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .foregroundStyle(Color(UIColor.systemGray))
+                        .opacity(0.5)
                 }
             }
             
         }
-        .padding(.bottom)
-        .background(.black.opacity(0.1))
-        .navigationTitle("Mockup Edits")
-        //        .onAppear {
-        //            imagesWithBackground = finalImages
-        //        }
-        
     }
     
     func addBackground(completion: @escaping () -> Void) {
