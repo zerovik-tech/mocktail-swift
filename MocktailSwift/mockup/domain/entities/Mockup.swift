@@ -63,4 +63,13 @@ struct BackgroundColors {
         ]
 }
 
+enum SelectedOption {
+    case format
+    case color
+    case gradient
+    case margin
+    case rotate
+    
+}
+
 
