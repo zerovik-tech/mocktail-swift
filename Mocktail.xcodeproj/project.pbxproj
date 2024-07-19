@@ -74,6 +74,7 @@
 		B14844D12C295762004B7B76 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14844D02C295762004B7B76 /* HomeView.swift */; };
 		B14844D32C295A6C004B7B76 /* Merienda-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B14844D22C295A6C004B7B76 /* Merienda-Regular.ttf */; };
 		B14844D82C2ADCBB004B7B76 /* YatraOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B14844D72C2ADCBB004B7B76 /* YatraOne-Regular.ttf */; };
+		B1E57B2E2C3E2C6900644345 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E57B2D2C3E2C6900644345 /* EditView.swift */; };
 		B1F963772C2EBE6F0014DA76 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F963762C2EBE6F0014DA76 /* CustomTabBar.swift */; };
 /* End PBXBuildFile section */
 
@@ -139,6 +140,7 @@
 		B14844D22C295A6C004B7B76 /* Merienda-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merienda-Regular.ttf"; sourceTree = "<group>"; };
 		B14844D42C295AC1004B7B76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B14844D72C2ADCBB004B7B76 /* YatraOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YatraOne-Regular.ttf"; sourceTree = "<group>"; };
+		B1E57B2D2C3E2C6900644345 /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 		B1F963762C2EBE6F0014DA76 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -570,6 +572,7 @@
 			children = (
 				B14844C92C294DDF004B7B76 /* MockupView.swift */,
 				B1F963762C2EBE6F0014DA76 /* CustomTabBar.swift */,
+				B1E57B2D2C3E2C6900644345 /* EditView.swift */,
 			);
 			path = presentation;
 			sourceTree = "<group>";
@@ -740,6 +743,7 @@
 				57A6077E2C2C07E200A9F206 /* MoreViewState.swift in Sources */,
 				B103F2AE2C218AA200F9E9C3 /* ImageHelper.swift in Sources */,
 				57A561122C2AA05400D70D0D /* URLView.swift in Sources */,
+				B1E57B2E2C3E2C6900644345 /* EditView.swift in Sources */,
 				571731482C2AFF90004862FA /* RoutingView.swift in Sources */,
 				57A5619E2C2AA95F00D70D0D /* PaywallViewModel.swift in Sources */,
 				57A561AA2C2AA95F00D70D0D /* PaywallRouter.swift in Sources */,

@@ -36,6 +36,13 @@ enum PostHogEvents: String {
         case mockup_star = "mockup_star"
         case mockup_clear = "mockup_clear"
     
+        case edit_format = "edit_format"
+        case edit_color = "edit_color"
+        case edit_gradient = "edit_gradient"
+        case edit_margin = "edit_margin"
+        case edit_rotate = "edit_rotate"
+    
+    
         case alert_save_permission_denied = "alert_save_permission_denied"
         case alert_save_permission_denied_cancel = "alert_save_permission_denied_cancel"
         case alert_save_permission_denied_settings = "alert_save_permission_denied_settings"
