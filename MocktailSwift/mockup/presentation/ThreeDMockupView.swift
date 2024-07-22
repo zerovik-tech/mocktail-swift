@@ -81,7 +81,9 @@ struct ThreeDMockupView: View {
                            }
                            .onChange(of: selectedImage) { oldValue, newValue in
                                if let selectedImage = selectedImage {
-                                   finalImage = ImageHelper.resizeImageFor3DModel(image: selectedImage, frameSize: CGSize(width: 1024, height: 2048), contentMode: contentMode)
+                                   if let imageFor3D = ImageHelper.resizeImageFor3DModel(image: selectedImage, frameSize: CGSize(width: 1024, height: 2048), contentMode: contentMode){
+                                       finalImage = ImageHelper.resizeImage(image: imageFor3D, targetSize: imageFor3D.size, contentMode: .fit, cornerRadius: 0)
+                                   }
                                }
                            }
                        }
@@ -110,16 +112,21 @@ struct ThreeDMockupView: View {
                                    return
                                }
                                sceneView.scene = scene
-//                               addLights(to: scene)
+                               sceneView.contentScaleFactor = UIScreen.main.scale
+                               //                               addLights(to: scene)
                                
-                              
+                               sceneView.antialiasingMode = .multisampling4X
                                sceneView.autoenablesDefaultLighting = true
+                               
+                               //                               sceneView.scene?.background.contents = UIColor.red
+                               sceneView.scene?.background.contents = UIColor.clear
                                
                                modelNode = scene.rootNode.childNodes.first
                                modelNode?.scale = SCNVector3(0.8, 0.8, 0.8)
                                
                                // Find the image node
-                               imageNode = scene.rootNode.childNode(withName: "IphoneScreen", recursively: true)
+                               imageNode = scene.rootNode.childNode(withName: "EHqmjTgFnPqroxg", recursively: true)
+
                                
                                // Enable gestures
                                let singleFingerPanGesture = UIPanGestureRecognizer(target: self, action: #selector(handleSingleFingerPan(_:)))
