@@ -13,79 +13,81 @@ import Photos
 struct ThreeDMockupView: View {
     @State private var showImagePicker = false
         @State private var selectedImage: UIImage? = nil
-    @State private var contentMode: ContentMode = .fit
+    @State private var contentMode: ContentMode = .stretch
     @State private var finalImage: UIImage? = nil
         
         var body: some View {
-            VStack {
-                ModelViewContainer(modelName: "iphone_15_pro_blue_titanium_no5g", selectedImage: $finalImage)
-                    .padding()
-                HStack {
-                    Button(action: {
-                        showImagePicker = true
-                    }) {
-                        Text("Select Photo")
-                            .padding()
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
-                    }
-                    
-                    Button(action: {
-                                       NotificationCenter.default.post(name: .saveModelImage, object: nil)
-                                   }) {
-                                       Text("Save Model")
-                                           .padding()
-                                           .background(Color.green)
-                                           .foregroundColor(.white)
-                                           .cornerRadius(10)
-                                   }
-                    
-                    Menu {
-                        
-                        Button("Fit") {
-                            contentMode = .fit
+           
+                VStack {
+                    ModelViewContainer(modelName: "iphone_15_pro_blue_titanium_no5g", selectedImage: $finalImage)
+                        .padding()
+                    HStack {
+                        Button(action: {
+                            showImagePicker = true
+                        }) {
+                            Text("Select Photo")
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
                         }
                         
-                        Button("Fill") {
-                            contentMode = .fill
+                        Button(action: {
+                            NotificationCenter.default.post(name: .saveModelImage, object: nil)
+                        }) {
+                            Text("Save Model")
+                                .padding()
+                                .background(Color.green)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
                         }
                         
-                        Button("Stretch") {
-                            contentMode = .stretch
-                        }
-                        
-                        
-                    } label: {
-                        HStack(spacing: 0) {
-                            Text(contentMode.rawValue)
-                                .fixedSize()
-                                .font(.subheadline)
-                                .bold()
-                                .padding(.horizontal, 4)
+                        Menu {
                             
-                            Image(systemName: "chevron.up.chevron.down")
-                                .font(.caption2)
-                                .bold()
+                            Button("Fit") {
+                                contentMode = .fit
+                            }
+                            
+                            Button("Fill") {
+                                contentMode = .fill
+                            }
+                            
+                            Button("Stretch") {
+                                contentMode = .stretch
+                            }
+                            
+                            
+                        } label: {
+                            HStack(spacing: 0) {
+                                Text(contentMode.rawValue)
+                                    .fixedSize()
+                                    .font(.subheadline)
+                                    .bold()
+                                    .padding(.horizontal, 4)
+                                
+                                Image(systemName: "chevron.up.chevron.down")
+                                    .font(.caption2)
+                                    .bold()
+                            }
+                            .foregroundStyle(.black)
+                            .padding(4)
+                            .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(.black.opacity(0.1)))
+                            
                         }
-                        .foregroundStyle(.black)
-                        .padding(4)
-                        .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(.black.opacity(0.1)))
-                        
                     }
-                               }
-                           }
-            .padding(.bottom, 4)
-                           .sheet(isPresented: $showImagePicker) {
-                               ImagePicker(selectedImage: $selectedImage)
-                           }
-                           .onChange(of: selectedImage) { oldValue, newValue in
-                               if let selectedImage = selectedImage {
-                                   if let imageFor3D = ImageHelper.resizeImageFor3DModel(image: selectedImage, frameSize: CGSize(width: 1024, height: 2048), contentMode: contentMode){
-                                       finalImage = ImageHelper.resizeImage(image: imageFor3D, targetSize: imageFor3D.size, contentMode: .fit, cornerRadius: 0)
-                                   }
-                               }
-                           }
+                }
+                .padding(.bottom, 4)
+                .sheet(isPresented: $showImagePicker) {
+                    ImagePicker(selectedImage: $selectedImage)
+                }
+                .onChange(of: selectedImage) { oldValue, newValue in
+                    if let selectedImage = selectedImage {
+                        if let imageFor3D = ImageHelper.resizeImageFor3DModel(image: selectedImage, frameSize: CGSize(width: 1024, height: 2048), contentMode: contentMode){
+                            finalImage = ImageHelper.resizeImage(image: imageFor3D, targetSize: imageFor3D.size, contentMode: .fit, cornerRadius: 0)
+                        }
+                    }
+                }
+            
                        }
                    }
 

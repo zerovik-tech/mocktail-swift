@@ -37,126 +37,127 @@ struct MockupView: View {
     
     
     var body: some View {
-        
-        VStack {
-            
-            HStack {
-                Text("Mocktail")
-                    .font(.custom("YatraOne-Regular", size: 24))
-                    .bold()
+        NavigationStack{
+            VStack {
                 
-                Spacer()
-                
-                Button(action: {
-                    PostHogSDK.shared.capture(PostHogEvents.mockup_star.rawValue)
+                HStack {
+                    Text("Mocktail")
+                        .font(.custom("YatraOne-Regular", size: 24))
+                        .bold()
                     
-                    if let url = URL(string: "itms-apps://itunes.apple.com/app/id\(APP_ID)?action=write-review") {
-                        UIApplication.shared.open(url)
+                    Spacer()
+                    
+                    Button(action: {
+                        PostHogSDK.shared.capture(PostHogEvents.mockup_star.rawValue)
+                        
+                        if let url = URL(string: "itms-apps://itunes.apple.com/app/id\(APP_ID)?action=write-review") {
+                            UIApplication.shared.open(url)
+                        }
+                        
+                        
+                    }) {
+                        Image(systemName: "star")
+                            .font(.title2)
+                            .foregroundStyle(.black)
+                            .padding(.horizontal)
+                        
                     }
                     
                     
-                }) {
-                    Image(systemName: "star")
-                        .font(.title2)
-                        .foregroundStyle(.black)
-                        .padding(.horizontal)
+                    
+                    Button(action: {
+                        PostHogSDK.shared.capture(PostHogEvents.mockup_clear.rawValue)
+                        
+                        selectedImages = []
+                        finalImages = []
+                        selectedFinalImageIndex = 0
+                        
+                        
+                    }) {
+                        Text("Clear")
+                            .font(.callout)
+                            .bold()
+                        
+                    }
+                    
+                    
+                    
+                    
+                }
+                .padding(.horizontal)
+                
+                
+                CustomTabBar(selectedTab: $selectedTab)
+                    .padding(.horizontal, 4)
+                
+                switch selectedTab {
+                case .iphone:
+                    TemplateView(selectedMockupType: .iphone, mockupArray: MockupArray.iPhoneMockups, selectedMockup: MockupArray.iPhoneMockups[15], selectedImages: $selectedImages, selectedFinalImageIndex: $selectedFinalImageIndex, finalImages: $finalImages)
+                    
+                case .ipad:
+                    TemplateView(selectedMockupType: .ipad, mockupArray: MockupArray.iPadMockups, selectedMockup: MockupArray.iPadMockups[0], selectedImages: $selectedImages, selectedFinalImageIndex: $selectedFinalImageIndex, finalImages: $finalImages)
+                    
+                case .macbook:
+                    TemplateView(selectedMockupType: .mac,mockupArray: MockupArray.macMockups, selectedMockup: MockupArray.macMockups[2], selectedImages: $selectedImages, selectedFinalImageIndex: $selectedFinalImageIndex, finalImages: $finalImages)
+                    
+                case .applewatch:
+                    TemplateView(selectedMockupType: .appleWatch,mockupArray: MockupArray.appleWatchMockups, selectedMockup: MockupArray.appleWatchMockups[0], selectedImages: $selectedImages, selectedFinalImageIndex: $selectedFinalImageIndex, finalImages: $finalImages)
                     
                 }
                 
                 
-                
-                Button(action: {
-                    PostHogSDK.shared.capture(PostHogEvents.mockup_clear.rawValue)
-                    
-                    selectedImages = []
-                    finalImages = []
-                    selectedFinalImageIndex = 0
-                    
-                    
-                }) {
-                    Text("Clear")
-                        .font(.callout)
-                        .bold()
-                    
-                }
-                
-                
+                //            TabView(selection: $selectedMockupType,
+                //                    content:  {
+                //                TemplateView(selectedMockupType: selectedMockupType, mockupArray: MockupArray.iPhoneMockups, selectedMockup: MockupArray.iPhoneMockups[15], selectedImages: $selectedImages)
+                //                    .tabItem {
+                //                        Image(systemName: "iphone")
+                //                        Text("iPhone")
+                //                            
+                //                            
+                //                    }
+                //                    .tag(MockupType.iphone.rawValue)
+                //                
+                //                TemplateView(selectedMockupType: selectedMockupType, mockupArray: MockupArray.iPadMockups, selectedMockup: MockupArray.iPadMockups[0], selectedImages: $selectedImages)
+                //                     .tabItem {
+                //                         
+                //                         Image(systemName: "ipad")
+                //                         Text("iPad")
+                //                             
+                //                             
+                //                     }
+                //                     .tag(MockupType.ipad.rawValue)
+                //                
+                //                TemplateView(selectedMockupType: selectedMockupType,mockupArray: MockupArray.macMockups, selectedMockup: MockupArray.macMockups[2], selectedImages: $selectedImages)
+                //                    .tabItem {
+                //                        Image(systemName: "macbook")
+                //                        Text("Mac")
+                //                            
+                //                            
+                //                    }
+                //                    .tag(MockupType.mac.rawValue)
+                //                
+                //                TemplateView(selectedMockupType: selectedMockupType,mockupArray: MockupArray.appleWatchMockups, selectedMockup: MockupArray.appleWatchMockups[0], selectedImages: $selectedImages)
+                //                    .tabItem {
+                //                        Image(systemName: "applewatch")
+                //                        Text("Watch")
+                //                            
+                //                            
+                //                    }
+                //                    .tag(MockupType.appleWatch.rawValue)
+                //                
+                //                
+                //                
+                //            })
                 
                 
             }
-            .padding(.horizontal)
-            
-            
-            CustomTabBar(selectedTab: $selectedTab)
-                .padding(.horizontal, 4)
-            
-            switch selectedTab {
-            case .iphone:
-                TemplateView(selectedMockupType: .iphone, mockupArray: MockupArray.iPhoneMockups, selectedMockup: MockupArray.iPhoneMockups[15], selectedImages: $selectedImages, selectedFinalImageIndex: $selectedFinalImageIndex, finalImages: $finalImages)
-                
-            case .ipad:
-                TemplateView(selectedMockupType: .ipad, mockupArray: MockupArray.iPadMockups, selectedMockup: MockupArray.iPadMockups[0], selectedImages: $selectedImages, selectedFinalImageIndex: $selectedFinalImageIndex, finalImages: $finalImages)
-                
-            case .macbook:
-                TemplateView(selectedMockupType: .mac,mockupArray: MockupArray.macMockups, selectedMockup: MockupArray.macMockups[2], selectedImages: $selectedImages, selectedFinalImageIndex: $selectedFinalImageIndex, finalImages: $finalImages)
-                
-            case .applewatch:
-                TemplateView(selectedMockupType: .appleWatch,mockupArray: MockupArray.appleWatchMockups, selectedMockup: MockupArray.appleWatchMockups[0], selectedImages: $selectedImages, selectedFinalImageIndex: $selectedFinalImageIndex, finalImages: $finalImages)
-                
+            .environmentObject(paywallViewModel)
+            .environmentObject(routingViewModel)
+            .environmentObject(moreViewModel)
+            .onAppear {
+                let structName = String(describing: type(of: self))
+                PostHogSDK.shared.capture(structName)
             }
-            
-            
-            //            TabView(selection: $selectedMockupType,
-            //                    content:  {
-            //                TemplateView(selectedMockupType: selectedMockupType, mockupArray: MockupArray.iPhoneMockups, selectedMockup: MockupArray.iPhoneMockups[15], selectedImages: $selectedImages)
-            //                    .tabItem {
-            //                        Image(systemName: "iphone")
-            //                        Text("iPhone")
-            //                            
-            //                            
-            //                    }
-            //                    .tag(MockupType.iphone.rawValue)
-            //                
-            //                TemplateView(selectedMockupType: selectedMockupType, mockupArray: MockupArray.iPadMockups, selectedMockup: MockupArray.iPadMockups[0], selectedImages: $selectedImages)
-            //                     .tabItem {
-            //                         
-            //                         Image(systemName: "ipad")
-            //                         Text("iPad")
-            //                             
-            //                             
-            //                     }
-            //                     .tag(MockupType.ipad.rawValue)
-            //                
-            //                TemplateView(selectedMockupType: selectedMockupType,mockupArray: MockupArray.macMockups, selectedMockup: MockupArray.macMockups[2], selectedImages: $selectedImages)
-            //                    .tabItem {
-            //                        Image(systemName: "macbook")
-            //                        Text("Mac")
-            //                            
-            //                            
-            //                    }
-            //                    .tag(MockupType.mac.rawValue)
-            //                
-            //                TemplateView(selectedMockupType: selectedMockupType,mockupArray: MockupArray.appleWatchMockups, selectedMockup: MockupArray.appleWatchMockups[0], selectedImages: $selectedImages)
-            //                    .tabItem {
-            //                        Image(systemName: "applewatch")
-            //                        Text("Watch")
-            //                            
-            //                            
-            //                    }
-            //                    .tag(MockupType.appleWatch.rawValue)
-            //                
-            //                
-            //                
-            //            })
-            
-            
-        }
-        .environmentObject(paywallViewModel)
-        .environmentObject(routingViewModel)
-        .environmentObject(moreViewModel)
-        .onAppear {
-            let structName = String(describing: type(of: self))
-            PostHogSDK.shared.capture(structName)
         }
         
     }

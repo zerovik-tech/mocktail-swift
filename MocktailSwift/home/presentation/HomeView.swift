@@ -48,7 +48,7 @@ struct HomeView: View {
                                 .font(.title)
                             Text("3D")
                         }
-                        .tag("mockup")
+                        .tag("3DMockup")
                     
                     MoreView(viewModel : moreViewModel,routingViewModel: routingViewModel, paywallViewModel: paywallViewModel)
                         .tabItem {
