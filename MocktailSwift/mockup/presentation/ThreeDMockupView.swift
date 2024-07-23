@@ -114,7 +114,7 @@ struct ThreeDMockupView: View {
                                sceneView.scene = scene
                                sceneView.contentScaleFactor = UIScreen.main.scale
                                //                               addLights(to: scene)
-                               
+                               sceneView.scene
                                sceneView.antialiasingMode = .multisampling4X
                                sceneView.autoenablesDefaultLighting = true
                                
@@ -224,11 +224,13 @@ struct ThreeDMockupView: View {
                                   }
                            
                            @objc func saveModelImage() {
-                               let renderer = UIGraphicsImageRenderer(size: sceneView.bounds.size)
+                               let size = CGSize(width: 7680, height: 4320)
+                               let renderer = SCNRenderer(device: MTLCreateSystemDefaultDevice(), options: nil)
+                               renderer.scene = sceneView.scene
+                               renderer.autoenablesDefaultLighting = true
+                               renderer.usesReverseZ = true
+                               let image = renderer.snapshot(atTime: 0, with: size, antialiasingMode: .multisampling4X)
                               
-                               let image = renderer.image { context in
-                                   sceneView.drawHierarchy(in: sceneView.bounds, afterScreenUpdates: true)
-                               }
                               saveImageToPhotosGallery(image: image)
                            }
                            

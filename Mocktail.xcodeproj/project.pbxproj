@@ -76,6 +76,7 @@
 		B14844D82C2ADCBB004B7B76 /* YatraOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B14844D72C2ADCBB004B7B76 /* YatraOne-Regular.ttf */; };
 		B16BDF7F2C494A470079AC51 /* ThreeDMockupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16BDF7E2C494A470079AC51 /* ThreeDMockupView.swift */; };
 		B16BDF8D2C4E64690079AC51 /* iphone_15_pro_blue_titanium_no5g.usdz in Resources */ = {isa = PBXBuildFile; fileRef = B16BDF8C2C4E64690079AC51 /* iphone_15_pro_blue_titanium_no5g.usdz */; };
+		B16BDF8F2C4E7F840079AC51 /* TempView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16BDF8E2C4E7F840079AC51 /* TempView.swift */; };
 		B1F963772C2EBE6F0014DA76 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F963762C2EBE6F0014DA76 /* CustomTabBar.swift */; };
 /* End PBXBuildFile section */
 
@@ -143,6 +144,7 @@
 		B14844D72C2ADCBB004B7B76 /* YatraOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YatraOne-Regular.ttf"; sourceTree = "<group>"; };
 		B16BDF7E2C494A470079AC51 /* ThreeDMockupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreeDMockupView.swift; sourceTree = "<group>"; };
 		B16BDF8C2C4E64690079AC51 /* iphone_15_pro_blue_titanium_no5g.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = iphone_15_pro_blue_titanium_no5g.usdz; sourceTree = "<group>"; };
+		B16BDF8E2C4E7F840079AC51 /* TempView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempView.swift; sourceTree = "<group>"; };
 		B1F963762C2EBE6F0014DA76 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -576,6 +578,7 @@
 				B16BDF7E2C494A470079AC51 /* ThreeDMockupView.swift */,
 				B14844C92C294DDF004B7B76 /* MockupView.swift */,
 				B1F963762C2EBE6F0014DA76 /* CustomTabBar.swift */,
+				B16BDF8E2C4E7F840079AC51 /* TempView.swift */,
 			);
 			path = presentation;
 			sourceTree = "<group>";
@@ -724,6 +727,7 @@
 				B103F2A52C217EC200F9E9C3 /* MocktailSwift.xcdatamodeld in Sources */,
 				571731442C2AFF90004862FA /* RoutingLocalDataSource.swift in Sources */,
 				57A561BD2C2AAAF000D70D0D /* Event.swift in Sources */,
+				B16BDF8F2C4E7F840079AC51 /* TempView.swift in Sources */,
 				57A607802C2C07ED00A9F206 /* MoreViewModel.swift in Sources */,
 				57A561A02C2AA95F00D70D0D /* PaywallRemoteDataSource.swift in Sources */,
 				571731412C2AFF90004862FA /* RoutingViewState.swift in Sources */,
