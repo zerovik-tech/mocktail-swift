@@ -24,7 +24,7 @@ struct MockupView: View {
     @State private var selectedFinalImageIndex: Int = 0
     @State private var selectedMockupType: MockupType = .iphone
     @State var selectedTab: Tab = .iphone
-    
+  
     
     
     
@@ -46,6 +46,8 @@ struct MockupView: View {
                         .bold()
                     
                     Spacer()
+                    
+                 
                     
                     Button(action: {
                         PostHogSDK.shared.capture(PostHogEvents.mockup_star.rawValue)
@@ -164,6 +166,12 @@ struct MockupView: View {
     
 }
 
+enum SaveOption {
+    case download
+    case save
+    case saveWithBackground
+}
+
 struct TemplateView: View {
     
     @EnvironmentObject var paywallViewModel : PaywallViewModel
@@ -177,6 +185,7 @@ struct TemplateView: View {
     @Binding  var selectedImages: [UIImage]
     @Binding  var selectedFinalImageIndex: Int
     @Binding  var finalImages: [UIImage]
+    
     @State private var replacedImage: UIImage = UIImage()
     @State private var isImagePickerPresented = false
     @State private var photosPickerItems: [PhotosPickerItem] = []
@@ -189,12 +198,14 @@ struct TemplateView: View {
     @State private var showAccessDeniedAlert : Bool = false
     
     
-    enum SaveOption {
-        case download
-        case save
-    }
+    
+    
+    
+  
     
     var body: some View {
+        
+        
         VStack {
             VStack {
                 
@@ -218,7 +229,8 @@ struct TemplateView: View {
             )
             
             Spacer()
-            
+           
+                
             VStack {
                 Spacer()
                 if isProcessing {
@@ -301,7 +313,7 @@ struct TemplateView: View {
                             }
                             
                             Spacer()
-
+                            
                         }
                     }
                     
@@ -443,9 +455,9 @@ struct TemplateView: View {
                             }
                             
                             Spacer()
-
+                            
                         }
-
+                        
                         
                         
                         
@@ -506,7 +518,7 @@ struct TemplateView: View {
                                     
                                 }
                             }
-                            .padding(.horizontal)
+                           
                             
                             Menu {
                                 
@@ -549,9 +561,26 @@ struct TemplateView: View {
                                 .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(.white))
                                 
                             }
-                            .padding(.horizontal)
+                           
+                            
+                            if finalImages.count > 0 {
+                                NavigationLink {
+                                    EditView(finalImages: finalImages).environmentObject(paywallViewModel)
+                                        .environmentObject(routingViewModel)
+                                        .environmentObject(moreViewModel)
+                                } label: {
+                                    Text("Edit")
+                                        .font(.subheadline)
+                                        .bold()
+                                        .padding(.horizontal, 4)
+                                        .foregroundStyle(.white)
+                                        .padding(4)
+                                        .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(.blue))
+                                }
+                            }
                             
                         }
+                        .padding(.horizontal, 4)
                     }
                     .padding(4)
                     .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(.black.opacity(0.1)))
@@ -595,6 +624,7 @@ struct TemplateView: View {
                 
                 
             }
+        
             VStack {
                 
             }
@@ -625,6 +655,11 @@ struct TemplateView: View {
             )
             
         }
+//        .sheet(isPresented: $showBottomSheet, content: {
+//
+//            .presentationDetents([.medium])
+//            
+//        })
         .onAppear(perform: {
             if selectedImages != [] {
                 processImages()
@@ -636,6 +671,7 @@ struct TemplateView: View {
             finalImages.removeAll()
             selectedFinalImageIndex = 0
         })
+        
         .onChange(of: selectedImages, perform: { value in
             selectedFinalImageIndex = 0
         })
@@ -728,6 +764,8 @@ struct TemplateView: View {
             PostHogSDK.shared.capture(PostHogEvents.mockup_.rawValue + "save_" + quality.rawValue)
             
             
+        case .saveWithBackground:
+            PostHogSDK.shared.capture(PostHogEvents.mockup_.rawValue + "saveWithBackground_" + quality.rawValue)
         }
         
         let authStatus = PHPhotoLibrary.authorizationStatus()
@@ -756,7 +794,7 @@ struct TemplateView: View {
     }
     
     
-    func saveImagesToAlbum (finalImagesArray : [UIImage],quality: Quality) {
+     func saveImagesToAlbum (finalImagesArray : [UIImage],quality: Quality) {
         if(paywallViewModel.viewState.isUserSubscribed ?? false){
             // if user is subscribed
             for image in finalImagesArray {
@@ -768,7 +806,9 @@ struct TemplateView: View {
             // check the daily limit
             if(finalImagesArray.count > moreViewModel.viewState.more.dailyFreeLimit){
                 // user has less/no limit left
+                
                 showUpgradeAlert = true
+                print("it should show upgrade alert: \(showUpgradeAlert)")
             } else {
                 // user has limit left
                 for image in finalImagesArray {
@@ -810,7 +850,31 @@ struct TemplateView: View {
             }
         }
     }
+    
+    
+    
+  
 }
+
+
+
+struct ColorCircle: View {
+    let color: Color?
+    var body: some View {
+        
+        VStack {
+
+            Image(systemName: "circle.fill")
+                .font(.title2)
+                .fontWeight(.medium)
+                .foregroundColor(color)
+                .background(.white)
+                .clipShape(Circle())
+        }
+    }
+}
+
+
 
 //#Preview {
 //    MockupView()
