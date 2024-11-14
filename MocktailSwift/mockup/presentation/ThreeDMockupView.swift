@@ -169,6 +169,13 @@ struct ThreeDMockupView: View {
                 }
             }
         }
+        .onChange(of: contentMode) { oldValue, newValue in
+            if let selectedImage = selectedImage {
+                if let imageFor3D = ImageHelper.resizeImageFor3DModel(image: selectedImage, frameSize: CGSize(width: 1024, height: 2048), contentMode: newValue){
+                    finalImage = ImageHelper.resizeImage(image: imageFor3D, targetSize: imageFor3D.size, contentMode: .fit, cornerRadius: 0)
+                }
+            }
+        }
         
     }
 }
