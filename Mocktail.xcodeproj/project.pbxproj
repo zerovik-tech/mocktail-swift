@@ -74,6 +74,8 @@
 		B14844D12C295762004B7B76 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14844D02C295762004B7B76 /* HomeView.swift */; };
 		B14844D32C295A6C004B7B76 /* Merienda-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B14844D22C295A6C004B7B76 /* Merienda-Regular.ttf */; };
 		B14844D82C2ADCBB004B7B76 /* YatraOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B14844D72C2ADCBB004B7B76 /* YatraOne-Regular.ttf */; };
+		B16BDF7F2C494A470079AC51 /* ThreeDMockupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16BDF7E2C494A470079AC51 /* ThreeDMockupView.swift */; };
+		B16BDF8D2C4E64690079AC51 /* iphone_15_pro_blue_titanium_no5g.usdz in Resources */ = {isa = PBXBuildFile; fileRef = B16BDF8C2C4E64690079AC51 /* iphone_15_pro_blue_titanium_no5g.usdz */; };
 		B1E57B2E2C3E2C6900644345 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E57B2D2C3E2C6900644345 /* EditView.swift */; };
 		B1F963772C2EBE6F0014DA76 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F963762C2EBE6F0014DA76 /* CustomTabBar.swift */; };
 /* End PBXBuildFile section */
@@ -140,6 +142,8 @@
 		B14844D22C295A6C004B7B76 /* Merienda-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merienda-Regular.ttf"; sourceTree = "<group>"; };
 		B14844D42C295AC1004B7B76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B14844D72C2ADCBB004B7B76 /* YatraOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YatraOne-Regular.ttf"; sourceTree = "<group>"; };
+		B16BDF7E2C494A470079AC51 /* ThreeDMockupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreeDMockupView.swift; sourceTree = "<group>"; };
+		B16BDF8C2C4E64690079AC51 /* iphone_15_pro_blue_titanium_no5g.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = iphone_15_pro_blue_titanium_no5g.usdz; sourceTree = "<group>"; };
 		B1E57B2D2C3E2C6900644345 /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 		B1F963762C2EBE6F0014DA76 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -540,6 +544,7 @@
 				5717311E2C2ACEEB004862FA /* GoogleService-Info.plist */,
 				B103F2AD2C218AA200F9E9C3 /* ImageHelper.swift */,
 				B103F29C2C217EC200F9E9C3 /* Assets.xcassets */,
+				B16BDF8C2C4E64690079AC51 /* iphone_15_pro_blue_titanium_no5g.usdz */,
 				B103F2A12C217EC200F9E9C3 /* Persistence.swift */,
 				571731302C2AFF90004862FA /* routing */,
 				57A561812C2AA95E00D70D0D /* paywall */,
@@ -570,6 +575,7 @@
 		B14844C82C294DC2004B7B76 /* presentation */ = {
 			isa = PBXGroup;
 			children = (
+				B16BDF7E2C494A470079AC51 /* ThreeDMockupView.swift */,
 				B14844C92C294DDF004B7B76 /* MockupView.swift */,
 				B1F963762C2EBE6F0014DA76 /* CustomTabBar.swift */,
 				B1E57B2D2C3E2C6900644345 /* EditView.swift */,
@@ -686,6 +692,7 @@
 				B14844D32C295A6C004B7B76 /* Merienda-Regular.ttf in Resources */,
 				5717311F2C2ACEEB004862FA /* GoogleService-Info.plist in Resources */,
 				B14844D82C2ADCBB004B7B76 /* YatraOne-Regular.ttf in Resources */,
+				B16BDF8D2C4E64690079AC51 /* iphone_15_pro_blue_titanium_no5g.usdz in Resources */,
 				B103F29D2C217EC200F9E9C3 /* Assets.xcassets in Resources */,
 				5717312F2C2AFD3E004862FA /* Lancelot-Regular.ttf in Resources */,
 			);
@@ -737,6 +744,7 @@
 				B103F2992C217EC000F9E9C3 /* MocktailSwift.swift in Sources */,
 				57A561132C2AA05400D70D0D /* URLWebView.swift in Sources */,
 				571731452C2AFF90004862FA /* RoutingRepository.swift in Sources */,
+				B16BDF7F2C494A470079AC51 /* ThreeDMockupView.swift in Sources */,
 				57A561AB2C2AA95F00D70D0D /* AllPlansView.swift in Sources */,
 				57A607922C2C0C9500A9F206 /* MoreLocalDataSource.swift in Sources */,
 				57A607822C2C07FD00A9F206 /* MoreViewInteractor.swift in Sources */,
@@ -883,7 +891,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"MocktailSwift/Preview Content\"";
 				DEVELOPMENT_TEAM = 8A97AKQKW4;
 				ENABLE_PREVIEWS = YES;
@@ -895,11 +903,12 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.zerovik.Mocktail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -908,7 +917,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -918,7 +927,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"MocktailSwift/Preview Content\"";
 				DEVELOPMENT_TEAM = 8A97AKQKW4;
 				ENABLE_PREVIEWS = YES;
@@ -930,11 +939,12 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.zerovik.Mocktail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -943,7 +953,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

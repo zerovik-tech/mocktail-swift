@@ -272,6 +272,55 @@ class ImageHelper {
     }
     
     
+    static func resizeImageFor3DModel(image: UIImage, frameSize: CGSize, contentMode: ContentMode) -> UIImage? {
+        autoreleasepool {
+                   let renderer = UIGraphicsImageRenderer(size: frameSize)
+                   let newImage = renderer.image { context in
+                       // Calculate the drawing rect based on content mode and image aspect ratio
+                       var drawingRect = CGRect(origin: .zero, size: frameSize)
+                       
+                       let imageSize = image.size
+                       let aspectRatio = imageSize.width / imageSize.height
+                       
+                       switch contentMode {
+                       case .fit:
+                           // Aspect fit: scale to fit within frameSize, centering the image
+                           let targetAspectRatio = frameSize.width / frameSize.height
+                           if aspectRatio > targetAspectRatio {
+                               drawingRect.size.width = frameSize.width
+                               drawingRect.size.height = frameSize.width / aspectRatio
+                           } else {
+                               drawingRect.size.height = frameSize.height
+                               drawingRect.size.width = frameSize.height * aspectRatio
+                           }
+                           drawingRect.origin.x = (frameSize.width - drawingRect.size.width) / 2
+                           drawingRect.origin.y = (frameSize.height - drawingRect.size.height) / 2
+                       case .fill:
+                           // Aspect fill: scale to fill the entire frameSize, clipping excess
+                           if imageSize.width > imageSize.height {
+                               drawingRect.size.height = frameSize.height
+                               drawingRect.size.width = frameSize.height * aspectRatio
+                               drawingRect.origin.x = (frameSize.width - drawingRect.size.width) / 2
+                           } else {
+                               drawingRect.size.width = frameSize.width
+                               drawingRect.size.height = frameSize.width / aspectRatio
+                               drawingRect.origin.y = (frameSize.height - drawingRect.size.height) / 2
+                           }
+                       case .stretch:
+                           // Stretch: fill the entire frameSize, possibly distorting the image
+                           drawingRect = CGRect(origin: .zero, size: frameSize)
+                       }
+                       
+                       // Fill the background with white
+                       UIColor.white.setFill()
+                       context.fill(CGRect(origin: .zero, size: frameSize))
+                       
+                       // Draw the image in the calculated rect
+                       image.draw(in: drawingRect)
+                   }
+                   return newImage
+               }
+    }
 //    static func addBackground(image: UIImage, color backgroundColor: UIColor, aspectRatio: CGFloat) -> UIImage? {
 //           autoreleasepool {
 //               

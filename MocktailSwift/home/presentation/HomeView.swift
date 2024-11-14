@@ -36,10 +36,19 @@ struct HomeView: View {
                     MockupView(paywallViewModel: paywallViewModel, routingViewModel: routingViewModel, moreViewModel: moreViewModel)
                         .tabItem {
                             Image(systemName: "house")
-                                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                                .font(.title)
                             Text("Home")
                         }
                         .tag("mockup")
+                    
+                    
+                    ThreeDMockupView()
+                        .tabItem {
+                            Image(systemName: "square.2.layers.3d")
+                                .font(.title)
+                            Text("3D")
+                        }
+                        .tag("3DMockup")
                     
                     MoreView(viewModel : moreViewModel,routingViewModel: routingViewModel, paywallViewModel: paywallViewModel)
                         .tabItem {

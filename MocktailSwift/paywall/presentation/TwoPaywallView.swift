@@ -14,6 +14,9 @@ struct TwoPaywallView: View {
     
     @StateObject private var viewModel: PaywallViewModel
     @StateObject private var routingViewModel: RoutingViewModel
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @State private var screenWidth: CGFloat = 0
+    @State private var screenHeight: CGFloat = 0
     
     let verticalSpacing = UIScreen.main.bounds.height / 94
     var showLoadingIndicator : Bool = false
@@ -56,24 +59,25 @@ struct TwoPaywallView: View {
                
                    
                     ZStack {
-                        let screenWidth = UIScreen.main.bounds.width
-                        let screenHeight = UIScreen.main.bounds.height
+//                        let screenWidth = UIScreen.main.bounds.width
+//                        let screenHeight = UIScreen.main.bounds.height
 
                         VStack {
-                            Spacer()
-                            
-                           Rectangle()
-                                .foregroundStyle(appColor1)
-                                .edgesIgnoringSafeArea(.all)
+//                            Spacer()
+                            appColor1
+//                           Rectangle()
+//                                .foregroundStyle(appColor1)
+//                                .frame(width: screenWidth, height: screenHeight)
                                 
                         }
                         
                         VStack {
                             Image("paywallBackground")
                                 .resizable()
-                                .scaledToFill()
-                                .frame(width: screenWidth * 1.01, height: screenWidth * 1.22 )
-                                .edgesIgnoringSafeArea(.all)
+                                .scaledToFit()
+                                .frame(width: screenWidth * 1.01, height: screenHeight * 0.6 )
+                                
+                                .edgesIgnoringSafeArea(.top)
                                
                             Spacer()
                         }
@@ -83,7 +87,9 @@ struct TwoPaywallView: View {
                                 Image(systemName: "multiply")
                                     .bold()
                                     .font(.title2)
-                                    .foregroundStyle(.white)
+                                    .foregroundStyle(Color(red: 0.08, green: 0.13, blue: 0.16))
+                                    .padding(2)
+//                                    .background(RoundedRectangle(cornerRadius: 4).fill(.ultraThinMaterial))
                                     .padding(.trailing)
                                     .onTapGesture {
                                         
@@ -102,7 +108,9 @@ struct TwoPaywallView: View {
                                 Text("Restore")
                                     .font(.subheadline)
                                     .bold()
-                                    .foregroundStyle(.white)
+                                    .foregroundStyle(Color(red: 0.08, green: 0.13, blue: 0.16))
+                                    .padding(2)
+//                                    .background(RoundedRectangle(cornerRadius: 4).fill(.ultraThinMaterial))
                                     .padding(.leading)
                                     .onTapGesture {
                                     
@@ -159,7 +167,9 @@ struct TwoPaywallView: View {
                             }
                             .padding(.bottom)
                         }
-                        .padding(.horizontal)
+                        .frame(width: screenWidth * 0.95, height: screenHeight * 0.95)
+//                        .padding(.horizontal)
+//                        .frame(width: screenWidth, height: screenHeight)
 
                         VStack(spacing:verticalSpacing) {
                             Spacer()
@@ -283,7 +293,7 @@ struct TwoPaywallView: View {
                                             .bold()
                                             .padding()
                                             .foregroundColor(.white)
-                                            .frame(width: screenWidth * 0.9)
+                                            .frame(minWidth: 0, maxWidth: 350)
                                         
                                     }
                                     if viewModel.viewState.selectedPlan == annualPlan {
@@ -294,7 +304,7 @@ struct TwoPaywallView: View {
                                             .bold()
                                             .padding()
                                             .foregroundColor(.white)
-                                            .frame(width: screenWidth * 0.9)
+                                            .frame(minWidth: 0, maxWidth: 350)
                                         
                                     }
                                 }else {
@@ -304,7 +314,7 @@ struct TwoPaywallView: View {
                                         .bold()
                                         .padding()
                                         .foregroundColor(.white)
-                                        .frame(width: screenWidth * 0.9)
+                                        .frame(minWidth: 0, maxWidth: 350)
                                         .overlay(
                                             RoundedRectangle(cornerRadius: 16)
                                                 .stroke(.white, lineWidth: 0)
@@ -350,6 +360,7 @@ struct TwoPaywallView: View {
                             
                           Spacer()
                         }
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
                         
                     }
                     .onAppear {
@@ -359,6 +370,8 @@ struct TwoPaywallView: View {
                         print("annual plan price : \(annualPlanPrice)")
                         print("monthly plan price: \(monthlyPlanPrice)")
                         print("annual plan is : \(annualPlan.rcPackage?.storeProduct.price)")
+                        screenWidth = UIScreen.main.bounds.width
+                        screenHeight = UIScreen.main.bounds.height
                     }
                     
                     
@@ -369,6 +382,10 @@ struct TwoPaywallView: View {
                 //                .onAppear {
                 //                    print("is trial eligible: \(viewModel.viewState.selectedPlan.isTrialEligible)")
                 //                }
+                .onChange(of: horizontalSizeClass) { _ in
+                    screenWidth = UIScreen.main.bounds.width
+                    screenHeight = UIScreen.main.bounds.height
+                        }
                 .onChange(of: viewModel.viewState.isProcessingPurchase) { _ in
                     print("view vars")
                     print(viewModel.viewState.isProcessingPurchase)
@@ -494,7 +511,7 @@ struct PlanCardTwoPaywall: View {
             
         }
         .padding()
-        .frame(width: UIScreen.main.bounds.width * 0.9)
+        .frame(minWidth: 0, maxWidth: 350)
         .background(viewModel.viewState.selectedPlan == plan ? paywallButtonColor : .white)
         .clipShape(RoundedRectangle(cornerRadius: 15))
         .overlay(RoundedRectangle(cornerRadius: 15).stroke(lineWidth: 1.2).fill(viewModel.viewState.selectedPlan == plan ? appColor2 : appColor2.opacity(0.5)))

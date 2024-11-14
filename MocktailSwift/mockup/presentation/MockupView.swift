@@ -37,7 +37,7 @@ struct MockupView: View {
     
     
     var body: some View {
-        NavigationStack {
+        NavigationStack{
             VStack {
                 
                 HStack {
@@ -65,11 +65,6 @@ struct MockupView: View {
                         
                     }
                     
-
-                    
-                    
-                    
-                    
                     
                     
                     Button(action: {
@@ -93,13 +88,9 @@ struct MockupView: View {
                 }
                 .padding(.horizontal)
                 
-                HStack {
-                    CustomTabBar(selectedTab: $selectedTab)
-                        .padding(.horizontal, 4)
-                    
-                    
-                }
                 
+                CustomTabBar(selectedTab: $selectedTab)
+                    .padding(.horizontal, 4)
                 
                 switch selectedTab {
                 case .iphone:
@@ -170,6 +161,7 @@ struct MockupView: View {
                 PostHogSDK.shared.capture(structName)
             }
         }
+        
     }
     
 }
